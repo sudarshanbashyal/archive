@@ -1,0 +1,134 @@
+@import '../../index.scss';
+
+.landing {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    position: relative;
+    overflow: hidden;
+
+    .image-section {
+        width: 50%;
+        height: 100%;
+        background-color: $green-primary;
+        position: relative;
+        overflow: hidden;
+
+        .logo-gradient {
+            font-family: 'Playfair Display';
+            margin-left: 160px;
+            font-size: 1.3rem;
+            background: linear-gradient(90deg, #ffc94b 0%, #f17a7e 100%);
+            display: inline-block;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .swiggle {
+            position: absolute;
+            width: 50%;
+        }
+
+        .yellow-swiggle {
+            top: -170px;
+            right: -5px;
+            width: 40%;
+        }
+
+        .red-swiggle {
+            width: 75%;
+            top: 25%;
+            left: 0px;
+        }
+
+        .white-swiggle {
+            bottom: -200px;
+            left: 0px;
+            width: 35%;
+        }
+    }
+
+    .login-section {
+        width: 50%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+
+        .form-swiggle {
+            position: absolute;
+            width: 50%;
+            top: -50px;
+            right: 0px;
+        }
+
+        .form-container {
+            width: 580px;
+
+            .form-logo {
+                font-family: 'Playfair Display', serif;
+                font-weight: 800;
+                font-size: 1.1rem;
+            }
+
+            .form-title {
+                margin-top: 5px;
+                font-size: 3rem;
+                margin-bottom: 120px;
+            }
+
+            form {
+                input {
+                    width: 100%;
+                    border: none;
+                    border-bottom: 1px solid black;
+                    margin-bottom: 35px;
+                    outline: none;
+                    padding: 10px 20px;
+                    font-size: 1.05rem;
+                    transition: 0.2s ease-in-out;
+                    box-sizing: border-box;
+
+                    &:focus {
+                        border-bottom: 3px solid black;
+                    }
+                }
+
+                .sign-in-btn {
+                    border: none;
+                    margin-top: 20px;
+                    margin-bottom: 10px;
+                    font-weight: 700;
+                    width: 100%;
+                    padding: 1rem 0rem;
+                    background-image: linear-gradient(
+                        90deg,
+                        $yellow-primary 0%,
+                        $red-primary 100%
+                    );
+                    cursor: pointer;
+                    border-radius: 7px;
+                }
+
+                .register-link {
+                    font-weight: 700;
+                    text-decoration: underline;
+                    cursor: pointer;
+                    font-size: 0.9rem;
+                    margin-top: 20px;
+                }
+            }
+        }
+    }
+
+    .typewriter {
+        position: absolute;
+        transform: rotate(31deg);
+        margin: auto;
+        left: 0;
+        right: 450px;
+        bottom: -100px;
+        text-align: center;
+    }
+}
