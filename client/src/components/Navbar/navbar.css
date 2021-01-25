@@ -1,0 +1,76 @@
+body {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: 'Source Sans Pro';
+}
+
+.navbar {
+  width: 100%;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.navbar .nav-container {
+  width: 1200px;
+  margin: auto;
+  height: 60px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.navbar .nav-container .logo {
+  height: 100%;
+  font-family: 'Playfair Display';
+  font-weight: 700;
+}
+
+.navbar .nav-container .logo div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 100px;
+  height: 100%;
+  background-color: #4a6163;
+  color: white;
+  cursor: pointer;
+}
+
+.navbar .nav-container .nav-items {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.navbar .nav-container .nav-items svg {
+  margin-right: 20px;
+  cursor: pointer;
+}
+
+.navbar .nav-container .nav-items .nav-profile-picture {
+  -webkit-transform: translateY(-3px);
+          transform: translateY(-3px);
+  margin-left: 30px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: teal;
+  cursor: pointer;
+}
+/*# sourceMappingURL=navbar.css.map */

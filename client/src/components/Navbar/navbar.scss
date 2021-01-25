@@ -1,0 +1,51 @@
+@import '../../index.scss';
+
+.navbar {
+    width: 100%;
+    user-select: none;
+
+    .nav-container {
+        width: 1200px;
+        margin: auto;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .logo {
+            height: 100%;
+            font-family: 'Playfair Display';
+            font-weight: 700;
+
+            div {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 100px;
+                height: 100%;
+                background-color: $green-primary;
+                color: white;
+                cursor: pointer;
+            }
+        }
+
+        .nav-items {
+            display: flex;
+
+            svg {
+                margin-right: 20px;
+                cursor: pointer;
+            }
+
+            .nav-profile-picture {
+                transform: translateY(-3px);
+                margin-left: 30px;
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+                background-color: teal;
+                cursor: pointer;
+            }
+        }
+    }
+}
