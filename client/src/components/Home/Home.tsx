@@ -9,7 +9,7 @@ const Home = () => {
         <div>
             <BrowserRouter>
                 <Navbar />
-                <Profile />
+                <Feed />
                 <Switch></Switch>
             </BrowserRouter>
         </div>
