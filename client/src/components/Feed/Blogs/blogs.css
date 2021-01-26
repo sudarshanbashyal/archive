@@ -1,0 +1,22 @@
+.blogs {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (minmax(300px, 1fr))[auto-fit];
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-column-gap: 50px;
+}
+
+.blogs .blog::before {
+  content: '';
+  display: block;
+  height: 1px;
+  width: 70px;
+  background-color: #cccccc;
+  margin-bottom: 40px;
+}
+
+.blogs .blog:first-child::before,
+.blogs .blog:nth-child(2)::before {
+  display: none;
+}
+/*# sourceMappingURL=blogs.css.map */

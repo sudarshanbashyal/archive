@@ -1,0 +1,72 @@
+body {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: 'Source Sans Pro';
+}
+
+.recommendations {
+  padding: 0.7rem 0rem;
+  padding-left: 1.5rem;
+  border-left: 1px solid black;
+}
+
+.recommendations h2 {
+  margin-top: 0;
+  font-size: 1rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 50px;
+}
+
+.recommendations .users .user {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin-bottom: 40px;
+}
+
+.recommendations .users .user .user-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.recommendations .users .user .user-container .user-profile {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: teal;
+  margin-right: 10px;
+}
+
+.recommendations .users .user .user-container .user-info .user-name {
+  font-weight: 700;
+}
+
+.recommendations .users .user .follow-btn {
+  border: none;
+  background-color: transparent;
+  outline: none;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.recommendations .users .user:last-child {
+  margin-bottom: 0px;
+}
+/*# sourceMappingURL=recommendations.css.map */

@@ -1,0 +1,68 @@
+.blog {
+  margin-bottom: 20px;
+}
+
+.blog .blog-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.blog .blog-header .blog-info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+}
+
+.blog .blog-header .blog-info .profile {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background-color: teal;
+  margin-right: 10px;
+}
+
+.blog .blog-header .blog-info .divider {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.blog .blog-header .blog-info .blog-topic {
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.blog .blog-header .blog-info .author-name {
+  cursor: pointer;
+}
+
+.blog .blog-header svg {
+  -webkit-transform: scale(0.8);
+          transform: scale(0.8);
+  display: none;
+  cursor: pointer;
+}
+
+.blog .blog-title {
+  font-size: 0.9rem;
+  cursor: pointer;
+  line-height: 1.5rem;
+  margin-top: -5px;
+}
+
+.blog:hover .blog-header svg {
+  display: block;
+}
+/*# sourceMappingURL=blog.css.map */

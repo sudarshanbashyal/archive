@@ -1,0 +1,10 @@
+@import '../../Feed/Blogs/blogs.scss';
+
+.profile-blogs {
+    @extend .blogs;
+    grid-column-gap: 70px;
+
+    .blog {
+        @extend .blog;
+    }
+}

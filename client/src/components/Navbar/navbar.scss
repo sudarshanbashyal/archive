@@ -3,6 +3,10 @@
 .navbar {
     width: 100%;
     user-select: none;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    background-color: white;
 
     .nav-container {
         width: 1200px;
