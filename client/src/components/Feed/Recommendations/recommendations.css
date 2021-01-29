@@ -6,6 +6,10 @@ body {
   font-family: 'Source Sans Pro';
 }
 
+body .App {
+  position: relative;
+}
+
 .recommendations {
   padding: 0.7rem 0rem;
   padding-left: 1.5rem;

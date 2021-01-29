@@ -6,12 +6,20 @@ body {
   font-family: 'Source Sans Pro';
 }
 
+body .App {
+  position: relative;
+}
+
 body {
   margin: 0;
   padding: 0;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   font-family: 'Source Sans Pro';
+}
+
+body .App {
+  position: relative;
 }
 
 .profile-settings .setting-section, .account-setting .setting-section {

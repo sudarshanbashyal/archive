@@ -6,6 +6,10 @@ body {
   font-family: 'Source Sans Pro';
 }
 
+body .App {
+  position: relative;
+}
+
 .landing {
   height: 100vh;
   width: 100%;

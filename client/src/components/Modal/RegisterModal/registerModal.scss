@@ -1,0 +1,117 @@
+@import '../../../index.scss';
+
+.register-modal {
+    height: 600px;
+    width: 520px;
+    border-radius: 7px;
+    background-color: white;
+    padding: 2rem 3rem;
+    position: relative;
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+
+        .logo {
+            font-size: 1.2rem;
+            font-family: 'Playfair Display', serif;
+            font-weight: 800;
+        }
+
+        svg {
+            transform: scale(0.6);
+            cursor: pointer;
+            transition: 0.2s ease-in-out;
+
+            &:hover {
+                transform: scale(0.8);
+            }
+        }
+    }
+
+    .form-content {
+        .form-title {
+            font-size: 2.2rem;
+            margin-top: 15px;
+            margin-bottom: 70px;
+        }
+
+        form {
+            input,
+            textarea {
+                width: 100%;
+                border: none;
+                padding: 1rem;
+                border-bottom: 1px solid black;
+                outline: none;
+                box-sizing: border-box;
+                margin-bottom: 30px;
+                font-size: 1rem;
+                font-weight: 700;
+                resize: none;
+
+                &:focus {
+                    border-bottom: 2px solid black;
+                }
+
+                &::placeholder {
+                    font-weight: normal;
+                    font-family: 'Source Sans Pro';
+                }
+            }
+
+            .basics {
+                display: flex;
+                justify-content: space-between;
+
+                input {
+                    @extend input;
+                    width: 45%;
+                }
+            }
+        }
+    }
+
+    .form-controls {
+        margin-top: 40px;
+        display: flex;
+        justify-content: space-between;
+        position: absolute;
+        bottom: 3rem;
+        margin: auto;
+        width: inherit;
+
+        .back-btn {
+            font-weight: 700;
+            padding: 0.5rem 0rem;
+            cursor: pointer;
+            outline: none;
+            background-color: transparent;
+            border: none;
+            display: flex;
+            align-items: center;
+            transition: 0.2s ease-in-out;
+
+            svg {
+                transform: scale(-0.6, -0.6);
+                margin-right: 5px;
+            }
+        }
+
+        .next-btn {
+            @extend .back-btn;
+            padding: 0.5rem 2rem;
+            background: linear-gradient(
+                90deg,
+                $yellow-primary 0%,
+                $red-primary 100%
+            );
+            border-radius: 7px;
+
+            svg {
+                margin-left: 5px;
+                transform: scale(0.6);
+            }
+        }
+    }
+}

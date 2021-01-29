@@ -6,6 +6,10 @@ body {
   font-family: 'Source Sans Pro';
 }
 
+body .App {
+  position: relative;
+}
+
 .settings {
   width: 950px;
   margin: auto;

@@ -1,0 +1,162 @@
+body {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: 'Source Sans Pro';
+}
+
+body .App {
+  position: relative;
+}
+
+.register-modal {
+  height: 600px;
+  width: 520px;
+  border-radius: 7px;
+  background-color: white;
+  padding: 2rem 3rem;
+  position: relative;
+}
+
+.register-modal .header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.register-modal .header .logo {
+  font-size: 1.2rem;
+  font-family: 'Playfair Display', serif;
+  font-weight: 800;
+}
+
+.register-modal .header svg {
+  -webkit-transform: scale(0.6);
+          transform: scale(0.6);
+  cursor: pointer;
+  -webkit-transition: 0.2s ease-in-out;
+  transition: 0.2s ease-in-out;
+}
+
+.register-modal .header svg:hover {
+  -webkit-transform: scale(0.8);
+          transform: scale(0.8);
+}
+
+.register-modal .form-content .form-title {
+  font-size: 2.2rem;
+  margin-top: 15px;
+  margin-bottom: 70px;
+}
+
+.register-modal .form-content form input, .register-modal .form-content form .basics input,
+.register-modal .form-content form textarea {
+  width: 100%;
+  border: none;
+  padding: 1rem;
+  border-bottom: 1px solid black;
+  outline: none;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin-bottom: 30px;
+  font-size: 1rem;
+  font-weight: 700;
+  resize: none;
+}
+
+.register-modal .form-content form input:focus,
+.register-modal .form-content form textarea:focus {
+  border-bottom: 2px solid black;
+}
+
+.register-modal .form-content form input::-webkit-input-placeholder, .register-modal .form-content form .basics input::-webkit-input-placeholder,
+.register-modal .form-content form textarea::-webkit-input-placeholder {
+  font-weight: normal;
+  font-family: 'Source Sans Pro';
+}
+
+.register-modal .form-content form input:-ms-input-placeholder, .register-modal .form-content form .basics input:-ms-input-placeholder,
+.register-modal .form-content form textarea:-ms-input-placeholder {
+  font-weight: normal;
+  font-family: 'Source Sans Pro';
+}
+
+.register-modal .form-content form input::-ms-input-placeholder, .register-modal .form-content form .basics input::-ms-input-placeholder,
+.register-modal .form-content form textarea::-ms-input-placeholder {
+  font-weight: normal;
+  font-family: 'Source Sans Pro';
+}
+
+.register-modal .form-content form input::placeholder, .register-modal .form-content form .basics input::placeholder,
+.register-modal .form-content form textarea::placeholder {
+  font-weight: normal;
+  font-family: 'Source Sans Pro';
+}
+
+.register-modal .form-content form .basics {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.register-modal .form-content form .basics input {
+  width: 45%;
+}
+
+.register-modal .form-controls {
+  margin-top: 40px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  position: absolute;
+  bottom: 3rem;
+  margin: auto;
+  width: inherit;
+}
+
+.register-modal .form-controls .back-btn, .register-modal .form-controls .next-btn {
+  font-weight: 700;
+  padding: 0.5rem 0rem;
+  cursor: pointer;
+  outline: none;
+  background-color: transparent;
+  border: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-transition: 0.2s ease-in-out;
+  transition: 0.2s ease-in-out;
+}
+
+.register-modal .form-controls .back-btn svg, .register-modal .form-controls .next-btn svg {
+  -webkit-transform: scale(-0.6, -0.6);
+          transform: scale(-0.6, -0.6);
+  margin-right: 5px;
+}
+
+.register-modal .form-controls .next-btn {
+  padding: 0.5rem 2rem;
+  background: -webkit-gradient(linear, left top, right top, from(#ffc94b), to(#f17a7e));
+  background: linear-gradient(90deg, #ffc94b 0%, #f17a7e 100%);
+  border-radius: 7px;
+}
+
+.register-modal .form-controls .next-btn svg {
+  margin-left: 5px;
+  -webkit-transform: scale(0.6);
+          transform: scale(0.6);
+}
+/*# sourceMappingURL=registerModal.css.map */

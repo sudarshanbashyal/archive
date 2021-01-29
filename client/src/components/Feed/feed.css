@@ -6,6 +6,10 @@ body {
   font-family: 'Source Sans Pro';
 }
 
+body .App {
+  position: relative;
+}
+
 .outer-container {
   position: relative;
   width: 100%;
