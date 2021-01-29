@@ -1,0 +1,26 @@
+@import '../../../index.scss';
+@import '../Profile/profileSettings.scss';
+
+.account-setting {
+    @extend .profile-settings;
+
+    .setting-section {
+        form {
+            #email-input {
+                margin-bottom: 0px;
+            }
+        }
+
+        .danger-title {
+            color: $red-dark;
+            font-weight: 700;
+        }
+
+        .delete-btn {
+            @extend .save-btn;
+            background: $red-dark !important;
+            color: white;
+            margin-top: -15px;
+        }
+    }
+}

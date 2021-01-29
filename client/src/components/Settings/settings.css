@@ -1,0 +1,70 @@
+body {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: 'Source Sans Pro';
+}
+
+.settings {
+  width: 950px;
+  margin: auto;
+  margin-top: 70px;
+  margin-bottom: 70px;
+}
+
+.settings h1 {
+  margin-bottom: 50px;
+  font-size: 2.2rem;
+}
+
+.settings .settings-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+.settings .settings-container .setting-links {
+  width: 17%;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+}
+
+.settings .settings-container .setting-links ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.settings .settings-container .setting-links ul li {
+  margin-bottom: 30px;
+  font-weight: 700;
+}
+
+.settings .settings-container .setting-links ul li .inactive-link {
+  text-decoration: none;
+  color: black;
+  padding: 0.1rem 1rem;
+}
+
+.settings .settings-container .setting-links ul li .active-link {
+  border-left: 5px solid #f17a7e;
+}
+
+.settings .settings-container .setting-content {
+  width: 80%;
+  border: 1px solid #c4c4c4;
+  border-radius: 7px;
+  padding: 2rem;
+}
+
+.settings .settings-container .setting-content h2 {
+  margin: 0;
+}
+/*# sourceMappingURL=settings.css.map */

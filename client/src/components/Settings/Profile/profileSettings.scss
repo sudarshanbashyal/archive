@@ -1,0 +1,129 @@
+@import '../../../index.scss';
+
+.profile-settings {
+    .setting-section {
+        padding-bottom: 40px;
+        margin-bottom: 40px;
+        border-bottom: 1px solid #c4c4c4;
+
+        &:last-child {
+            border-bottom: none;
+            padding-bottom: 0px;
+            margin-bottom: 0px;
+        }
+
+        .section-title {
+            text-transform: uppercase;
+            padding-bottom: 10px;
+            padding-top: 10px;
+
+            &:first-child {
+                padding-top: 0px;
+            }
+        }
+
+        .section-description {
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .themes {
+            display: flex;
+
+            .theme {
+                padding: 0.8rem 2rem;
+                margin-right: 20px;
+                border: 1px solid black;
+                border-radius: 7px;
+                font-weight: 600;
+                cursor: pointer;
+            }
+
+            .dark-theme {
+                color: white;
+                background-color: $blue-dark;
+                border: 1px solid $blue-dark;
+            }
+
+            .high-contrast {
+                color: white;
+                background-color: black;
+                border: 1px solid black;
+            }
+        }
+
+        .profile-pictures {
+            display: flex;
+            margin-bottom: 30px;
+
+            div {
+                height: 85px;
+                width: 85px;
+                background-color: teal;
+                margin-right: 30px;
+                border-radius: 7px;
+            }
+
+            .change-profile {
+                background-color: transparent;
+                border: 1px dashed #bebebe;
+                display: flex;
+                text-align: center;
+                align-items: center;
+                color: #bebebe;
+                font-size: 0.8rem;
+                cursor: pointer;
+            }
+        }
+
+        .header-images {
+            @extend .profile-pictures;
+            margin-bottom: 0px;
+
+            div {
+                height: 130px;
+            }
+
+            .change-header {
+                @extend .change-profile;
+                width: 18%;
+            }
+
+            .header {
+                width: 80%;
+            }
+        }
+
+        form {
+            margin-top: 20px;
+            input,
+            textarea {
+                margin-top: 10px;
+                margin-bottom: 25px;
+                box-sizing: border-box;
+                width: 100%;
+                padding: 0.8rem 1rem;
+                border-radius: 7px;
+                border: none;
+                background-color: #f1f1f1;
+                outline: none;
+                font-family: 'Source Sans Pro';
+                resize: none;
+            }
+
+            .save-btn {
+                padding: 0.8rem 1.8rem;
+                font-weight: 700;
+                border-radius: 7px;
+                border: none;
+                outline: none;
+                cursor: pointer;
+                background: linear-gradient(
+                    90deg,
+                    $yellow-primary 0%,
+                    $red-primary 100%
+                );
+            }
+        }
+    }
+}

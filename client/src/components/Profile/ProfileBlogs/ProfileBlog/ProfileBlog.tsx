@@ -3,7 +3,7 @@ import './blog.css';
 
 const ProfileBlog = ({ blogTopic, blogTitle, likes, publishedOn }: any) => {
     return (
-        <div className="blog">
+        <div className="p-blog">
             <strong>{blogTopic}</strong>
             <h2>{blogTitle}</h2>
             <div className="blog-header-image"></div>

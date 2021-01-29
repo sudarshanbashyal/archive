@@ -1,10 +1,17 @@
 $yellow-primary: #ffc94b;
 $red-primary: #f17a7e;
+$red-dark: #dd3b40;
 $green-primary: #4a6163;
+$blue-dark: #151f2e;
+$blue-light: #222e40;
 
 body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Source Sans Pro';
+
+    .App {
+        position: relative;
+    }
 }

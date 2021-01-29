@@ -7,7 +7,9 @@ const Navbar = () => {
         <div className="navbar">
             <div className="nav-container">
                 <div className="logo">
-                    <div>Archive.</div>
+                    <Link style={{ textDecoration: 'none' }} to="/">
+                        <div>Archive.</div>
+                    </Link>
                 </div>
 
                 <div className="nav-items">
@@ -22,7 +24,7 @@ const Navbar = () => {
                         </svg>
                     </Link>
 
-                    <Link to="/">
+                    <Link to="/explore">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="24"

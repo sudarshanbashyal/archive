@@ -1,0 +1,10 @@
+@import '../../index.scss';
+
+.modal-container {
+    height: 100vh;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: rgba($color: #000000, $alpha: 0.5);
+}

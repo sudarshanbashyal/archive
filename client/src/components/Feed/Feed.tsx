@@ -2,7 +2,6 @@ import React from 'react';
 import Blogs from './Blogs/Blogs';
 import './feed.css';
 import Recommendations from './Recommendations/Recommendations';
-import patternImg from '../../assets/images/pattern.jpg';
 
 const Feed = () => {
     return (

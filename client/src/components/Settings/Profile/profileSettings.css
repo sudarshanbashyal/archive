@@ -1,0 +1,139 @@
+body {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: 'Source Sans Pro';
+}
+
+.profile-settings .setting-section {
+  padding-bottom: 40px;
+  margin-bottom: 40px;
+  border-bottom: 1px solid #c4c4c4;
+}
+
+.profile-settings .setting-section:last-child {
+  border-bottom: none;
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+}
+
+.profile-settings .setting-section .section-title {
+  text-transform: uppercase;
+  padding-bottom: 10px;
+  padding-top: 10px;
+}
+
+.profile-settings .setting-section .section-title:first-child {
+  padding-top: 0px;
+}
+
+.profile-settings .setting-section .section-description {
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.profile-settings .setting-section .themes {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.profile-settings .setting-section .themes .theme {
+  padding: 0.8rem 2rem;
+  margin-right: 20px;
+  border: 1px solid black;
+  border-radius: 7px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.profile-settings .setting-section .themes .dark-theme {
+  color: white;
+  background-color: #151f2e;
+  border: 1px solid #151f2e;
+}
+
+.profile-settings .setting-section .themes .high-contrast {
+  color: white;
+  background-color: black;
+  border: 1px solid black;
+}
+
+.profile-settings .setting-section .profile-pictures, .profile-settings .setting-section .header-images {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 30px;
+}
+
+.profile-settings .setting-section .profile-pictures div, .profile-settings .setting-section .header-images div {
+  height: 85px;
+  width: 85px;
+  background-color: teal;
+  margin-right: 30px;
+  border-radius: 7px;
+}
+
+.profile-settings .setting-section .profile-pictures .change-profile, .profile-settings .setting-section .header-images .change-profile, .profile-settings .setting-section .header-images .change-header {
+  background-color: transparent;
+  border: 1px dashed #bebebe;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  text-align: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: #bebebe;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.profile-settings .setting-section .header-images {
+  margin-bottom: 0px;
+}
+
+.profile-settings .setting-section .header-images div {
+  height: 130px;
+}
+
+.profile-settings .setting-section .header-images .change-header {
+  width: 18%;
+}
+
+.profile-settings .setting-section .header-images .header {
+  width: 80%;
+}
+
+.profile-settings .setting-section form {
+  margin-top: 20px;
+}
+
+.profile-settings .setting-section form input,
+.profile-settings .setting-section form textarea {
+  margin-top: 10px;
+  margin-bottom: 25px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border-radius: 7px;
+  border: none;
+  background-color: #f1f1f1;
+  outline: none;
+  font-family: 'Source Sans Pro';
+  resize: none;
+}
+
+.profile-settings .setting-section form .save-btn {
+  padding: 0.8rem 1.8rem;
+  font-weight: 700;
+  border-radius: 7px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background: -webkit-gradient(linear, left top, right top, from(#ffc94b), to(#f17a7e));
+  background: linear-gradient(90deg, #ffc94b 0%, #f17a7e 100%);
+}
+/*# sourceMappingURL=profileSettings.css.map */
