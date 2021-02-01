@@ -1,0 +1,57 @@
+body {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: 'Source Sans Pro';
+}
+
+body .App {
+  position: relative;
+}
+
+.editor-page {
+  width: 1200px;
+  margin: auto;
+}
+
+.editor-page .Wysiwyg {
+  margin-top: 70px;
+}
+
+.editor-page .Wysiwyg .story-title {
+  margin-bottom: 20px;
+  border: none;
+  font-size: 2rem;
+  outline: none;
+  font-family: 'Playfair Display', serif;
+  width: 100%;
+}
+
+.editor-page .Wysiwyg .editor-controls {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin-top: 20px;
+}
+
+.editor-page .Wysiwyg .editor-controls .draft-btn, .editor-page .Wysiwyg .editor-controls .publish-btn {
+  font-weight: 700;
+  padding: 0.5rem 0rem;
+  cursor: pointer;
+  outline: none;
+  background-color: transparent;
+  border: 1px solid black;
+  padding: 0.5rem 2rem;
+  border-radius: 7px;
+}
+
+.editor-page .Wysiwyg .editor-controls .publish-btn {
+  border: none;
+  background: -webkit-gradient(linear, left top, right top, from(#ffc94b), to(#f17a7e));
+  background: linear-gradient(90deg, #ffc94b 0%, #f17a7e 100%);
+}
+/*# sourceMappingURL=editor.css.map */

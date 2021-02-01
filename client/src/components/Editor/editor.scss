@@ -1,0 +1,46 @@
+@import '../../index.scss';
+
+.editor-page {
+    width: 1200px;
+    margin: auto;
+
+    .Wysiwyg {
+        margin-top: 70px;
+
+        .story-title {
+            margin-bottom: 20px;
+            border: none;
+            font-size: 2rem;
+            outline: none;
+            font-family: 'Playfair Display', serif;
+            width: 100%;
+        }
+
+        .editor-controls {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+
+            .draft-btn {
+                font-weight: 700;
+                padding: 0.5rem 0rem;
+                cursor: pointer;
+                outline: none;
+                background-color: transparent;
+                border: 1px solid black;
+                padding: 0.5rem 2rem;
+                border-radius: 7px;
+            }
+
+            .publish-btn {
+                @extend .draft-btn;
+                border: none;
+                background: linear-gradient(
+                    90deg,
+                    $yellow-primary 0%,
+                    $red-primary 100%
+                );
+            }
+        }
+    }
+}

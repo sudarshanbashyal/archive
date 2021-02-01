@@ -5,8 +5,26 @@ import './registerModal.css';
 const RegisterModal = () => {
     const [formStage, setFormStage] = useState<number>(1);
 
+    const handleSubmit = (e: any) => {
+        e.preventDefault();
+    };
+
     return (
         <div className="register-modal">
+            <div
+                className="form-progress-bar"
+                style={{
+                    width:
+                        formStage == 1
+                            ? '33%'
+                            : formStage == 2
+                            ? '66%'
+                            : '100%',
+                    borderRadius:
+                        formStage == 3 ? '7px 7px 0px 0px' : '7px 0px 0px 0px',
+                }}
+            ></div>
+
             <div className="header">
                 <span className="logo">A....</span>
                 <svg
@@ -107,22 +125,36 @@ const RegisterModal = () => {
                     Back
                 </button>
 
-                <button
-                    className="next-btn"
-                    onClick={() => {
-                        setFormStage(formStage + 1);
-                    }}
-                >
-                    Next
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
+                {formStage < 3 ? (
+                    <button
+                        className="next-btn"
+                        onClick={() => {
+                            setFormStage(formStage + 1);
+                        }}
                     >
-                        <path d="M13.025 1l-2.847 2.828 6.176 6.176h-16.354v3.992h16.354l-6.176 6.176 2.847 2.828 10.975-11z" />
-                    </svg>
-                </button>
+                        Next
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                        >
+                            <path d="M13.025 1l-2.847 2.828 6.176 6.176h-16.354v3.992h16.354l-6.176 6.176 2.847 2.828 10.975-11z" />
+                        </svg>
+                    </button>
+                ) : (
+                    <button className="next-btn" onClick={handleSubmit}>
+                        Finish
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                        >
+                            <path d="M13.025 1l-2.847 2.828 6.176 6.176h-16.354v3.992h16.354l-6.176 6.176 2.847 2.828 10.975-11z" />
+                        </svg>
+                    </button>
+                )}
             </div>
         </div>
     );

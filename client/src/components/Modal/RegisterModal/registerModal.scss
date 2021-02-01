@@ -80,6 +80,7 @@
         bottom: 3rem;
         margin: auto;
         width: inherit;
+        user-select: none;
 
         .back-btn {
             font-weight: 700;
@@ -113,5 +114,18 @@
                 transform: scale(0.6);
             }
         }
+    }
+
+    .form-progress-bar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 10px;
+        background: linear-gradient(
+            90deg,
+            $yellow-primary 0%,
+            $red-primary 100%
+        );
+        transition: 0.3s ease-in-out;
     }
 }

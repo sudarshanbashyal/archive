@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import EditorPage from '../Editor/EditorPage';
 import Explore from '../Explore/Explore';
 import Feed from '../Feed/Feed';
 import ModalContainer from '../Modal/ModalContainer';
@@ -17,8 +18,8 @@ const Home = () => {
                     <Route exact path="/user/:id" component={Profile} />
                     <Route path="/settings" component={Settings} />
                     <Route exact path="/explore" component={Explore} />
+                    <Route exact path="/editor" component={EditorPage} />
                 </Switch>
-                <ModalContainer />
             </BrowserRouter>
         </div>
     );

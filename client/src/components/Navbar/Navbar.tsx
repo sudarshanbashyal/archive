@@ -13,7 +13,7 @@ const Navbar = () => {
                 </div>
 
                 <div className="nav-items">
-                    <Link to="/">
+                    <Link to="/editor">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="24"
