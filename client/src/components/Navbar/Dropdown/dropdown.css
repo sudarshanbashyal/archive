@@ -1,0 +1,68 @@
+body {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: 'Source Sans Pro';
+}
+
+body .App {
+  position: relative;
+}
+
+.dropdown {
+  background-color: white;
+  padding: 0.5rem 2rem 2rem 2rem;
+  width: 220px;
+  border-radius: 7px;
+  -webkit-box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1);
+          box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown .profile {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.dropdown .profile .user-info .user-name {
+  font-weight: 700;
+  font-size: 1.4rem;
+}
+
+.dropdown .profile .user-info .user-interest {
+  margin-top: -23px;
+  font-size: 0.9rem;
+}
+
+.dropdown .dropdown-links {
+  list-style: none;
+  padding-left: 0;
+}
+
+.dropdown .dropdown-links li {
+  margin-bottom: 25px;
+}
+
+.dropdown .dropdown-links li:hover {
+  font-weight: 600;
+}
+
+.dropdown .sign-out {
+  background: transparent;
+  border: none;
+  padding: 0px;
+  font-size: 1rem;
+  margin-top: 10px;
+  font-family: 'Source Sans Pro';
+  cursor: pointer;
+  outline: none;
+}
+
+.dropdown .sign-out:hover {
+  font-weight: 600;
+}
+/*# sourceMappingURL=dropdown.css.map */

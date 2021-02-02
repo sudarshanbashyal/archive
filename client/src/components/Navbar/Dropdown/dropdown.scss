@@ -1,0 +1,54 @@
+@import '../../../index.scss';
+
+.dropdown {
+    background-color: white;
+    padding: 0.5rem 2rem 2rem 2rem;
+    width: 220px;
+    border-radius: 7px;
+    box-shadow: 10px 10px 20px rgba($color: #000000, $alpha: 0.1);
+
+    .profile {
+        display: flex;
+        align-items: center;
+
+        .user-info {
+            .user-name {
+                font-weight: 700;
+                font-size: 1.4rem;
+            }
+
+            .user-interest {
+                margin-top: -23px;
+                font-size: 0.9rem;
+            }
+        }
+    }
+
+    .dropdown-links {
+        list-style: none;
+        padding-left: 0;
+
+        li {
+            margin-bottom: 25px;
+
+            &:hover {
+                font-weight: 600;
+            }
+        }
+    }
+
+    .sign-out {
+        background: transparent;
+        border: none;
+        padding: 0px;
+        font-size: 1rem;
+        margin-top: 10px;
+        font-family: 'Source Sans Pro';
+        cursor: pointer;
+        outline: none;
+
+        &:hover {
+            font-weight: 600;
+        }
+    }
+}

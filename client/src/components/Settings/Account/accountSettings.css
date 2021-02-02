@@ -8,35 +8,6 @@ body {
 
 body .App {
   position: relative;
-  /* Snow Theme */
-  /* Bubble Theme */
-}
-
-body .App .ql-container {
-  border-bottom-left-radius: 0.5em;
-  border-bottom-right-radius: 0.5em;
-  background: #fefcfc;
-}
-
-body .App .ql-snow.ql-toolbar {
-  display: block;
-  background: #eaecec;
-  border-top-left-radius: 0.5em;
-  border-top-right-radius: 0.5em;
-}
-
-body .App .ql-bubble .ql-editor {
-  border: 1px solid #ccc;
-  border-radius: 0.5em;
-}
-
-body .App .ql-editor {
-  min-height: 18em;
-}
-
-body .App .themeSwitcher {
-  margin-top: 0.5em;
-  font-size: small;
 }
 
 body {
@@ -49,35 +20,6 @@ body {
 
 body .App {
   position: relative;
-  /* Snow Theme */
-  /* Bubble Theme */
-}
-
-body .App .ql-container {
-  border-bottom-left-radius: 0.5em;
-  border-bottom-right-radius: 0.5em;
-  background: #fefcfc;
-}
-
-body .App .ql-snow.ql-toolbar {
-  display: block;
-  background: #eaecec;
-  border-top-left-radius: 0.5em;
-  border-top-right-radius: 0.5em;
-}
-
-body .App .ql-bubble .ql-editor {
-  border: 1px solid #ccc;
-  border-radius: 0.5em;
-}
-
-body .App .ql-editor {
-  min-height: 18em;
-}
-
-body .App .themeSwitcher {
-  margin-top: 0.5em;
-  font-size: small;
 }
 
 .profile-settings .setting-section, .account-setting .setting-section {
