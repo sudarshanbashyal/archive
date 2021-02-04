@@ -38,3 +38,13 @@ CREATE TABLE comments(
     parent_id integer references comments(comment_id)
     created_at date not null default CURRENT_DATE
 );
+
+
+INSERT INTO topics(topic_title, topic_image) VALUES('Art', 'https://imgur.com/DzB37fa');
+INSERT INTO topics(topic_title, topic_image) VALUES('Cinema', 'https://imgur.com/tVhlNVj');
+INSERT INTO topics(topic_title, topic_image) VALUES('Finance', 'https://imgur.com/xhYsh39');
+INSERT INTO topics(topic_title, topic_image) VALUES('Gadgets', 'https://imgur.com/7oUTRRY');
+INSERT INTO topics(topic_title, topic_image) VALUES('Gaming', 'https://imgur.com/TowE1CM');
+INSERT INTO topics(topic_title, topic_image) VALUES('Music', 'https://imgur.com/Y5usu03');
+INSERT INTO topics(topic_title, topic_image) VALUES('Programming', 'https://imgur.com/KXHQeO5');
+INSERT INTO topics(topic_title, topic_image) VALUES('Travel', 'https://imgur.com/rVJBUE7');

@@ -8,8 +8,8 @@ import './index.css';
 const App = () => {
     return (
         <div className="App">
-            <Home />
-            {/* <ModalContainer /> */}
+            <Landing />
+            <ModalContainer />
         </div>
     );
 };

@@ -36,6 +36,11 @@
             margin-bottom: 70px;
         }
 
+        .form-description {
+            font-weight: 700;
+            margin-bottom: 30px;
+        }
+
         form {
             input,
             textarea {
@@ -49,6 +54,7 @@
                 font-size: 1rem;
                 font-weight: 700;
                 resize: none;
+                font-family: 'Source Sans Pro';
 
                 &:focus {
                     border-bottom: 2px solid black;
@@ -70,6 +76,46 @@
                 }
             }
         }
+
+        .topics-panel {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            justify-content: space-between;
+
+            .topic {
+                margin-bottom: 30px;
+                cursor: pointer;
+
+                .topic-image {
+                    border-radius: 9px;
+                    width: 110px;
+                    height: 50px;
+                    margin-bottom: 7px;
+
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                        border-radius: 7px;
+                    }
+                }
+
+                .topic-title {
+                    font-weight: 600;
+                }
+            }
+
+            .selected-topic {
+                .topic-image {
+                    border: 2px solid black;
+                }
+            }
+        }
+    }
+
+    .form-error {
+        color: $red-dark;
+        font-weight: 700;
     }
 
     .form-controls {

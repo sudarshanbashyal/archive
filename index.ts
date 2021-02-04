@@ -1,9 +1,13 @@
 import Express from 'express';
-import dotenv from 'dotenv';
+import BlogRouter from './server/routes/TopicRoute';
 
 const app = Express();
-dotenv.config();
 
-app.listen(3000, () => {
-    console.log('server up...');
+app.use('/topic', BlogRouter);
+
+const port = process.env.PORT || 4000;
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+
+app.listen(port, () => {
+    console.log(`listening on ${port}`);
 });

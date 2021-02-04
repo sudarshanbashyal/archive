@@ -1,13 +1,112 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { rightArrowIcon } from 'src/assets/SVGs';
 import './registerModal.css';
+
+interface registerData {
+    firstName: string;
+    lastName: string;
+    email: string;
+    password: string;
+    confirmPassword: string;
+    interest?: string;
+    workplace?: string;
+    bio?: string;
+    topics: number[];
+}
+
+interface topicData {
+    topic_id: number;
+    topic_title: string;
+    topic_image: string;
+}
 
 const RegisterModal = () => {
     const [formStage, setFormStage] = useState<number>(1);
 
-    const handleSubmit = (e: any) => {
-        e.preventDefault();
+    const [registerData, setRegisterData] = useState<registerData>({
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: '',
+        confirmPassword: '',
+        interest: '',
+        workplace: '',
+        bio: '',
+        topics: [],
+    });
+
+    const [topics, setTopics] = useState<topicData[] | null>([]);
+
+    const [error, setError] = useState('');
+
+    const handleChange = (e: any) => {
+        setRegisterData({ ...registerData, [e.target.name]: e.target.value });
     };
+
+    const changeFormStage = () => {
+        if (formStage === 1) {
+            const {
+                firstName,
+                lastName,
+                email,
+                password,
+                confirmPassword,
+            } = registerData;
+
+            if (
+                !firstName ||
+                !lastName ||
+                !email ||
+                !password ||
+                !confirmPassword
+            ) {
+                setError('Please fill out all the values.');
+            } else if (password !== confirmPassword) {
+                setError('The passwords do not match.');
+            } else if (password.length < 6) {
+                setError('The password must be at least 6 characters.');
+            } else {
+                setError('');
+                setFormStage(formStage + 1);
+            }
+        } else if (formStage == 2) {
+            setFormStage(formStage + 1);
+        }
+    };
+
+    const toggleTopic = (topicId: number) => {
+        if (registerData.topics.includes(topicId)) {
+            setRegisterData({
+                ...registerData,
+                topics: registerData.topics.filter(
+                    (topic) => topic !== topicId
+                ),
+            });
+        } else {
+            setRegisterData({
+                ...registerData,
+                topics: [...registerData.topics, topicId],
+            });
+        }
+    };
+
+    const handleSubmit = (e: any) => {
+        if (registerData.topics.length < 3) {
+            setError('Please select at least 3 topics');
+        } else {
+            console.log(registerData);
+        }
+    };
+
+    useEffect(() => {
+        (async function getTopics() {
+            const req = await fetch('/topic/getTopics');
+            const data = await req.json();
+            if (data.ok) {
+                setTopics(data.data);
+            }
+        })();
+    }, []);
 
     return (
         <div className="register-modal">
@@ -37,7 +136,9 @@ const RegisterModal = () => {
                 </svg>
             </div>
 
-            {formStage == 1 ? (
+            {/* BASIC INFO SECTION */}
+
+            {formStage === 1 ? (
                 <div className="form-content">
                     <h1 className="form-title">Create a new account</h1>
 
@@ -47,11 +148,15 @@ const RegisterModal = () => {
                                 type="text"
                                 name="firstName"
                                 placeholder="First Name"
+                                value={registerData.firstName}
+                                onChange={handleChange}
                             />
                             <input
                                 type="text"
                                 name="lastName"
                                 placeholder="Last Name"
+                                value={registerData.lastName}
+                                onChange={handleChange}
                             />
                         </div>
 
@@ -59,20 +164,28 @@ const RegisterModal = () => {
                             type="email"
                             name="email"
                             placeholder="Email Address"
+                            value={registerData.email}
+                            onChange={handleChange}
                         />
                         <input
                             type="password"
                             name="password"
                             placeholder="Password"
+                            value={registerData.password}
+                            onChange={handleChange}
                         />
                         <input
                             type="password"
                             name="confirmPassword"
                             placeholder="Confirm Password"
+                            value={registerData.confirmPassword}
+                            onChange={handleChange}
                         />
                     </form>
                 </div>
             ) : null}
+
+            {/* MORE INFO SECTION */}
 
             {formStage === 2 ? (
                 <div className="form-content">
@@ -83,28 +196,69 @@ const RegisterModal = () => {
                             type="text"
                             name="interest"
                             placeholder="Expertise/ Interest (Optional)"
+                            value={registerData.interest}
+                            onChange={handleChange}
                         />
 
                         <input
                             type="text"
                             name="workplace"
                             placeholder="Workplace (Optional)"
+                            value={registerData.workplace}
+                            onChange={handleChange}
                         />
 
                         <textarea
                             name="bio"
                             placeholder="How would you describe yourself? (Optional)"
-                            rows={8}
+                            rows={4}
+                            value={registerData.bio}
+                            onChange={handleChange}
                         ></textarea>
                     </form>
                 </div>
             ) : null}
 
+            {/* TOPICS SECTION */}
+
             {formStage === 3 ? (
                 <div className="form-content">
                     <h1 className="form-title">What fascinates you?</h1>
+                    <p className="form-description">
+                        Select at least 3 topics of your interest
+                    </p>
+
+                    <div className="topics-panel">
+                        {topics!.map((topic) => (
+                            <div
+                                key={topic.topic_id}
+                                className={
+                                    registerData.topics.includes(topic.topic_id)
+                                        ? 'topic selected-topic'
+                                        : 'topic'
+                                }
+                                onClick={() => {
+                                    toggleTopic(topic.topic_id);
+                                }}
+                            >
+                                <div className="topic-image">
+                                    <img
+                                        src={`${topic.topic_image}.jpg`}
+                                        alt={topic.topic_title}
+                                    />
+                                </div>
+                                <span className="topic-title">
+                                    {topic.topic_title}
+                                </span>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             ) : null}
+
+            {/* FORM BUTTONS */}
+
+            {error && <span className="form-error">{error}</span>}
 
             <div className="form-controls">
                 <button
@@ -126,12 +280,7 @@ const RegisterModal = () => {
                 </button>
 
                 {formStage < 3 ? (
-                    <button
-                        className="next-btn"
-                        onClick={() => {
-                            setFormStage(formStage + 1);
-                        }}
-                    >
+                    <button className="next-btn" onClick={changeFormStage}>
                         Next
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
