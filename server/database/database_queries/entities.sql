@@ -4,10 +4,10 @@ CREATE TABLE users(
   last_name varchar(20) not null,
   email varchar(30) unique not null,
   password text not null,
-  interest varchar2(20) default null,
-  workplace varchar2(20) default null,
+  interest varchar(20) default null,
+  workplace varchar(20) default null,
   bio text default null,
-  user_followed integer[],
+  user_followed integer[] default '{}',
   topics_followed integer[],
   profileImage text default null,
   headerImage text default null
@@ -39,12 +39,3 @@ CREATE TABLE comments(
     created_at date not null default CURRENT_DATE
 );
 
-
-INSERT INTO topics(topic_title, topic_image) VALUES('Art', 'https://imgur.com/DzB37fa');
-INSERT INTO topics(topic_title, topic_image) VALUES('Cinema', 'https://imgur.com/tVhlNVj');
-INSERT INTO topics(topic_title, topic_image) VALUES('Finance', 'https://imgur.com/xhYsh39');
-INSERT INTO topics(topic_title, topic_image) VALUES('Gadgets', 'https://imgur.com/7oUTRRY');
-INSERT INTO topics(topic_title, topic_image) VALUES('Gaming', 'https://imgur.com/TowE1CM');
-INSERT INTO topics(topic_title, topic_image) VALUES('Music', 'https://imgur.com/Y5usu03');
-INSERT INTO topics(topic_title, topic_image) VALUES('Programming', 'https://imgur.com/KXHQeO5');
-INSERT INTO topics(topic_title, topic_image) VALUES('Travel', 'https://imgur.com/rVJBUE7');

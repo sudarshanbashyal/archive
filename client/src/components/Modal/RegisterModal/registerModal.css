@@ -67,7 +67,6 @@ body .App {
   outline: none;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-  margin-bottom: 30px;
   font-size: 1rem;
   font-weight: 700;
   resize: none;
@@ -103,6 +102,14 @@ body .App {
   font-family: 'Source Sans Pro';
 }
 
+.register-modal .form-content form input, .register-modal .form-content form .basics input {
+  margin-bottom: 30px;
+}
+
+.register-modal .form-content form textarea {
+  margin-bottom: 10px;
+}
+
 .register-modal .form-content form .basics {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -114,6 +121,10 @@ body .App {
 
 .register-modal .form-content form .basics input {
   width: 45%;
+}
+
+.register-modal .form-content form .textarea-length {
+  font-weight: 700;
 }
 
 .register-modal .form-content .topics-panel {
@@ -136,6 +147,8 @@ body .App {
   width: 110px;
   height: 50px;
   margin-bottom: 7px;
+  -webkit-transition: 0.1s ease-in-out;
+  transition: 0.1s ease-in-out;
 }
 
 .register-modal .form-content .topics-panel .topic .topic-image img {

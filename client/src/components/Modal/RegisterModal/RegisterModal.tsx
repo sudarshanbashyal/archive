@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { rightArrowIcon } from 'src/assets/SVGs';
+// import { rightArrowIcon } from 'src/assets/SVGs';
 import './registerModal.css';
 
 interface registerData {
@@ -69,7 +69,7 @@ const RegisterModal = () => {
                 setError('');
                 setFormStage(formStage + 1);
             }
-        } else if (formStage == 2) {
+        } else if (formStage === 2) {
             setFormStage(formStage + 1);
         }
     };
@@ -114,13 +114,13 @@ const RegisterModal = () => {
                 className="form-progress-bar"
                 style={{
                     width:
-                        formStage == 1
+                        formStage === 1
                             ? '33%'
-                            : formStage == 2
+                            : formStage === 2
                             ? '66%'
                             : '100%',
                     borderRadius:
-                        formStage == 3 ? '7px 7px 0px 0px' : '7px 0px 0px 0px',
+                        formStage === 3 ? '7px 7px 0px 0px' : '7px 0px 0px 0px',
                 }}
             ></div>
 
@@ -150,6 +150,8 @@ const RegisterModal = () => {
                                 placeholder="First Name"
                                 value={registerData.firstName}
                                 onChange={handleChange}
+                                maxLength={20}
+                                required
                             />
                             <input
                                 type="text"
@@ -157,6 +159,8 @@ const RegisterModal = () => {
                                 placeholder="Last Name"
                                 value={registerData.lastName}
                                 onChange={handleChange}
+                                maxLength={20}
+                                required
                             />
                         </div>
 
@@ -166,6 +170,8 @@ const RegisterModal = () => {
                             placeholder="Email Address"
                             value={registerData.email}
                             onChange={handleChange}
+                            maxLength={40}
+                            required
                         />
                         <input
                             type="password"
@@ -173,6 +179,7 @@ const RegisterModal = () => {
                             placeholder="Password"
                             value={registerData.password}
                             onChange={handleChange}
+                            required
                         />
                         <input
                             type="password"
@@ -180,6 +187,7 @@ const RegisterModal = () => {
                             placeholder="Confirm Password"
                             value={registerData.confirmPassword}
                             onChange={handleChange}
+                            required
                         />
                     </form>
                 </div>
@@ -198,6 +206,7 @@ const RegisterModal = () => {
                             placeholder="Expertise/ Interest (Optional)"
                             value={registerData.interest}
                             onChange={handleChange}
+                            maxLength={30}
                         />
 
                         <input
@@ -206,6 +215,7 @@ const RegisterModal = () => {
                             placeholder="Workplace (Optional)"
                             value={registerData.workplace}
                             onChange={handleChange}
+                            maxLength={30}
                         />
 
                         <textarea
@@ -215,6 +225,17 @@ const RegisterModal = () => {
                             value={registerData.bio}
                             onChange={handleChange}
                         ></textarea>
+                        <span
+                            className="textarea-length"
+                            style={{
+                                color:
+                                    registerData.bio!.length > 200
+                                        ? '#dd3b40'
+                                        : 'black',
+                            }}
+                        >
+                            {registerData.bio?.length}/200
+                        </span>
                     </form>
                 </div>
             ) : null}
@@ -280,7 +301,11 @@ const RegisterModal = () => {
                 </button>
 
                 {formStage < 3 ? (
-                    <button className="next-btn" onClick={changeFormStage}>
+                    <button
+                        className="next-btn"
+                        disabled={registerData.bio!.length > 200}
+                        onClick={changeFormStage}
+                    >
                         Next
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
