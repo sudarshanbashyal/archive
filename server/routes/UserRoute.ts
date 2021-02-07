@@ -2,6 +2,7 @@ import Express from 'express';
 import { db } from '../database/db';
 import bcrypt from 'bcrypt';
 import { isAuth, createAccessToken, createRefreshToken } from '../utils/auth';
+import jwt, { verify } from 'jsonwebtoken';
 
 const router = Express.Router();
 
@@ -105,16 +106,47 @@ router.post('/login', async (_req, _res) => {
             });
         }
 
-        // generate tokens
+        // generate access token
         const accessToken = createAccessToken(user);
+
+        // deliver refresh token in client's cookie
+        _res.cookie('jwtToken', createRefreshToken(user), {
+            httpOnly: true, // cannot be accessed by client javascript
+        });
+
+        const {
+            user_id,
+            first_name,
+            last_name,
+            interest,
+            workplace,
+            bio,
+            user_followed,
+            topics_followed,
+            profileimage,
+            headerimage,
+        } = user.rows[0];
 
         return _res.json({
             ok: true,
-            user: user.rows[0],
             accessToken,
+            user: {
+                userId: user_id,
+                firstName: first_name,
+                lastName: last_name,
+                email: user.rows[0]['email'],
+                interest,
+                workplace,
+                bio,
+                usersFollowed: user_followed,
+                topicsFollowed: topics_followed,
+                profileImage: profileimage,
+                headerImage: headerimage,
+            },
         });
+        //
     } catch (err) {
-        return _res.json({
+        return _res.status(500).json({
             ok: false,
             error: {
                 message: 'Something went wrong.',
@@ -124,6 +156,46 @@ router.post('/login', async (_req, _res) => {
     }
 });
 
-router.delete('/deleteAccount', async (_req, _res) => {});
+router.post('/refreshToken', async (_req, _res) => {
+    try {
+        const token = _req.cookies.authId;
+        if (!token) {
+            return _res.status(401).json({
+                ok: false,
+                error: {
+                    message: 'Access Denied.',
+                },
+            });
+        }
+
+        try {
+            const payload = verify(token, process.env.REFRESH_TOKEN_SECRET!);
+
+            return _res.json({
+                ok: true,
+                payload,
+            });
+            //
+        } catch (err) {
+            return _res.status(401).json({
+                ok: false,
+                error: {
+                    message: 'Could not verify token.',
+                    err,
+                },
+            });
+        }
+
+        //
+    } catch (err) {
+        return _res.status(500).json({
+            ok: false,
+            error: {
+                message: 'Something went wrong.',
+                err,
+            },
+        });
+    }
+});
 
 export default router;

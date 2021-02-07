@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 import { bookmarkStrokeIcon, exploreIcon, pencilIcon } from 'src/assets/SVGs';
+import { RootStore } from 'src/redux/store';
 import Dropdown from './Dropdown/Dropdown';
 import './navbar.css';
 
 const Navbar = () => {
     const [dropdown, setDropdown] = useState<boolean>(false);
+    const applicationState = useSelector(
+        (state: RootStore) => state.application
+    );
 
     // get current route
     const currentRoute = useLocation();
@@ -13,7 +18,7 @@ const Navbar = () => {
     // set dropdown to false on route change
     useEffect(() => {
         setDropdown(false);
-    }, [currentRoute.pathname]);
+    }, [currentRoute.pathname, applicationState.modal?.modalOpen]);
 
     // array of nav-items
     const navbarLinks = [
@@ -41,8 +46,10 @@ const Navbar = () => {
                 </div>
 
                 <div className="nav-items">
-                    {navbarLinks.map((navbarLink) => (
-                        <Link to={navbarLink.link}>{navbarLink.icon}</Link>
+                    {navbarLinks.map(navbarLink => (
+                        <Link key={navbarLink.link} to={navbarLink.link}>
+                            {navbarLink.icon}
+                        </Link>
                     ))}
 
                     <div

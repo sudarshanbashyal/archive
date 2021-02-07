@@ -28,6 +28,7 @@ export const isAuth = (
         const payload = jwt.verify(authToken, process.env.ACCESS_TOKEN_SECRET!);
         _req.user = payload;
         return _next();
+        //
     } catch (err) {
         return _res.status(401).json({
             ok: false,
@@ -46,6 +47,9 @@ export const createAccessToken = (user: any) => {
 export const createRefreshToken = (user: any) => {
     return jwt.sign(
         { userId: user.user_id },
-        process.env.REFRESH_TOKEN_SECRET!
+        process.env.REFRESH_TOKEN_SECRET!,
+        {
+            expiresIn: '10d',
+        }
     );
 };

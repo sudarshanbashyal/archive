@@ -1,8 +1,12 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { openModal } from 'src/redux/Actions/applicationActions';
 import './dropdown.css';
 
 const Dropdown = () => {
+    const dispatch = useDispatch();
+
     const dropdownLinks = [
         { title: 'Profile', to: '/profile/123' },
         { title: 'My Blogs', to: '/' },
@@ -22,8 +26,8 @@ const Dropdown = () => {
             <hr />
 
             <ul className="dropdown-links">
-                {dropdownLinks.map((link) => (
-                    <li>
+                {dropdownLinks.map(link => (
+                    <li key={link.title}>
                         <Link
                             style={{ textDecoration: 'none', color: 'black' }}
                             to={link.to}
@@ -36,7 +40,14 @@ const Dropdown = () => {
 
             <hr />
 
-            <button className="sign-out">Sign out</button>
+            <button
+                className="sign-out"
+                onClick={() => {
+                    dispatch(openModal('logout'));
+                }}
+            >
+                Sign out
+            </button>
         </div>
     );
 };

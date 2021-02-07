@@ -5,6 +5,7 @@ import yellowSwiggle from '../../assets/yellow-swiggle.svg';
 import redSwiggle from '../../assets/red-swiggle.svg';
 import whiteSwiggle from '../../assets/white-swiggle.svg';
 import formSwiggle from '../../assets/form-red-swiggle.svg';
+import LoginForm from './LoginForm/LoginForm';
 
 const Landing = () => {
     return (
@@ -29,19 +30,7 @@ const Landing = () => {
             </div>
 
             <div className="login-section">
-                <div className="form-container">
-                    <span className="form-logo">A....</span>
-                    <h1 className="form-title">Read. Write. Share</h1>
-                    {/* Login Form */}
-                    <form>
-                        <input type="email" placeholder="Email" />
-                        <input type="password" placeholder="Password" />
-                        <button className="sign-in-btn">Sign In</button>
-                        <span className="register-link">
-                            Not a member yet? Register here.
-                        </span>
-                    </form>
-                </div>
+                <LoginForm />
 
                 <img
                     className="swiggle form-swiggle"

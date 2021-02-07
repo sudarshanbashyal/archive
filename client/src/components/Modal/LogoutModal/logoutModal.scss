@@ -1,0 +1,57 @@
+@import '../../../index.scss';
+
+.logout-modal {
+    background-color: white;
+    width: 500px;
+    border-radius: 7px;
+    display: flex;
+
+    .icon-section {
+        height: auto;
+        width: 20%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: $yellow-primary;
+        border-radius: 7px 0px 0px 7px;
+
+        svg {
+            transform: scale(1.2);
+        }
+    }
+
+    .content-section {
+        width: 80%;
+        padding: 2rem 1rem;
+
+        h2 {
+            margin: 0;
+        }
+
+        p {
+            margin-top: 10px;
+            margin-bottom: 30px;
+        }
+
+        .cancel-btn {
+            font-weight: 700;
+            padding: 0.5rem 0rem;
+            cursor: pointer;
+            outline: none;
+            background-color: transparent;
+            border: none;
+        }
+
+        .logout-btn {
+            @extend .cancel-btn;
+            padding: 0.5rem 2rem;
+            margin-right: 20px;
+            background: linear-gradient(
+                90deg,
+                $yellow-primary 0%,
+                $red-primary 100%
+            );
+            border-radius: 7px;
+        }
+    }
+}

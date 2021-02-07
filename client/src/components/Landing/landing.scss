@@ -118,6 +118,11 @@
                     font-size: 0.9rem;
                     margin-top: 20px;
                 }
+
+                .error-message {
+                    font-weight: 700;
+                    color: $red-dark;
+                }
             }
         }
     }

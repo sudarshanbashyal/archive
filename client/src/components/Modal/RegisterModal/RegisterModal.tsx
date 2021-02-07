@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { closeModal } from 'src/redux/Actions/applicationActions';
 // import { rightArrowIcon } from 'src/assets/SVGs';
 import './registerModal.css';
 
@@ -21,6 +23,8 @@ interface topicData {
 }
 
 const RegisterModal = () => {
+    const dispatch = useDispatch();
+
     const [formStage, setFormStage] = useState<number>(1);
 
     const [registerData, setRegisterData] = useState<registerData>({
@@ -78,9 +82,7 @@ const RegisterModal = () => {
         if (registerData.topics.includes(topicId)) {
             setRegisterData({
                 ...registerData,
-                topics: registerData.topics.filter(
-                    (topic) => topic !== topicId
-                ),
+                topics: registerData.topics.filter(topic => topic !== topicId),
             });
         } else {
             setRegisterData({
@@ -90,11 +92,23 @@ const RegisterModal = () => {
         }
     };
 
-    const handleSubmit = (e: any) => {
+    const handleSubmit = async (e: any) => {
         if (registerData.topics.length < 3) {
             setError('Please select at least 3 topics');
         } else {
-            console.log(registerData);
+            const data = await fetch('/user/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(registerData),
+            });
+            const user = await data.json();
+
+            if (!user.ok) {
+                setError(user.error.message);
+                setFormStage(1);
+            }
         }
     };
 
@@ -127,6 +141,9 @@ const RegisterModal = () => {
             <div className="header">
                 <span className="logo">A....</span>
                 <svg
+                    onClick={() => {
+                        dispatch(closeModal);
+                    }}
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
                     height="24"
@@ -250,7 +267,7 @@ const RegisterModal = () => {
                     </p>
 
                     <div className="topics-panel">
-                        {topics!.map((topic) => (
+                        {topics!.map(topic => (
                             <div
                                 key={topic.topic_id}
                                 className={

@@ -1,0 +1,35 @@
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { logoutIcon } from 'src/assets/SVGs';
+import { closeModal } from 'src/redux/Actions/applicationActions';
+import './logoutModal.css';
+
+const LogoutModal = () => {
+    const dispatch = useDispatch();
+
+    return (
+        <div className="logout-modal">
+            <div className="icon-section">{logoutIcon}</div>
+
+            <div className="content-section">
+                <h2>Are you sure you want to log out?</h2>
+                <p>
+                    You will have to enter the credentials again before you can
+                    log back in.
+                </p>
+
+                <button className="logout-btn">Log Out</button>
+                <button
+                    className="cancel-btn"
+                    onClick={() => {
+                        dispatch(closeModal);
+                    }}
+                >
+                    Cancel
+                </button>
+            </div>
+        </div>
+    );
+};
+
+export default LogoutModal;

@@ -139,6 +139,11 @@ body .App {
   margin-top: 20px;
 }
 
+.landing .login-section .form-container form .error-message {
+  font-weight: 700;
+  color: #dd3b40;
+}
+
 .landing .typewriter {
   position: absolute;
   -webkit-transform: rotate(31deg);

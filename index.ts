@@ -2,10 +2,12 @@ import Express from 'express';
 import BlogRouter from './server/routes/TopicRoute';
 import UserRouter from './server/routes/UserRoute';
 import cors from 'cors';
+import cookieParser from 'cookie-parser';
 
 const app = Express();
 app.use(Express.json());
 app.use(cors());
+app.use(cookieParser());
 
 app.use('/topic', BlogRouter);
 app.use('/user', UserRouter);
