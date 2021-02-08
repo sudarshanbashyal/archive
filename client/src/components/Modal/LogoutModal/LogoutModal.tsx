@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { logoutIcon } from 'src/assets/SVGs';
 import { closeModal } from 'src/redux/Actions/applicationActions';
+import { logOutUser } from 'src/redux/Actions/userActions';
 import './logoutModal.css';
 
 const LogoutModal = () => {
@@ -18,7 +19,15 @@ const LogoutModal = () => {
                     log back in.
                 </p>
 
-                <button className="logout-btn">Log Out</button>
+                <button
+                    className="logout-btn"
+                    onClick={() => {
+                        dispatch(logOutUser);
+                        dispatch(closeModal);
+                    }}
+                >
+                    Log Out
+                </button>
                 <button
                     className="cancel-btn"
                     onClick={() => {

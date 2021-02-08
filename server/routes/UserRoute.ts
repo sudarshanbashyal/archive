@@ -106,11 +106,8 @@ router.post('/login', async (_req, _res) => {
             });
         }
 
-        // generate access token
-        const accessToken = createAccessToken(user);
-
         // deliver refresh token in client's cookie
-        _res.cookie('jwtToken', createRefreshToken(user), {
+        _res.cookie('authId', createRefreshToken(user.rows[0]), {
             httpOnly: true, // cannot be accessed by client javascript
         });
 
@@ -129,7 +126,7 @@ router.post('/login', async (_req, _res) => {
 
         return _res.json({
             ok: true,
-            accessToken,
+            accessToken: createAccessToken(user.rows[0]),
             user: {
                 userId: user_id,
                 firstName: first_name,
@@ -169,12 +166,61 @@ router.post('/refreshToken', async (_req, _res) => {
         }
 
         try {
-            const payload = verify(token, process.env.REFRESH_TOKEN_SECRET!);
+            const payload: any = verify(
+                token,
+                process.env.REFRESH_TOKEN_SECRET!
+            );
+
+            const user = await db.query(
+                `SELECT * FROM users WHERE user_id=$1`,
+                [payload.userId]
+            );
+
+            if (!user.rows[0]) {
+                return _res.status(401).json({
+                    ok: false,
+                    error: {
+                        message: 'Could not find a user.',
+                    },
+                });
+            }
+
+            // deliver refresh token in client's cookie
+            _res.cookie('authId', createRefreshToken(user.rows[0]), {
+                httpOnly: true, // cannot be accessed by client javascript
+            });
+
+            const {
+                user_id,
+                first_name,
+                last_name,
+                interest,
+                workplace,
+                bio,
+                user_followed,
+                topics_followed,
+                profileimage,
+                headerimage,
+            } = user.rows[0];
 
             return _res.json({
                 ok: true,
-                payload,
+                accessToken: createAccessToken(user.rows[0]),
+                user: {
+                    userId: user_id,
+                    firstName: first_name,
+                    lastName: last_name,
+                    email: user.rows[0]['email'],
+                    interest,
+                    workplace,
+                    bio,
+                    usersFollowed: user_followed,
+                    topicsFollowed: topics_followed,
+                    profileImage: profileimage,
+                    headerImage: headerimage,
+                },
             });
+
             //
         } catch (err) {
             return _res.status(401).json({
@@ -185,6 +231,27 @@ router.post('/refreshToken', async (_req, _res) => {
                 },
             });
         }
+
+        //
+    } catch (err) {
+        return _res.status(500).json({
+            ok: false,
+            error: {
+                message: 'Something went wrong.',
+                err,
+            },
+        });
+    }
+});
+
+router.get('/clearToken', async (_req, _res) => {
+    try {
+        console.log('hit');
+        _res.cookie('authId', null, { httpOnly: true });
+        return _res.json({
+            ok: true,
+            message: 'Successfully logged out',
+        });
 
         //
     } catch (err) {

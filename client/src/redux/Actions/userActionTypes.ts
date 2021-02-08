@@ -2,6 +2,8 @@ export const USER_LOADING = 'USER_LOADING';
 export const USER_FAILED = 'USER_FAILED';
 export const USER_SUCCESS = 'USER_SUCCESS';
 export const USER_LOGIN_FAILED = 'LOGIN_FAILED';
+export const USER_LOGGED_OUT = 'USER_LOGGED_OUT';
+export const TOKEN_FAILED = 'TOKEN_SUCCESS';
 
 export type UserType = {
     userId: number;
@@ -47,8 +49,18 @@ export interface UserLoginFailed {
     };
 }
 
+export interface UserLoggedOut {
+    type: typeof USER_LOGGED_OUT;
+}
+
+export interface TokenRefreshFailed {
+    type: typeof TOKEN_FAILED;
+}
+
 export type UserDispatchType =
     | UserLoading
     | UserFailed
     | UserSuccess
-    | UserLoginFailed;
+    | UserLoginFailed
+    | UserLoggedOut
+    | TokenRefreshFailed;

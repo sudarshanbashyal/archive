@@ -3,12 +3,15 @@ import Home from './components/Home/Home';
 import Landing from './components/Landing/Landing';
 import ModalContainer from './components/Modal/ModalContainer';
 import Navbar from './components/Navbar/Navbar';
-import Cookies from 'js-cookie';
 import './index.css';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootStore } from './redux/store';
+import { refreshToken } from './redux/Actions/userActions';
 
 const App = () => {
+    const dispatch = useDispatch();
+    const [userLogged, setUserLogged] = useState(false);
+
     // get user from the state
     const userState = useSelector((state: RootStore) => state.client);
 
@@ -18,7 +21,9 @@ const App = () => {
     );
 
     // request the backend for token with the cookie
-    useEffect(() => {}, []);
+    useEffect(() => {
+        dispatch(refreshToken());
+    }, []);
 
     return (
         <div className="App">

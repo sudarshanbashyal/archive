@@ -1,14 +1,19 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { openModal } from 'src/redux/Actions/applicationActions';
+import { RootStore } from 'src/redux/store';
 import './dropdown.css';
 
 const Dropdown = () => {
     const dispatch = useDispatch();
+    const userState = useSelector((state: RootStore) => state.client);
 
     const dropdownLinks = [
-        { title: 'Profile', to: '/profile/123' },
+        {
+            title: 'Profile',
+            to: `/user/${userState && userState.client?.profile.userId}`,
+        },
         { title: 'My Blogs', to: '/' },
         { title: 'Bookmarks', to: '/' },
         { title: 'Settings', to: '/settings' },

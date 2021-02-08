@@ -3,18 +3,16 @@ import {
     USER_SUCCESS,
     USER_LOADING,
     USER_LOGIN_FAILED,
-    UserType,
+    USER_LOGGED_OUT,
     LoginDataType,
-    UserLoading,
-    UserFailed,
-    UserSuccess,
     UserDispatchType,
+    TOKEN_FAILED,
 } from '../Actions/userActionTypes';
 
 interface DefaultUserState {
     loading: boolean;
     client?: LoginDataType | null; // optional field
-    error?: string; // optional field
+    error?: string | null; // optional field
 }
 
 const defaultUserState: DefaultUserState = {
@@ -45,10 +43,23 @@ export const userReducer = (
         case USER_LOGIN_FAILED:
             return {
                 ...state,
+                loading: false,
                 error: action.payload.message,
             };
 
         case USER_FAILED:
+            return {
+                ...state,
+                loading: false,
+            };
+
+        case USER_LOGGED_OUT:
+            return {
+                ...state,
+                client: null,
+            };
+
+        case TOKEN_FAILED:
             return {
                 ...state,
                 loading: false,
