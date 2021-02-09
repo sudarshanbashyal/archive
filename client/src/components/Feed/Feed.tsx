@@ -1,15 +1,20 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { RootStore } from 'src/redux/store';
 import Blogs from './Blogs/Blogs';
 import './feed.css';
 import Recommendations from './Recommendations/Recommendations';
 
 const Feed = () => {
+    const userState = useSelector((state: RootStore) => state.client);
+
     return (
         <div className="outer-container">
             <div className="feed">
                 <div className="header">
                     <h1>
-                        Good Afternoon, <br /> Andrew...
+                        Good Afternoon, <br />
+                        {userState && userState.client?.profile.firstName}...
                     </h1>
                     <p>Hope you have a good read today!</p>
 

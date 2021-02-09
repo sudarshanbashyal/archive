@@ -10,7 +10,9 @@ import { refreshToken } from './redux/Actions/userActions';
 
 const App = () => {
     const dispatch = useDispatch();
-    const [userLogged, setUserLogged] = useState(false);
+    const [userLogged, setUserLogged] = useState(
+        localStorage.getItem('userLoggedIn')
+    );
 
     // get user from the state
     const userState = useSelector((state: RootStore) => state.client);
@@ -25,10 +27,16 @@ const App = () => {
         dispatch(refreshToken());
     }, []);
 
+    //
+
     return (
         <div className="App">
             {/* Render Home page if the user is in the store */}
-            {userState && userState.client ? <Home /> : <Landing />}
+            {userState.loading ? null : userState.client?.profile ? (
+                <Home />
+            ) : (
+                <Landing />
+            )}
 
             {/* check is modal is open */}
             {applicationState && applicationState.modal?.modalOpen && (

@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { logoutIcon } from 'src/assets/SVGs';
 import { closeModal } from 'src/redux/Actions/applicationActions';
 import { logOutUser } from 'src/redux/Actions/userActions';
@@ -7,6 +8,8 @@ import './logoutModal.css';
 
 const LogoutModal = () => {
     const dispatch = useDispatch();
+
+    const history = useHistory();
 
     return (
         <div className="logout-modal">

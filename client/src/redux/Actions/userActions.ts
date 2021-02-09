@@ -1,4 +1,8 @@
+import { useSelector } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import { Dispatch } from 'redux';
+import { userReducer } from '../Reducers/userReducer';
+import { RootStore } from '../store';
 import {
     USER_FAILED,
     USER_SUCCESS,
@@ -7,6 +11,8 @@ import {
     UserDispatchType,
     USER_LOGGED_OUT,
     TOKEN_FAILED,
+    UserProfileType,
+    USER_PROFILE_UPDATED,
 } from './userActionTypes';
 
 export const loginUser = (user: object) => async (
@@ -35,6 +41,7 @@ export const loginUser = (user: object) => async (
                     profile: data.user,
                 },
             });
+            localStorage.setItem('userLoggedIn', 'true');
         } else {
             dispatch({
                 type: USER_LOGIN_FAILED,
@@ -73,6 +80,7 @@ export const refreshToken = () => async (
                     profile: data.user,
                 },
             });
+            localStorage.setItem('userLoggedIn', 'true');
         } else {
             dispatch({
                 type: TOKEN_FAILED,
@@ -87,7 +95,6 @@ export const refreshToken = () => async (
 };
 
 export const logOutUser = async (dispatch: Dispatch<UserDispatchType>) => {
-    console.log('hi');
     const res = await fetch('/user/clearToken', {
         credentials: 'include',
     });
@@ -97,5 +104,32 @@ export const logOutUser = async (dispatch: Dispatch<UserDispatchType>) => {
         dispatch({
             type: USER_LOGGED_OUT,
         });
+        localStorage.setItem('userLoggedIn', 'false');
     }
+};
+
+export const updateUserProfile = (
+    userProfile: UserProfileType,
+    accessToken: string
+) => async (dispatch: Dispatch<UserDispatchType>) => {
+    try {
+        const res = await fetch('/user/updateUserProfile', {
+            method: 'POST',
+            headers: {
+                authorization: `bearer ${accessToken}`,
+                'Content-Type': 'application/json',
+            },
+            credentials: 'include',
+            body: JSON.stringify(userProfile),
+        });
+
+        const data = await res.json();
+
+        if (data.ok) {
+            dispatch({
+                type: USER_PROFILE_UPDATED,
+                payload: data.user,
+            });
+        }
+    } catch (error) {}
 };

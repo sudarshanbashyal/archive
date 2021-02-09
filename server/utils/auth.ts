@@ -4,7 +4,7 @@ import { Request, Response, NextFunction } from 'express';
 dotenv.config();
 
 export interface PayloadType extends Request {
-    user: String | Object;
+    userId?: Number | Object;
 }
 
 export const isAuth = (
@@ -25,8 +25,11 @@ export const isAuth = (
         }
 
         const authToken = authorization.split(' ')[1];
-        const payload = jwt.verify(authToken, process.env.ACCESS_TOKEN_SECRET!);
-        _req.user = payload;
+        const payload: any = jwt.verify(
+            authToken,
+            process.env.ACCESS_TOKEN_SECRET!
+        );
+        _req.userId = payload.userId!;
         return _next();
         //
     } catch (err) {

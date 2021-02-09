@@ -7,6 +7,7 @@ import {
     LoginDataType,
     UserDispatchType,
     TOKEN_FAILED,
+    USER_PROFILE_UPDATED,
 } from '../Actions/userActionTypes';
 
 interface DefaultUserState {
@@ -16,7 +17,7 @@ interface DefaultUserState {
 }
 
 const defaultUserState: DefaultUserState = {
-    loading: false,
+    loading: true,
 };
 
 export const userReducer = (
@@ -63,6 +64,20 @@ export const userReducer = (
             return {
                 ...state,
                 loading: false,
+            };
+
+        case USER_PROFILE_UPDATED:
+            return {
+                ...state,
+                loading: false,
+                error: '',
+                client: {
+                    accessToken: state.client!.accessToken,
+                    profile: {
+                        ...state.client!.profile,
+                        ...action.payload,
+                    },
+                },
             };
 
         default:

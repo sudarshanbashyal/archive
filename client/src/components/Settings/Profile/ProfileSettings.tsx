@@ -1,7 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateUserProfile } from 'src/redux/Actions/userActions';
+import { RootStore } from 'src/redux/store';
 import './profileSettings.css';
 
 const ProfileSettings = () => {
+    const userState = useSelector((state: RootStore) => state.client);
+    const dispatch = useDispatch();
+
+    // extract the profile information from redux state
+    const accessToken = userState && userState.client?.accessToken;
+    const profile = userState && userState.client!.profile;
+    const [profileData, setProfileData] = useState({
+        firstName: profile.firstName,
+        lastName: profile.lastName,
+        interest: profile.interest,
+        workplace: profile.workplace,
+        bio: profile.bio,
+    });
+
+    const handleChange = (e: any) => {
+        setProfileData({
+            ...profileData,
+            [e.target.name]: e.target.value,
+        });
+    };
+
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        dispatch(updateUserProfile(profileData, accessToken!));
+    };
+
     return (
         <div className="profile-settings">
             <div className="setting-section">
@@ -46,7 +75,7 @@ const ProfileSettings = () => {
             <div className="setting-section">
                 <h2 className="section-title">about you</h2>
 
-                <form>
+                <form onSubmit={handleSubmit}>
                     <label htmlFor="name-input" className="section-description">
                         First Name
                     </label>
@@ -54,6 +83,9 @@ const ProfileSettings = () => {
                         type="text"
                         id="name-input"
                         placeholder="Your First Name"
+                        value={profileData.firstName}
+                        name="firstName"
+                        onChange={handleChange}
                     />
 
                     <label
@@ -66,18 +98,39 @@ const ProfileSettings = () => {
                         type="text"
                         id="last-name-input"
                         placeholder="Your Last Name"
+                        value={profileData.lastName}
+                        name="lastName"
+                        onChange={handleChange}
                     />
 
                     <label
                         htmlFor="interest-input"
                         className="section-description"
                     >
-                        Interest/ Workplace/ Education
+                        Interest/ Education
                     </label>
                     <input
                         type="text"
                         id="interest-input"
-                        placeholder="What do you do?/ What are you interested i?"
+                        placeholder="What do you do?/ What are you interested in?"
+                        value={profileData.interest}
+                        name="interest"
+                        onChange={handleChange}
+                    />
+
+                    <label
+                        htmlFor="workplace-input"
+                        className="section-description"
+                    >
+                        Workplace
+                    </label>
+                    <input
+                        type="text"
+                        id="interest-input"
+                        placeholder="Where do you work?"
+                        value={profileData.workplace}
+                        name="workplace"
+                        onChange={handleChange}
                     />
 
                     <label htmlFor="bio-input" className="section-description">
@@ -89,6 +142,9 @@ const ProfileSettings = () => {
                         cols={30}
                         rows={5}
                         placeholder="Write something about yourself"
+                        value={profileData.bio}
+                        name="bio"
+                        onChange={handleChange}
                     ></textarea>
 
                     <button className="save-btn">Save Changes</button>

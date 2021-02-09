@@ -6,8 +6,12 @@ import redSwiggle from '../../assets/red-swiggle.svg';
 import whiteSwiggle from '../../assets/white-swiggle.svg';
 import formSwiggle from '../../assets/form-red-swiggle.svg';
 import LoginForm from './LoginForm/LoginForm';
+import { useSelector } from 'react-redux';
+import { RootStore } from 'src/redux/store';
 
 const Landing = () => {
+    const userState = useSelector((state: RootStore) => state.client);
+
     return (
         <div className="landing">
             <div className="image-section">

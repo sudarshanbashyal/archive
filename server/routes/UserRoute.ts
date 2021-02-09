@@ -1,7 +1,12 @@
 import Express from 'express';
 import { db } from '../database/db';
 import bcrypt from 'bcrypt';
-import { isAuth, createAccessToken, createRefreshToken } from '../utils/auth';
+import {
+    isAuth,
+    createAccessToken,
+    createRefreshToken,
+    PayloadType,
+} from '../utils/auth';
 import jwt, { verify } from 'jsonwebtoken';
 
 const router = Express.Router();
@@ -253,6 +258,38 @@ router.get('/clearToken', async (_req, _res) => {
             message: 'Successfully logged out',
         });
 
+        //
+    } catch (err) {
+        return _res.status(500).json({
+            ok: false,
+            error: {
+                message: 'Something went wrong.',
+                err,
+            },
+        });
+    }
+});
+
+router.post('/updateUserProfile', isAuth, async (_req: PayloadType, _res) => {
+    try {
+        const { firstName, lastName, interest, workplace, bio } = _req.body;
+
+        const userId = _req.userId;
+        const user = await db.query(
+            `UPDATE users SET first_name=$1, last_name=$2, interest=$3, workplace=$4, bio=$5 WHERE user_id=$6 RETURNING *`,
+            [firstName, lastName, interest, workplace, bio, userId]
+        );
+
+        return _res.json({
+            ok: true,
+            user: {
+                firstName: user.rows[0].first_name,
+                lastName: user.rows[0].last_name,
+                interest: user.rows[0].interest,
+                workplace: user.rows[0].workplace,
+                bio: user.rows[0].bio,
+            },
+        });
         //
     } catch (err) {
         return _res.status(500).json({

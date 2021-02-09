@@ -223,7 +223,7 @@ const RegisterModal = () => {
                             placeholder="Expertise/ Interest (Optional)"
                             value={registerData.interest}
                             onChange={handleChange}
-                            maxLength={30}
+                            maxLength={40}
                         />
 
                         <input
@@ -232,7 +232,7 @@ const RegisterModal = () => {
                             placeholder="Workplace (Optional)"
                             value={registerData.workplace}
                             onChange={handleChange}
-                            maxLength={30}
+                            maxLength={40}
                         />
 
                         <textarea

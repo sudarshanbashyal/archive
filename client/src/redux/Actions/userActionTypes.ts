@@ -1,9 +1,12 @@
+import { StringMappingType } from 'typescript';
+
 export const USER_LOADING = 'USER_LOADING';
 export const USER_FAILED = 'USER_FAILED';
 export const USER_SUCCESS = 'USER_SUCCESS';
 export const USER_LOGIN_FAILED = 'LOGIN_FAILED';
 export const USER_LOGGED_OUT = 'USER_LOGGED_OUT';
 export const TOKEN_FAILED = 'TOKEN_SUCCESS';
+export const USER_PROFILE_UPDATED = 'USER_PROFILE_UPDATED';
 
 export type UserType = {
     userId: number;
@@ -17,6 +20,14 @@ export type UserType = {
     topicsFollowed: number[];
     profileImage: string;
     headerImage: string;
+};
+
+export type UserProfileType = {
+    firstName: string;
+    lastName: string;
+    interest: string;
+    bio: string;
+    workplace: string;
 };
 
 type LoginErrorType = {
@@ -57,10 +68,16 @@ export interface TokenRefreshFailed {
     type: typeof TOKEN_FAILED;
 }
 
+export interface UserProfileUpdated {
+    type: typeof USER_PROFILE_UPDATED;
+    payload: UserProfileType;
+}
+
 export type UserDispatchType =
     | UserLoading
     | UserFailed
     | UserSuccess
     | UserLoginFailed
     | UserLoggedOut
-    | TokenRefreshFailed;
+    | TokenRefreshFailed
+    | UserProfileUpdated;
