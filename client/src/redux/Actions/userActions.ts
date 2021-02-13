@@ -1,8 +1,5 @@
-import { useSelector } from 'react-redux';
-import { Redirect } from 'react-router-dom';
 import { Dispatch } from 'redux';
-import { userReducer } from '../Reducers/userReducer';
-import { RootStore } from '../store';
+import { showSuccessToast } from 'src/components/Utils/ToastNotification';
 import {
     USER_FAILED,
     USER_SUCCESS,
@@ -13,6 +10,7 @@ import {
     TOKEN_FAILED,
     UserProfileType,
     USER_PROFILE_UPDATED,
+    USER_ACCOUNT_UPDATED,
 } from './userActionTypes';
 
 export const loginUser = (user: object) => async (
@@ -130,6 +128,36 @@ export const updateUserProfile = (
                 type: USER_PROFILE_UPDATED,
                 payload: data.user,
             });
+            showSuccessToast('Profile Successfully Updated!');
         }
+    } catch (error) {}
+};
+
+export const updateUserAccount = (
+    userAccount: Object,
+    accessToken: String
+) => async (dispatch: Dispatch<UserDispatchType>) => {
+    try {
+        const res = await fetch('/user/updateUserAccount', {
+            method: 'POST',
+            headers: {
+                authorization: `bearer ${accessToken}`,
+                'Content-Type': 'application/json',
+            },
+            credentials: 'include',
+            body: JSON.stringify(userAccount),
+        });
+
+        const data = await res.json();
+
+        if (data.ok) {
+            dispatch({
+                type: USER_ACCOUNT_UPDATED,
+                payload: data.user,
+            });
+            showSuccessToast('Account Successfully Updated!');
+        }
+
+        //
     } catch (error) {}
 };

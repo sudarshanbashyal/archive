@@ -7,6 +7,8 @@ import './index.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootStore } from './redux/store';
 import { refreshToken } from './redux/Actions/userActions';
+import { ToastContainer } from 'react-toastify';
+// import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
     const dispatch = useDispatch();
@@ -42,6 +44,19 @@ const App = () => {
             {applicationState && applicationState.modal?.modalOpen && (
                 <ModalContainer />
             )}
+
+            {/* toast notification container */}
+            <ToastContainer
+                position="bottom-center"
+                autoClose={4000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
         </div>
     );
 };

@@ -13,19 +13,78 @@ body .App {
 .editor-page {
   width: 1200px;
   margin: auto;
+  margin-top: 80px;
 }
 
-.editor-page .Wysiwyg {
-  margin-top: 70px;
-}
-
-.editor-page .Wysiwyg .story-title {
+.editor-page .story-title {
   margin-bottom: 20px;
   border: none;
   font-size: 2rem;
   outline: none;
   font-family: 'Playfair Display', serif;
   width: 100%;
+}
+
+.editor-page .header-image {
+  height: 250px;
+  width: 100%;
+  border: 7px;
+  position: relative;
+}
+
+.editor-page .header-image img {
+  border-radius: 7px;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  -webkit-user-drag: none;
+}
+
+.editor-page .header-image svg {
+  position: absolute;
+  fill: white;
+  top: 15px;
+  right: 15px;
+  cursor: pointer;
+}
+
+.editor-page .header-image-placeholder {
+  height: 250px;
+  border: 1px dashed gray;
+  border-radius: 7px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  cursor: pointer;
+}
+
+.editor-page .header-image-placeholder p {
+  font-size: 1.3rem;
+  color: gray;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.editor-page .error-message {
+  color: #dd3b40;
+  font-weight: 700;
+}
+
+.editor-page .Wysiwyg {
+  margin-top: 70px;
 }
 
 .editor-page .Wysiwyg .editor-controls {

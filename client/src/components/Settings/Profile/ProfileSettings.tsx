@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { updateUserProfile } from 'src/redux/Actions/userActions';
 import { RootStore } from 'src/redux/store';
 import './profileSettings.css';
@@ -146,8 +147,24 @@ const ProfileSettings = () => {
                         name="bio"
                         onChange={handleChange}
                     ></textarea>
+                    <p
+                        style={{
+                            color:
+                                profileData.bio.length >= 200
+                                    ? '#dd3b40'
+                                    : 'black',
+                        }}
+                        className="bio-length"
+                    >
+                        {profileData.bio.length}/200
+                    </p>
 
-                    <button className="save-btn">Save Changes</button>
+                    <button
+                        className="save-btn"
+                        disabled={profileData.bio.length > 200}
+                    >
+                        Save Changes
+                    </button>
                 </form>
             </div>
         </div>

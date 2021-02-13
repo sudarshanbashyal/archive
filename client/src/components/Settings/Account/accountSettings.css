@@ -143,6 +143,12 @@ body .App {
   resize: none;
 }
 
+.profile-settings .setting-section form .bio-length, .account-setting .setting-section form .bio-length {
+  font-weight: 600;
+  margin-top: -10px;
+  margin-bottom: 20px;
+}
+
 .profile-settings .setting-section form .save-btn, .account-setting .setting-section form .save-btn, .account-setting .setting-section form .delete-btn {
   padding: 0.8rem 1.8rem;
   font-weight: 700;
@@ -167,5 +173,11 @@ body .App {
   background: #dd3b40 !important;
   color: white;
   margin-top: -15px;
+}
+
+.account-setting .error-message {
+  color: #dd3b40;
+  font-weight: 700;
+  margin-top: -10px;
 }
 /*# sourceMappingURL=accountSettings.css.map */

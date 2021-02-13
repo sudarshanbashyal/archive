@@ -8,6 +8,7 @@ import {
     UserDispatchType,
     TOKEN_FAILED,
     USER_PROFILE_UPDATED,
+    USER_ACCOUNT_UPDATED,
 } from '../Actions/userActionTypes';
 
 interface DefaultUserState {
@@ -76,6 +77,20 @@ export const userReducer = (
                     profile: {
                         ...state.client!.profile,
                         ...action.payload,
+                    },
+                },
+            };
+
+        case USER_ACCOUNT_UPDATED:
+            return {
+                ...state,
+                loading: false,
+                error: '',
+                client: {
+                    accessToken: state.client!.accessToken,
+                    profile: {
+                        ...state.client!.profile,
+                        email: action.payload.email,
                     },
                 },
             };

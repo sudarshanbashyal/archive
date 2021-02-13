@@ -7,6 +7,7 @@ export const USER_LOGIN_FAILED = 'LOGIN_FAILED';
 export const USER_LOGGED_OUT = 'USER_LOGGED_OUT';
 export const TOKEN_FAILED = 'TOKEN_SUCCESS';
 export const USER_PROFILE_UPDATED = 'USER_PROFILE_UPDATED';
+export const USER_ACCOUNT_UPDATED = 'USER_ACCOUNT_UPDATED';
 
 export type UserType = {
     userId: number;
@@ -73,6 +74,11 @@ export interface UserProfileUpdated {
     payload: UserProfileType;
 }
 
+export interface UserAccountUpdated {
+    type: typeof USER_ACCOUNT_UPDATED;
+    payload: { email: string };
+}
+
 export type UserDispatchType =
     | UserLoading
     | UserFailed
@@ -80,4 +86,5 @@ export type UserDispatchType =
     | UserLoginFailed
     | UserLoggedOut
     | TokenRefreshFailed
-    | UserProfileUpdated;
+    | UserProfileUpdated
+    | UserAccountUpdated;

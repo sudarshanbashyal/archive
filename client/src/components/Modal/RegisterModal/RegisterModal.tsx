@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { showSuccessToast } from 'src/components/Utils/ToastNotification';
 import { closeModal } from 'src/redux/Actions/applicationActions';
 // import { rightArrowIcon } from 'src/assets/SVGs';
 import './registerModal.css';
@@ -96,18 +97,23 @@ const RegisterModal = () => {
         if (registerData.topics.length < 3) {
             setError('Please select at least 3 topics');
         } else {
-            const data = await fetch('/user/register', {
+            const res = await fetch('/user/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(registerData),
             });
-            const user = await data.json();
+            const data = await res.json();
 
-            if (!user.ok) {
-                setError(user.error.message);
+            if (!data.ok) {
+                setError(data.error.message);
                 setFormStage(1);
+            }
+
+            if (data.ok) {
+                showSuccessToast('Account Successfully created!');
+                dispatch(closeModal);
             }
         }
     };

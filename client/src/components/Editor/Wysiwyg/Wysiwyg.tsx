@@ -3,12 +3,11 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.bubble.css';
 import 'react-quill/dist/quill.snow.css';
 
-const Wysiwyg = () => {
-    const [editorHTML, setEditorHTML] = useState('');
+const Wysiwyg = ({ setEditorHTML, editorHTML, handleSubmit }: any) => {
+    // const [editorHTML, setEditorHTML] = useState('');
 
     const handleEditorChange = (html: string) => {
         setEditorHTML(html);
-        console.log(editorHTML);
     };
 
     const modules = {
@@ -49,12 +48,6 @@ const Wysiwyg = () => {
 
     return (
         <div className="Wysiwyg">
-            <input
-                type="text"
-                className="story-title"
-                placeholder="Title your Story..."
-            />
-
             <ReactQuill
                 className="actual-editor"
                 theme="snow"
@@ -68,7 +61,9 @@ const Wysiwyg = () => {
 
             <div className="editor-controls">
                 <button className="draft-btn">Save as draft</button>
-                <button className="publish-btn">Publish Story</button>
+                <button className="publish-btn" onClick={handleSubmit}>
+                    Publish Story
+                </button>
             </div>
         </div>
     );

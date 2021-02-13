@@ -251,7 +251,6 @@ router.post('/refreshToken', async (_req, _res) => {
 
 router.get('/clearToken', async (_req, _res) => {
     try {
-        console.log('hit');
         _res.cookie('authId', null, { httpOnly: true });
         return _res.json({
             ok: true,
@@ -280,7 +279,7 @@ router.post('/updateUserProfile', isAuth, async (_req: PayloadType, _res) => {
             [firstName, lastName, interest, workplace, bio, userId]
         );
 
-        return _res.json({
+        return _res.status(201).json({
             ok: true,
             user: {
                 firstName: user.rows[0].first_name,
@@ -289,6 +288,67 @@ router.post('/updateUserProfile', isAuth, async (_req: PayloadType, _res) => {
                 workplace: user.rows[0].workplace,
                 bio: user.rows[0].bio,
             },
+        });
+        //
+    } catch (err) {
+        return _res.status(500).json({
+            ok: false,
+            error: {
+                message: 'Something went wrong.',
+                err,
+            },
+        });
+    }
+});
+
+router.post('/updateUserAccount', isAuth, async (_req: PayloadType, _res) => {
+    try {
+        const { email, currentPassword, newPassword } = _req.body;
+
+        const userId = _req.userId;
+        const user = await db.query('SELECT * FROM users WHERE user_id=$1', [
+            userId,
+        ]);
+
+        const passwordMatch = await bcrypt.compare(
+            currentPassword,
+            user.rows[0].password
+        );
+        if (!passwordMatch) {
+            return _res.status(401).json({
+                ok: false,
+                error: {
+                    message: 'Incorrect credentials.',
+                },
+            });
+        }
+
+        // change just the email if no new password is given
+        if (!newPassword) {
+            let updatedUser = await db.query(
+                'UPDATE users SET email=$1 WHERE user_id=$2 RETURNING email',
+                [email, userId]
+            );
+
+            return _res.status(201).json({
+                ok: true,
+                user: updatedUser.rows[0],
+            });
+        }
+
+        // hash new password
+        const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+        // ---- TODO ----
+        // - Handle unique email warning
+        let updatedUser = await db.query(
+            'UPDATE users SET email=$1, password=$2 WHERE user_id=$3 RETURNING email',
+            [email, hashedPassword, userId]
+        );
+
+        return _res.json({
+            ok: true,
+            user: updatedUser.rows[0],
         });
         //
     } catch (err) {
