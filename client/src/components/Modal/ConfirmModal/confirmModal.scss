@@ -1,0 +1,18 @@
+@import '../../../index.scss';
+@import '../LogoutModal//logoutModal.scss';
+
+.confirm-modal {
+    @extend .logout-modal;
+
+    .content-section {
+        padding: 1.5rem 1rem;
+
+        h3 {
+            margin-bottom: 30px;
+        }
+
+        .confirm-btn {
+            @extend .logout-btn;
+        }
+    }
+}

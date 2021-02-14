@@ -1,5 +1,8 @@
 import { Dispatch } from 'redux';
-import { showSuccessToast } from 'src/components/Utils/ToastNotification';
+import {
+    showFailureToast,
+    showSuccessToast,
+} from 'src/components/Utils/ToastNotification';
 import {
     USER_FAILED,
     USER_SUCCESS,
@@ -135,7 +138,7 @@ export const updateUserProfile = (
 
 export const updateUserAccount = (
     userAccount: Object,
-    accessToken: String
+    accessToken: string | undefined
 ) => async (dispatch: Dispatch<UserDispatchType>) => {
     try {
         const res = await fetch('/user/updateUserAccount', {
@@ -156,6 +159,11 @@ export const updateUserAccount = (
                 payload: data.user,
             });
             showSuccessToast('Account Successfully Updated!');
+        } else if (
+            !data.ok &&
+            data.error.message === 'Incorrect credentials.'
+        ) {
+            showFailureToast('Incorrect credentials. Please try again');
         }
 
         //

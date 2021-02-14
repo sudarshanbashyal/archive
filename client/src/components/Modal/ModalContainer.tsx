@@ -4,6 +4,7 @@ import { RootStore } from 'src/redux/store';
 import LogoutModal from './LogoutModal/LogoutModal';
 import RegisterModal from './RegisterModal/RegisterModal';
 import './modalContainer.css';
+import ConfirmModal from './ConfirmModal/ConfirmModal';
 
 const ModalContainer = () => {
     const applicationState = useSelector(
@@ -17,6 +18,8 @@ const ModalContainer = () => {
                 <RegisterModal />
             ) : applicationState.modal?.modalType === 'logout' ? (
                 <LogoutModal />
+            ) : applicationState.modal?.modalType === 'uploadBlog' ? (
+                <ConfirmModal />
             ) : null}
         </div>
     );

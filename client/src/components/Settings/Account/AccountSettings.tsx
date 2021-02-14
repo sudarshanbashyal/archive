@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { updateUserAccount } from 'src/redux/Actions/userActions';
 import { RootStore } from 'src/redux/store';
 import './accountSettings.css';
 
@@ -7,6 +8,7 @@ const AccountSettings = () => {
     const userState = useSelector((state: RootStore) => state.client);
     const dispatch = useDispatch();
 
+    const emailFormat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
     const [accountData, setAccountData] = useState({
         email: userState.client?.profile.email,
         currentPassword: '',
@@ -16,6 +18,7 @@ const AccountSettings = () => {
 
     const [currentError, setCurrentError] = useState<null | string>(null);
     const [mismatchError, setMismatchError] = useState<null | string>(null);
+    const [emailError, setEmailError] = useState<null | string>(null);
 
     const handleChange = (e: any) => {
         setAccountData({
@@ -24,28 +27,50 @@ const AccountSettings = () => {
         });
     };
 
-    const validateData = (e: React.FormEvent) => {
+    const validateData = (e: React.FormEvent): void => {
         e.preventDefault();
 
-        if (!accountData.currentPassword) {
-            setCurrentError(
-                'You must enter the current password to confirm the changes.'
-            );
-        } else setCurrentError(null);
-
-        if (accountData.newPassword.length < 6) {
-            setMismatchError('Password must be at least 6 characters long.');
-        } else if (accountData.newPassword !== accountData.confirmNewPassword) {
-            setMismatchError('Your passwords do not match.');
-        } else setMismatchError(null);
-
-        handleSubmit();
+        if (accountData.newPassword || accountData.confirmNewPassword) {
+            if (accountData.newPassword !== accountData.confirmNewPassword) {
+                setMismatchError('Your passwords do not match.');
+            } else if (accountData.newPassword.length < 6) {
+                setMismatchError(
+                    'Your password must be at least 6 characters long.'
+                );
+            } else if (!accountData.currentPassword) {
+                setCurrentError(
+                    'You must enter the current password to confirm the changes'
+                );
+            } else if (!accountData.email?.match(emailFormat)) {
+                setEmailError('Please enter a valid email address.');
+            } else {
+                handleSubmit();
+                setCurrentError(null);
+                setMismatchError(null);
+            }
+        } else {
+            if (!accountData.currentPassword) {
+                setCurrentError(
+                    'You must enter the current password to confirm the changes'
+                );
+            } else if (!accountData.email?.match(emailFormat)) {
+                setEmailError('Please enter a valid email address.');
+            } else {
+                handleSubmit();
+            }
+        }
     };
 
     const handleSubmit = () => {
-        if (currentError === null && mismatchError === null) {
-            console.log('W');
-        }
+        setMismatchError(null);
+        setCurrentError(null);
+        setEmailError(null);
+        dispatch(
+            updateUserAccount(
+                accountData,
+                userState && userState.client?.accessToken
+            )
+        );
     };
 
     return (
@@ -60,6 +85,9 @@ const AccountSettings = () => {
                         Email Address
                     </label>
                     <input
+                        style={{
+                            marginBottom: emailError ? '20px' : '0px',
+                        }}
                         value={accountData.email}
                         id="email-input"
                         type="email"
@@ -67,6 +95,7 @@ const AccountSettings = () => {
                         placeholder="Change Your Email Address"
                         onChange={handleChange}
                     />
+                    <p className="error-message">{emailError && emailError}</p>
                 </form>
             </div>
 

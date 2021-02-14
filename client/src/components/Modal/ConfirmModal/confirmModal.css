@@ -1,0 +1,93 @@
+body {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: 'Source Sans Pro';
+}
+
+body .App {
+  position: relative;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: 'Source Sans Pro';
+}
+
+body .App {
+  position: relative;
+}
+
+.logout-modal, .confirm-modal {
+  background-color: white;
+  width: 500px;
+  border-radius: 7px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.logout-modal .icon-section, .confirm-modal .icon-section {
+  height: auto;
+  width: 20%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background: #ffc94b;
+  border-radius: 7px 0px 0px 7px;
+}
+
+.logout-modal .icon-section svg, .confirm-modal .icon-section svg {
+  -webkit-transform: scale(1.2);
+          transform: scale(1.2);
+}
+
+.logout-modal .content-section, .confirm-modal .content-section {
+  width: 80%;
+  padding: 2rem 1rem;
+}
+
+.logout-modal .content-section h2, .confirm-modal .content-section h2 {
+  margin: 0;
+}
+
+.logout-modal .content-section p, .confirm-modal .content-section p {
+  margin-top: 10px;
+  margin-bottom: 30px;
+}
+
+.logout-modal .content-section .cancel-btn, .confirm-modal .content-section .cancel-btn, .logout-modal .content-section .logout-btn, .confirm-modal .content-section .logout-btn, .confirm-modal .content-section .confirm-btn {
+  font-weight: 700;
+  padding: 0.5rem 0rem;
+  cursor: pointer;
+  outline: none;
+  background-color: transparent;
+  border: none;
+}
+
+.logout-modal .content-section .logout-btn, .confirm-modal .content-section .logout-btn, .confirm-modal .content-section .confirm-btn {
+  padding: 0.5rem 2rem;
+  margin-right: 20px;
+  background: -webkit-gradient(linear, left top, right top, from(#ffc94b), to(#f17a7e));
+  background: linear-gradient(90deg, #ffc94b 0%, #f17a7e 100%);
+  border-radius: 7px;
+}
+
+.confirm-modal .content-section {
+  padding: 1.5rem 1rem;
+}
+
+.confirm-modal .content-section h3 {
+  margin-bottom: 30px;
+}
+/*# sourceMappingURL=confirmModal.css.map */

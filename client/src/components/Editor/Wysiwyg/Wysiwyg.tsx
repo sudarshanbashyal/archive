@@ -51,7 +51,7 @@ const Wysiwyg = ({ setEditorHTML, editorHTML, handleSubmit }: any) => {
             <ReactQuill
                 className="actual-editor"
                 theme="snow"
-                value={editorHTML}
+                value={editorHTML || ''}
                 onChange={handleEditorChange}
                 modules={modules}
                 formats={formats}
