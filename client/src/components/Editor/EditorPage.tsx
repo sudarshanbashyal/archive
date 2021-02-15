@@ -1,13 +1,17 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { openModal } from 'src/redux/Actions/applicationActions';
-import { showFailureToast } from '../Utils/ToastNotification';
+import { RootStore } from 'src/redux/store';
+import { showSuccessToast } from '../Utils/ToastNotification';
 import './editor.css';
 import Wysiwyg from './Wysiwyg/Wysiwyg';
 
 const EditorPage = () => {
     const dispatch = useDispatch();
+    const history = useHistory();
 
+    const userState = useSelector((state: RootStore) => state.client);
     //
     const [blogTitle, setBlogTitle] = useState<string | null>(null);
     const [blogTopics, setBlogTopics] = useState<
@@ -62,25 +66,52 @@ const EditorPage = () => {
     const handleSubmit = () => {
         if (!blogTitle) {
             setEditorError('Your blog must have a title.');
-            console.log(editorError);
         } else if (!previewSource) {
             setEditorError('You must upload an image.');
-            console.log(editorError);
         } else if (!selectedTopic) {
             setEditorError('You must select a topic.');
-            console.log(editorError);
         } else if (!editorHTML) {
             setEditorError('Your blog cannot be empty.');
-            console.log(editorError);
         } else {
             setEditorError(null);
-            dispatch(openModal('uploadBlog'));
+            // dispatch(openModal('uploadBlog'));
+
+            // upload the blog
+            uploadBlog();
+        }
+    };
+
+    const uploadBlog = async () => {
+        const blogData = {
+            blogTitle,
+            blogContent: editorHTML,
+            topicId: selectedTopic,
+            encodedImage: previewSource,
+        };
+
+        const res = await fetch('blog/postBlog', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                authorization: `bearer ${
+                    userState && userState.client?.accessToken
+                }`,
+            },
+            body: JSON.stringify(blogData),
+        });
+
+        const data = await res.json();
+        if (data.ok) {
+            showSuccessToast('Blog Successfully Published.');
+            history.push(
+                `/user/${userState && userState.client?.profile.userId}`
+            );
         }
     };
 
     useEffect(() => {
         (async function () {
-            const res = await fetch('topic/getTopics');
+            const res = await fetch('blog/getTopics');
             const data = await res.json();
             setBlogTopics(data.data);
         })();

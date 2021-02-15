@@ -24,8 +24,8 @@ const Recommendations = () => {
             <h2>people you might want to follow</h2>
 
             <div className="users">
-                {userArray.map((user) => (
-                    <div className="user">
+                {userArray.map((user, index) => (
+                    <div key={index} className="user">
                         <div className="user-container">
                             <div className="user-profile"></div>
                             <div className="user-info">

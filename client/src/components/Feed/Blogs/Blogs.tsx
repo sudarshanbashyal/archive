@@ -54,8 +54,9 @@ const Blogs = () => {
 
     return (
         <div className="blogs">
-            {blogArray.map((blog) => (
+            {blogArray.map((blog, index) => (
                 <Blog
+                    key={index}
                     authorName={blog.authorName}
                     blogTopic={blog.blogTopic}
                     blogTitle={blog.blogTitle}

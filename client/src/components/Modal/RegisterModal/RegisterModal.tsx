@@ -120,7 +120,7 @@ const RegisterModal = () => {
 
     useEffect(() => {
         (async function getTopics() {
-            const req = await fetch('/topic/getTopics');
+            const req = await fetch('/blog/getTopics');
             const data = await req.json();
             if (data.ok) {
                 setTopics(data.data);
