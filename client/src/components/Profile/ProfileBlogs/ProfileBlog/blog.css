@@ -14,9 +14,16 @@
 .p-blog .blog-header-image {
   width: 100%;
   height: 150px;
-  background-color: teal;
   border-radius: 7px;
   margin-bottom: 5px;
+}
+
+.p-blog .blog-header-image img {
+  height: 100%;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 7px;
 }
 
 .p-blog .blog-info {

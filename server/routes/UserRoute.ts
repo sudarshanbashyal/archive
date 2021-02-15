@@ -362,4 +362,51 @@ router.post('/updateUserAccount', isAuth, async (_req: PayloadType, _res) => {
     }
 });
 
+router.get('/getUser/:id', async (_req, _res) => {
+    try {
+        const profileId = _req.params.id;
+
+        const user = await db.query(
+            `SELECT 
+                u.first_name, 
+                u.last_name, 
+                u.interest, 
+                u.workplace, 
+                b.blog_id,
+                b.title,
+                b.header_image,
+                b.created_at,
+                t.topic_title
+            FROM users u
+            INNER JOIN blogs b ON u.user_id=b.creator_id
+            INNER JOIN topics t ON b.topic_id = t.topic_id
+            WHERE u.user_id=$1;`,
+            [profileId]
+        );
+
+        if (!user.rows[0]) {
+            return _res.status(404).json({
+                ok: false,
+                error: {
+                    message: 'User not found.',
+                },
+            });
+        }
+
+        return _res.json({
+            ok: true,
+            info: user.rows,
+        });
+        //
+    } catch (err) {
+        return _res.status(500).json({
+            ok: false,
+            error: {
+                message: 'Something went wrong.',
+                err,
+            },
+        });
+    }
+});
+
 export default router;

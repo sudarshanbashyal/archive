@@ -1,12 +1,22 @@
 import React from 'react';
+import { ProfileBlogType } from '../../Profile';
+import moment from 'moment';
 import './blog.css';
 
-const ProfileBlog = ({ blogTopic, blogTitle, likes, publishedOn }: any) => {
+const ProfileBlog = ({
+    blogId,
+    title,
+    createdAt,
+    topicTitle,
+    headerImage,
+}: ProfileBlogType) => {
     return (
         <div className="p-blog">
-            <strong>{blogTopic}</strong>
-            <h2>{blogTitle}</h2>
-            <div className="blog-header-image"></div>
+            <strong>{topicTitle}</strong>
+            <h2>{title}</h2>
+            <div className="blog-header-image">
+                <img src={headerImage} alt="" />
+            </div>
 
             <div className="blog-info">
                 <div className="icons">
@@ -19,7 +29,7 @@ const ProfileBlog = ({ blogTopic, blogTitle, likes, publishedOn }: any) => {
                     >
                         <path d="M12 9.229c.234-1.12 1.547-6.229 5.382-6.229 2.22 0 4.618 1.551 4.618 5.003 0 3.907-3.627 8.47-10 12.629-6.373-4.159-10-8.722-10-12.629 0-3.484 2.369-5.005 4.577-5.005 3.923 0 5.145 5.126 5.423 6.231zm-12-1.226c0 4.068 3.06 9.481 12 14.997 8.94-5.516 12-10.929 12-14.997 0-7.962-9.648-9.028-12-3.737-2.338-5.262-12-4.27-12 3.737z" />
                     </svg>
-                    {likes}
+                    {7}
 
                     <svg
                         className="bookmark-icon"
@@ -31,7 +41,11 @@ const ProfileBlog = ({ blogTopic, blogTitle, likes, publishedOn }: any) => {
                         <path d="M16 2v17.582l-4-3.512-4 3.512v-17.582h8zm2-2h-12v24l6-5.269 6 5.269v-24z" />
                     </svg>
                 </div>
-                <span className="published-date">{publishedOn}</span>
+                <span className="published-date">
+                    {moment(createdAt).format('DD')}{' '}
+                    {moment(createdAt).format('MMMM')},{' '}
+                    {moment(createdAt).format('YYYY')}
+                </span>
             </div>
         </div>
     );
