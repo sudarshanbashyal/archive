@@ -1,4 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { followUser, unfollowUser } from 'src/redux/Actions/userActions';
+import { RootStore } from 'src/redux/store';
 import { couldStartTrivia } from 'typescript';
 import './profile.css';
 import ProfileBlogs from './ProfileBlogs/ProfileBlogs';
@@ -20,6 +24,8 @@ export interface ProfileBlogType {
 
 const Profile = (props: any) => {
     const { id: profileId } = props.match.params;
+    const userState = useSelector((state: RootStore) => state.client);
+    const dispatch = useDispatch();
 
     const [userExists, setUserExists] = useState<boolean>(true);
     const [profileInfo, setProfileInfo] = useState<ProfileInfoType>({
@@ -36,7 +42,6 @@ const Profile = (props: any) => {
             const data = await res.json();
 
             if (data.ok) {
-                console.log(data.info);
                 // set up profile info
                 let {
                     first_name,
@@ -50,6 +55,10 @@ const Profile = (props: any) => {
                     interest,
                     workplace,
                 });
+
+                if (!data.info[0].title) {
+                    return;
+                }
 
                 // retrieve all the blogs
                 const retrievedBlogs = data.info.map(
@@ -73,7 +82,6 @@ const Profile = (props: any) => {
                 );
 
                 setProfileBlogs([...profileBlogs, ...retrievedBlogs]);
-                console.log(profileBlogs);
             } else {
                 setUserExists(false);
             }
@@ -87,7 +95,46 @@ const Profile = (props: any) => {
             <div className="content-container">
                 <div className="profile">
                     <div className="profile-picture"></div>
-                    <button className="follow-btn">Follow</button>
+
+                    {/* chcek user id and display buttons accordingly */}
+                    {+profileId === userState.client!.profile.userId ? (
+                        <Link to="/settings">
+                            <button className="follow-btn">Edit Profile</button>
+                        </Link>
+                    ) : userState &&
+                      userState.client?.profile.usersFollowed.includes(
+                          +profileId
+                      ) ? (
+                        <button
+                            className="follow-btn"
+                            onClick={() => {
+                                dispatch(
+                                    unfollowUser(
+                                        +profileId,
+                                        userState &&
+                                            userState.client?.accessToken
+                                    )
+                                );
+                            }}
+                        >
+                            Unfollow
+                        </button>
+                    ) : (
+                        <button
+                            className="follow-btn"
+                            onClick={() => {
+                                dispatch(
+                                    followUser(
+                                        +profileId,
+                                        userState &&
+                                            userState.client?.accessToken
+                                    )
+                                );
+                            }}
+                        >
+                            Follow
+                        </button>
+                    )}
                 </div>
 
                 <div className="content">
@@ -114,7 +161,13 @@ const Profile = (props: any) => {
 
                     <hr />
 
-                    <ProfileBlogs profileBlogs={profileBlogs} />
+                    {profileBlogs[0] ? (
+                        <ProfileBlogs profileBlogs={profileBlogs} />
+                    ) : (
+                        <h2 className="no-blogs-message">
+                            This user does not have any blogs.
+                        </h2>
+                    )}
                 </div>
             </div>
         </div>

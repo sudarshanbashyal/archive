@@ -8,6 +8,8 @@ export const USER_LOGGED_OUT = 'USER_LOGGED_OUT';
 export const TOKEN_FAILED = 'TOKEN_SUCCESS';
 export const USER_PROFILE_UPDATED = 'USER_PROFILE_UPDATED';
 export const USER_ACCOUNT_UPDATED = 'USER_ACCOUNT_UPDATED';
+export const USER_FOLLOWED = 'FOLLOW_USER';
+export const USER_UNFOLLOWED = 'FOLLOW_USER';
 
 export type UserType = {
     userId: number;
@@ -79,6 +81,16 @@ export interface UserAccountUpdated {
     payload: { email: string };
 }
 
+export interface UserFollowed {
+    type: typeof USER_FOLLOWED;
+    payload: number[];
+}
+
+export interface UserUnfollowed {
+    type: typeof USER_UNFOLLOWED;
+    payload: number[];
+}
+
 export type UserDispatchType =
     | UserLoading
     | UserFailed
@@ -87,4 +99,6 @@ export type UserDispatchType =
     | UserLoggedOut
     | TokenRefreshFailed
     | UserProfileUpdated
-    | UserAccountUpdated;
+    | UserAccountUpdated
+    | UserFollowed
+    | UserUnfollowed;

@@ -14,6 +14,8 @@ import {
     UserProfileType,
     USER_PROFILE_UPDATED,
     USER_ACCOUNT_UPDATED,
+    USER_FOLLOWED,
+    USER_UNFOLLOWED,
 } from './userActionTypes';
 
 export const loginUser = (user: object) => async (
@@ -167,5 +169,47 @@ export const updateUserAccount = (
         }
 
         //
+    } catch (error) {}
+};
+
+export const followUser = (
+    userId: number,
+    accessToken: string | undefined
+) => async (dispatch: Dispatch<UserDispatchType>) => {
+    try {
+        const res = await fetch(`/user/followUser/${userId}`, {
+            headers: {
+                authorization: `bearer ${accessToken}`,
+            },
+        });
+
+        const data = await res.json();
+        if (data.ok) {
+            dispatch({
+                type: USER_FOLLOWED,
+                payload: data.newList,
+            });
+        }
+    } catch (error) {}
+};
+
+export const unfollowUser = (
+    userId: number,
+    accessToken: string | undefined
+) => async (dispatch: Dispatch<UserDispatchType>) => {
+    try {
+        const res = await fetch(`/user/unfollowUser/${userId}`, {
+            headers: {
+                authorization: `bearer ${accessToken}`,
+            },
+        });
+
+        const data = await res.json();
+        if (data.ok) {
+            dispatch({
+                type: USER_UNFOLLOWED,
+                payload: data.newList,
+            });
+        }
     } catch (error) {}
 };

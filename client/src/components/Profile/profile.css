@@ -68,4 +68,8 @@ body .App {
 .profile .content-container .content hr {
   margin-bottom: 50px;
 }
+
+.profile .content-container .content .no-blogs-message {
+  color: #a5a5a5;
+}
 /*# sourceMappingURL=profile.css.map */

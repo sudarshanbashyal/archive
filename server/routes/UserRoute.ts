@@ -123,7 +123,7 @@ router.post('/login', async (_req, _res) => {
             interest,
             workplace,
             bio,
-            user_followed,
+            users_followed,
             topics_followed,
             profileimage,
             headerimage,
@@ -140,7 +140,7 @@ router.post('/login', async (_req, _res) => {
                 interest,
                 workplace,
                 bio,
-                usersFollowed: user_followed,
+                usersFollowed: users_followed,
                 topicsFollowed: topics_followed,
                 profileImage: profileimage,
                 headerImage: headerimage,
@@ -202,7 +202,7 @@ router.post('/refreshToken', async (_req, _res) => {
                 interest,
                 workplace,
                 bio,
-                user_followed,
+                users_followed,
                 topics_followed,
                 profileimage,
                 headerimage,
@@ -219,7 +219,7 @@ router.post('/refreshToken', async (_req, _res) => {
                     interest,
                     workplace,
                     bio,
-                    usersFollowed: user_followed,
+                    usersFollowed: users_followed,
                     topicsFollowed: topics_followed,
                     profileImage: profileimage,
                     headerImage: headerimage,
@@ -378,8 +378,8 @@ router.get('/getUser/:id', async (_req, _res) => {
                 b.created_at,
                 t.topic_title
             FROM users u
-            INNER JOIN blogs b ON u.user_id=b.creator_id
-            INNER JOIN topics t ON b.topic_id = t.topic_id
+            LEFT OUTER JOIN blogs b ON u.user_id=b.creator_id
+            LEFT OUTER JOIN topics t ON b.topic_id = t.topic_id
             WHERE u.user_id=$1;`,
             [profileId]
         );
@@ -396,6 +396,66 @@ router.get('/getUser/:id', async (_req, _res) => {
         return _res.json({
             ok: true,
             info: user.rows,
+        });
+        //
+    } catch (err) {
+        return _res.status(500).json({
+            ok: false,
+            error: {
+                message: 'Something went wrong.',
+                err,
+            },
+        });
+    }
+});
+
+router.get('/followUser/:id', isAuth, async (_req: PayloadType, _res) => {
+    try {
+        const profileId = _req.params.id;
+
+        const user = _req.userId;
+        const newFollowArray = await db.query(
+            `
+            UPDATE users
+            SET users_followed=array_append(users_followed, $1)
+            WHERE user_id=$2
+            RETURNING users_followed;`,
+            [profileId, user]
+        );
+
+        return _res.status(201).json({
+            ok: true,
+            newList: newFollowArray.rows[0].users_followed,
+        });
+        //
+    } catch (err) {
+        return _res.status(500).json({
+            ok: false,
+            error: {
+                message: 'Something went wrong.',
+                err,
+            },
+        });
+    }
+});
+
+router.get('/unfollowUser/:id', isAuth, async (_req: PayloadType, _res) => {
+    try {
+        const profileId = _req.params.id;
+
+        const user = _req.userId;
+        const newFollowArray = await db.query(
+            `
+            UPDATE users
+            SET users_followed=array_remove(users_followed, $1)
+            WHERE user_id=$2
+            RETURNING users_followed;`,
+            [profileId, user]
+        );
+
+        return _res.status(201).json({
+            ok: true,
+            newList: newFollowArray.rows[0].users_followed,
         });
         //
     } catch (err) {

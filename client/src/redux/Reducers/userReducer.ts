@@ -9,6 +9,8 @@ import {
     TOKEN_FAILED,
     USER_PROFILE_UPDATED,
     USER_ACCOUNT_UPDATED,
+    USER_FOLLOWED,
+    USER_UNFOLLOWED,
 } from '../Actions/userActionTypes';
 
 interface DefaultUserState {
@@ -91,6 +93,34 @@ export const userReducer = (
                     profile: {
                         ...state.client!.profile,
                         email: action.payload.email,
+                    },
+                },
+            };
+
+        case USER_FOLLOWED:
+            return {
+                ...state,
+                loading: false,
+                error: '',
+                client: {
+                    accessToken: state.client!.accessToken,
+                    profile: {
+                        ...state.client!.profile,
+                        usersFollowed: action.payload,
+                    },
+                },
+            };
+
+        case USER_UNFOLLOWED:
+            return {
+                ...state,
+                loading: false,
+                error: '',
+                client: {
+                    accessToken: state.client!.accessToken,
+                    profile: {
+                        ...state.client!.profile,
+                        usersFollowed: action.payload,
                     },
                 },
             };
