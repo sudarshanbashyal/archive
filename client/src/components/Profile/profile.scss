@@ -47,6 +47,15 @@
                     span {
                         margin-right: 20px;
                     }
+
+                    .follower-stat {
+                        cursor: pointer;
+                    }
+
+                    .following-stat {
+                        @extend .follower-stat;
+                    }
+
                     margin-bottom: 50px;
                 }
             }

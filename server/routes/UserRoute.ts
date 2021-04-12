@@ -8,6 +8,7 @@ import {
     PayloadType,
 } from '../utils/auth';
 import jwt, { verify } from 'jsonwebtoken';
+import { isArray } from 'util';
 
 const router = Express.Router();
 
@@ -350,6 +351,7 @@ router.post('/updateUserAccount', isAuth, async (_req: PayloadType, _res) => {
             ok: true,
             user: updatedUser.rows[0],
         });
+
         //
     } catch (err) {
         return _res.status(500).json({
@@ -372,19 +374,24 @@ router.get('/getUser/:id', async (_req, _res) => {
                 u.last_name, 
                 u.interest, 
                 u.workplace, 
+                u.users_followed,
                 b.blog_id,
                 b.title,
                 b.header_image,
                 b.created_at,
                 t.topic_title
             FROM users u
-            LEFT OUTER JOIN blogs b ON u.user_id=b.creator_id
+            LEFT OUTER JOIN blogs b ON u.user_id = b.creator_id
             LEFT OUTER JOIN topics t ON b.topic_id = t.topic_id
             WHERE u.user_id=$1;`,
             [profileId]
         );
 
-        if (!user.rows[0]) {
+        const followersQuery = await db.query(
+            `SELECT user_id FROM users WHERE ARRAY[${profileId}] && users_followed;`
+        );
+
+        if (!user.rows[0] || !followersQuery) {
             return _res.status(404).json({
                 ok: false,
                 error: {
@@ -396,6 +403,7 @@ router.get('/getUser/:id', async (_req, _res) => {
         return _res.json({
             ok: true,
             info: user.rows,
+            followers: followersQuery.rows,
         });
         //
     } catch (err) {
@@ -456,6 +464,89 @@ router.get('/unfollowUser/:id', isAuth, async (_req: PayloadType, _res) => {
         return _res.status(201).json({
             ok: true,
             newList: newFollowArray.rows[0].users_followed,
+        });
+        //
+    } catch (err) {
+        return _res.status(500).json({
+            ok: false,
+            error: {
+                message: 'Something went wrong.',
+                err,
+            },
+        });
+    }
+});
+
+router.get('/getFollowing/:id', async (_req, _res) => {
+    try {
+        const userId = +_req.params.id;
+        const followingQuery = await db.query(
+            `SELECT users_followed FROM users WHERE user_id=${userId}`
+        );
+
+        if (!followingQuery) {
+            return _res.status(500).json({
+                ok: false,
+                error: {
+                    message: 'Something went wrong.',
+                },
+            });
+        }
+        const queryArray = followingQuery.rows[0].users_followed.toString();
+
+        const queryUsers = await db.query(
+            `SELECT
+            user_id,
+            first_name,
+            last_name,
+            profileImage
+            FROM users WHERE user_id IN (${queryArray});`
+        );
+
+        if (!queryUsers) {
+            return _res.status(500).json({
+                ok: false,
+                error: {
+                    message: 'Something went wrong.',
+                },
+            });
+        }
+
+        return _res.json({
+            ok: true,
+            profileUsers: queryUsers.rows,
+        });
+
+        //
+    } catch (err) {
+        return _res.status(500).json({
+            ok: false,
+            error: {
+                message: 'Something went wrong.',
+                err,
+            },
+        });
+    }
+});
+
+router.get('/getFollowers/:id', async (_req, _res) => {
+    try {
+        const userId = parseInt(_req.params.id);
+
+        const queryUsers = await db.query(
+            `SELECT user_id, first_name, last_name, profileImage FROM users WHERE ARRAY[${userId}] && users_followed;`
+        );
+
+        if (queryUsers === undefined || queryUsers === null) {
+            return _res.json({
+                ok: false,
+                message: 'no users found',
+            });
+        }
+
+        return _res.json({
+            ok: true,
+            profileUsers: queryUsers.rows,
         });
         //
     } catch (err) {

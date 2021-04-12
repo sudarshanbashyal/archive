@@ -1,0 +1,110 @@
+body {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: 'Source Sans Pro';
+}
+
+body .App {
+  position: relative;
+}
+
+.info-modal {
+  background-color: white;
+  width: 400px;
+  border-radius: 7px;
+  min-height: 50px;
+  position: relative;
+  padding: 0rem 1.3rem 2rem 1.3rem;
+}
+
+.info-modal svg {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  -webkit-transform: scale(0.5);
+          transform: scale(0.5);
+  cursor: pointer;
+  -webkit-transition: 0.2s ease-in-out;
+  transition: 0.2s ease-in-out;
+}
+
+.info-modal svg:hover {
+  -webkit-transform: scale(0.6);
+          transform: scale(0.6);
+}
+
+.info-modal .info-title {
+  margin-bottom: 30px;
+}
+
+.info-modal .info-navigation {
+  margin: auto;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.info-modal .info-navigation .info-topic {
+  cursor: pointer;
+  width: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.info-modal .info-navigation .info-topic span {
+  margin: auto;
+}
+
+.info-modal .info-navigation .active-topic {
+  border-bottom: 2px solid black;
+  padding-bottom: 10px;
+}
+
+.info-modal .users-container {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.info-modal .users-container .user {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-bottom: 20px;
+}
+
+.info-modal .users-container .user .user-profile {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: teal;
+  margin-right: 10px;
+}
+
+.info-modal .users-container .user .follow-btn {
+  width: 150px;
+  border: none;
+  background-color: transparent;
+  outline: none;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 10px;
+  margin-left: auto;
+}
+/*# sourceMappingURL=infoModal.css.map */

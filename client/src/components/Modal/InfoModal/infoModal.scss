@@ -1,0 +1,82 @@
+@import '../../../index.scss';
+
+.info-modal {
+    background-color: white;
+    width: 400px;
+    border-radius: 7px;
+    min-height: 50px;
+    position: relative;
+    padding: 0rem 1.3rem 2rem 1.3rem;
+
+    svg {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        transform: scale(0.5);
+        cursor: pointer;
+        transition: 0.2s ease-in-out;
+
+        &:hover {
+            transform: scale(0.6);
+        }
+    }
+
+    .info-title {
+        margin-bottom: 30px;
+    }
+
+    .info-navigation {
+        margin: auto;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 30px;
+
+        .info-topic {
+            cursor: pointer;
+            width: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            span {
+                margin: auto;
+            }
+        }
+
+        .active-topic {
+            border-bottom: 2px solid black;
+            padding-bottom: 10px;
+        }
+    }
+
+    .users-container {
+        max-height: 300px;
+        overflow-y: auto;
+
+        .user {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+
+            .user-profile {
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+                background-color: teal;
+                margin-right: 10px;
+            }
+
+            .follow-btn {
+                width: 150px;
+                border: none;
+                background-color: transparent;
+                outline: none;
+                font-weight: 700;
+                cursor: pointer;
+                margin-top: 10px;
+                margin-left: auto;
+            }
+        }
+    }
+}

@@ -8,7 +8,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootStore } from './redux/store';
 import { refreshToken } from './redux/Actions/userActions';
 import { ToastContainer } from 'react-toastify';
-// import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
     const dispatch = useDispatch();

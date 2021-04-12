@@ -22,9 +22,9 @@ export const loginUser = (user: object) => async (
     dispatch: Dispatch<UserDispatchType>
 ) => {
     try {
-        dispatch({
-            type: USER_LOADING,
-        });
+        // dispatch({
+        //     type: USER_LOADING,
+        // });
 
         const res = await fetch('/user/login', {
             method: 'POST',
@@ -62,9 +62,9 @@ export const refreshToken = () => async (
     dispatch: Dispatch<UserDispatchType>
 ) => {
     try {
-        dispatch({
-            type: USER_LOADING,
-        });
+        // dispatch({
+        //     type: USER_LOADING,
+        // });
         const res = await fetch('/user/refreshToken', {
             method: 'POST',
             headers: {

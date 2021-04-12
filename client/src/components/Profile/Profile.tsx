@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { openModal } from 'src/redux/Actions/applicationActions';
 import { followUser, unfollowUser } from 'src/redux/Actions/userActions';
 import { RootStore } from 'src/redux/store';
-import { couldStartTrivia } from 'typescript';
 import './profile.css';
 import ProfileBlogs from './ProfileBlogs/ProfileBlogs';
 
@@ -12,6 +12,8 @@ interface ProfileInfoType {
     lastName: string;
     interest: string;
     workplace: string;
+    usersFollowed: number[];
+    userFollowers: number;
 }
 
 export interface ProfileBlogType {
@@ -33,6 +35,8 @@ const Profile = (props: any) => {
         lastName: '',
         interest: '',
         workplace: '',
+        usersFollowed: [],
+        userFollowers: 0,
     });
     const [profileBlogs, setProfileBlogs] = useState<ProfileBlogType[]>([]);
 
@@ -48,12 +52,15 @@ const Profile = (props: any) => {
                     last_name,
                     interest,
                     workplace,
+                    users_followed,
                 } = data.info[0];
                 setProfileInfo({
                     firstName: first_name,
                     lastName: last_name,
                     interest,
                     workplace,
+                    usersFollowed: users_followed,
+                    userFollowers: data.followers.length,
                 });
 
                 if (!data.info[0].title) {
@@ -96,7 +103,7 @@ const Profile = (props: any) => {
                 <div className="profile">
                     <div className="profile-picture"></div>
 
-                    {/* chcek user id and display buttons accordingly */}
+                    {/* check user id and display buttons accordingly */}
                     {+profileId === userState.client!.profile.userId ? (
                         <Link to="/settings">
                             <button className="follow-btn">Edit Profile</button>
@@ -147,14 +154,28 @@ const Profile = (props: any) => {
                         </p>
 
                         <div className="profile-stats">
-                            <span className="follower-stat">
-                                <strong>20</strong> Followers
+                            <span
+                                className="follower-stat"
+                                onClick={() => {
+                                    dispatch(openModal('followers'));
+                                }}
+                            >
+                                <strong>{profileInfo.userFollowers}</strong>{' '}
+                                Followers
                             </span>
                             <span className="blog-stat">
-                                <strong>7</strong> Blogs
+                                <strong>{profileBlogs.length}</strong> Blogs
                             </span>
-                            <span className="favourite-stat">
-                                <strong>120</strong> Favourites
+                            <span
+                                className="following-stat"
+                                onClick={() => {
+                                    dispatch(openModal('following'));
+                                }}
+                            >
+                                <strong>
+                                    {profileInfo.usersFollowed.length}
+                                </strong>{' '}
+                                Following
                             </span>
                         </div>
                     </div>
