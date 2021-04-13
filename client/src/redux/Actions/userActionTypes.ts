@@ -10,6 +10,8 @@ export const USER_PROFILE_UPDATED = 'USER_PROFILE_UPDATED';
 export const USER_ACCOUNT_UPDATED = 'USER_ACCOUNT_UPDATED';
 export const USER_FOLLOWED = 'FOLLOW_USER';
 export const USER_UNFOLLOWED = 'FOLLOW_USER';
+export const TOPIC_FOLLOWED = 'TOPIC_FOLLOWED';
+export const TOPIC_UNFOLLOWED = 'TOPIC_UNFOLLOWED';
 
 export type UserType = {
     userId: number;
@@ -91,6 +93,16 @@ export interface UserUnfollowed {
     payload: number[];
 }
 
+export interface TopicFollowed {
+    type: typeof TOPIC_FOLLOWED;
+    payload: number[];
+}
+
+export interface TopicUnfollowed {
+    type: typeof TOPIC_UNFOLLOWED;
+    payload: number[];
+}
+
 export type UserDispatchType =
     | UserLoading
     | UserFailed
@@ -101,4 +113,6 @@ export type UserDispatchType =
     | UserProfileUpdated
     | UserAccountUpdated
     | UserFollowed
-    | UserUnfollowed;
+    | UserUnfollowed
+    | TopicFollowed
+    | TopicUnfollowed;

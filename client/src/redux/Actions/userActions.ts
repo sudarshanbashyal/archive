@@ -16,6 +16,8 @@ import {
     USER_ACCOUNT_UPDATED,
     USER_FOLLOWED,
     USER_UNFOLLOWED,
+    TOPIC_FOLLOWED,
+    TOPIC_UNFOLLOWED,
 } from './userActionTypes';
 
 export const loginUser = (user: object) => async (
@@ -189,6 +191,7 @@ export const followUser = (
                 type: USER_FOLLOWED,
                 payload: data.newList,
             });
+            showSuccessToast('User Followed!');
         }
     } catch (error) {}
 };
@@ -210,6 +213,51 @@ export const unfollowUser = (
                 type: USER_UNFOLLOWED,
                 payload: data.newList,
             });
+            showSuccessToast('User Unfollowed!');
+        }
+    } catch (error) {}
+};
+
+export const followTopic = (
+    topicId: number,
+    accessToken: string | undefined
+) => async (dispatch: Dispatch<UserDispatchType>) => {
+    try {
+        const res = await fetch(`/blog/followTopic/${topicId}`, {
+            headers: {
+                authorization: `bearer ${accessToken}`,
+            },
+        });
+
+        const data = await res.json();
+        if (data.ok) {
+            dispatch({
+                type: TOPIC_FOLLOWED,
+                payload: data.topics,
+            });
+            showSuccessToast('Topic Followed!');
+        }
+    } catch (error) {}
+};
+
+export const unfollowTopic = (
+    topicId: number,
+    accessToken: string | undefined
+) => async (dispatch: Dispatch<UserDispatchType>) => {
+    try {
+        const res = await fetch(`/blog/unfollowTopic/${topicId}`, {
+            headers: {
+                authorization: `bearer ${accessToken}`,
+            },
+        });
+
+        const data = await res.json();
+        if (data.ok) {
+            dispatch({
+                type: TOPIC_UNFOLLOWED,
+                payload: data.topics,
+            });
+            showSuccessToast('Topic Unfollowed!');
         }
     } catch (error) {}
 };

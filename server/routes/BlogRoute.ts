@@ -64,4 +64,119 @@ router.post('/postBlog', isAuth, async (_req: PayloadType, _res) => {
     }
 });
 
+router.get('/getFollowingBlogs/:id', async (_req, _res) => {
+    try {
+        const userId = _req.params.id;
+
+        const topicsQuery = await db.query(
+            `SELECT topics_followed FROM users WHERE user_id=$1`,
+            [userId]
+        );
+
+        if (!topicsQuery.rows[0]) {
+            return _res.status(404).json({
+                ok: false,
+                error: {
+                    message: 'No user found.',
+                },
+            });
+        }
+
+        const topicsArray = topicsQuery.rows[0].topics_followed;
+
+        const topics = await db.query(
+            `SELECT * FROM topics WHERE topic_id IN (${topicsArray.toString()})`
+        );
+
+        return _res.json({
+            ok: true,
+            topics: topics.rows,
+        });
+        //
+    } catch (error) {
+        return _res.status(500).json({
+            ok: false,
+            error,
+        });
+    }
+});
+
+router.get('/followTopic/:id', isAuth, async (_req: PayloadType, _res) => {
+    try {
+        //
+        const userid = _req.userId;
+        const topicId = _req.params.id;
+
+        const followQuery = await db.query(
+            `
+            UPDATE users
+            SET topics_followed = array_append(topics_followed, $1)
+            WHERE user_id = $2
+            RETURNING topics_followed;
+            `,
+            [topicId, userid]
+        );
+
+        if (!followQuery) {
+            return _res.status(500).json({
+                ok: false,
+                error: {
+                    message: 'Something went wrong.',
+                },
+            });
+        }
+
+        return _res.status(201).json({
+            ok: true,
+            topics: followQuery.rows[0].topics_followed,
+        });
+
+        //
+    } catch (error) {
+        return _res.status(500).json({
+            ok: false,
+            error,
+        });
+    }
+});
+
+router.get('/unfollowTopic/:id', isAuth, async (_req: PayloadType, _res) => {
+    try {
+        //
+        const userid = _req.userId;
+        const topicId = _req.params.id;
+
+        const followQuery = await db.query(
+            `
+            UPDATE users
+            SET topics_followed = array_remove(topics_followed, $1)
+            WHERE user_id = $2
+            RETURNING topics_followed;
+            `,
+            [topicId, userid]
+        );
+
+        if (!followQuery) {
+            return _res.status(500).json({
+                ok: false,
+                error: {
+                    message: 'Something went wrong.',
+                },
+            });
+        }
+
+        return _res.status(201).json({
+            ok: true,
+            topics: followQuery.rows[0].topics_followed,
+        });
+
+        //
+    } catch (error) {
+        return _res.status(500).json({
+            ok: false,
+            error,
+        });
+    }
+});
+
 export default router;

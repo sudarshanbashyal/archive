@@ -19,7 +19,7 @@ body .App {
   padding: 0rem 1.3rem 2rem 1.3rem;
 }
 
-.info-modal svg {
+.info-modal .close-modal svg {
   position: absolute;
   top: 15px;
   right: 15px;
@@ -30,7 +30,7 @@ body .App {
   transition: 0.2s ease-in-out;
 }
 
-.info-modal svg:hover {
+.info-modal .close-modal svg:hover {
   -webkit-transform: scale(0.6);
           transform: scale(0.6);
 }
@@ -74,12 +74,16 @@ body .App {
   padding-bottom: 10px;
 }
 
-.info-modal .users-container {
+.info-modal .users-container, .info-modal .topics-container {
   max-height: 300px;
   overflow-y: auto;
 }
 
-.info-modal .users-container .user {
+.info-modal .users-container .no-users, .info-modal .topics-container .no-users {
+  color: lightgray;
+}
+
+.info-modal .users-container .user, .info-modal .topics-container .user, .info-modal .topics-container .topic {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -89,7 +93,7 @@ body .App {
   margin-bottom: 20px;
 }
 
-.info-modal .users-container .user .user-profile {
+.info-modal .users-container .user .user-profile, .info-modal .topics-container .user .user-profile, .info-modal .topics-container .topic .user-profile, .info-modal .topics-container .topic .topic-profile {
   width: 30px;
   height: 30px;
   border-radius: 50%;
@@ -97,7 +101,7 @@ body .App {
   margin-right: 10px;
 }
 
-.info-modal .users-container .user .follow-btn {
+.info-modal .users-container .user .follow-btn, .info-modal .topics-container .user .follow-btn, .info-modal .topics-container .topic .follow-btn, .info-modal .topics-container .topic .topic-profile .follow-btn {
   width: 150px;
   border: none;
   background-color: transparent;
@@ -106,5 +110,17 @@ body .App {
   cursor: pointer;
   margin-top: 10px;
   margin-left: auto;
+}
+
+.info-modal .svg-container {
+  width: 100%;
+  display: -ms-grid;
+  display: grid;
+  place-items: center;
+}
+
+.info-modal .svg-container svg {
+  -webkit-transform: scale(0.5);
+          transform: scale(0.5);
 }
 /*# sourceMappingURL=infoModal.css.map */

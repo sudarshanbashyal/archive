@@ -12,6 +12,7 @@ interface ProfileInfoType {
     lastName: string;
     interest: string;
     workplace: string;
+    topicsFollowed: number[];
     usersFollowed: number[];
     userFollowers: number;
 }
@@ -35,6 +36,7 @@ const Profile = (props: any) => {
         lastName: '',
         interest: '',
         workplace: '',
+        topicsFollowed: [],
         usersFollowed: [],
         userFollowers: 0,
     });
@@ -42,6 +44,7 @@ const Profile = (props: any) => {
 
     useEffect(() => {
         (async function () {
+            setProfileBlogs([]);
             const res = await fetch(`/user/getUser/${profileId}`);
             const data = await res.json();
 
@@ -53,12 +56,14 @@ const Profile = (props: any) => {
                     interest,
                     workplace,
                     users_followed,
+                    topics_followed,
                 } = data.info[0];
                 setProfileInfo({
                     firstName: first_name,
                     lastName: last_name,
                     interest,
                     workplace,
+                    topicsFollowed: topics_followed,
                     usersFollowed: users_followed,
                     userFollowers: data.followers.length,
                 });
@@ -88,12 +93,15 @@ const Profile = (props: any) => {
                     }
                 );
 
-                setProfileBlogs([...profileBlogs, ...retrievedBlogs]);
+                setProfileBlogs(profileBlogs => [
+                    ...profileBlogs,
+                    ...retrievedBlogs,
+                ]);
             } else {
                 setUserExists(false);
             }
         })();
-    }, []);
+    }, [profileId]);
 
     return (
         <div className="profile">
@@ -150,7 +158,7 @@ const Profile = (props: any) => {
                             {profileInfo.firstName} {profileInfo.lastName}
                         </h1>
                         <p className="related-field">
-                            {profileInfo.interest}, {profileInfo.workplace}
+                            {profileInfo.interest} {profileInfo.workplace}
                         </p>
 
                         <div className="profile-stats">
@@ -173,7 +181,8 @@ const Profile = (props: any) => {
                                 }}
                             >
                                 <strong>
-                                    {profileInfo.usersFollowed.length}
+                                    {profileInfo.usersFollowed.length +
+                                        profileInfo.topicsFollowed.length}
                                 </strong>{' '}
                                 Following
                             </span>

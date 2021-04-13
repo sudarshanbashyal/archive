@@ -11,6 +11,8 @@ import {
     USER_ACCOUNT_UPDATED,
     USER_FOLLOWED,
     USER_UNFOLLOWED,
+    TOPIC_FOLLOWED,
+    TOPIC_UNFOLLOWED,
 } from '../Actions/userActionTypes';
 
 interface DefaultUserState {
@@ -121,6 +123,34 @@ export const userReducer = (
                     profile: {
                         ...state.client!.profile,
                         usersFollowed: action.payload,
+                    },
+                },
+            };
+
+        case TOPIC_FOLLOWED:
+            return {
+                ...state,
+                loading: false,
+                error: '',
+                client: {
+                    accessToken: state.client!.accessToken,
+                    profile: {
+                        ...state.client!.profile,
+                        topicsFollowed: action.payload,
+                    },
+                },
+            };
+
+        case TOPIC_UNFOLLOWED:
+            return {
+                ...state,
+                loading: false,
+                error: '',
+                client: {
+                    accessToken: state.client!.accessToken,
+                    profile: {
+                        ...state.client!.profile,
+                        topicsFollowed: action.payload,
                     },
                 },
             };

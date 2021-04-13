@@ -8,7 +8,6 @@ import {
     PayloadType,
 } from '../utils/auth';
 import jwt, { verify } from 'jsonwebtoken';
-import { isArray } from 'util';
 
 const router = Express.Router();
 
@@ -375,6 +374,7 @@ router.get('/getUser/:id', async (_req, _res) => {
                 u.interest, 
                 u.workplace, 
                 u.users_followed,
+                u.topics_followed,
                 b.blog_id,
                 b.title,
                 b.header_image,
@@ -391,7 +391,7 @@ router.get('/getUser/:id', async (_req, _res) => {
             `SELECT user_id FROM users WHERE ARRAY[${profileId}] && users_followed;`
         );
 
-        if (!user.rows[0] || !followersQuery) {
+        if (!user.rows[0]) {
             return _res.status(404).json({
                 ok: false,
                 error: {

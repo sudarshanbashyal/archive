@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
 
 export const rightArrowIcon = (
     <svg
@@ -151,5 +151,91 @@ export const checkmarkIcon = (
         viewBox="0 0 24 24"
     >
         <path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm4.393 7.5l-5.643 5.784-2.644-2.506-1.856 1.858 4.5 4.364 7.5-7.643-1.857-1.857z" />
+    </svg>
+);
+
+const loadingStyle: CSSProperties = {
+    margin: 'auto',
+    background: 'transparent',
+    display: 'block',
+    shapeRendering: 'auto',
+};
+
+export const loadingAnimation = (
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        xmlnsXlink="http://www.w3.org/1999/xlink"
+        style={loadingStyle}
+        width="200px"
+        height="100px"
+        viewBox="0 0 100 100"
+        preserveAspectRatio="xMidYMid"
+    >
+        <rect x="17.5" y="30" width="15" height="40" fill="#dd3b40">
+            <animate
+                attributeName="y"
+                repeatCount="indefinite"
+                dur="1s"
+                calcMode="spline"
+                keyTimes="0;0.5;1"
+                values="18;30;30"
+                keySplines="0 0.5 0.5 1;0 0.5 0.5 1"
+                begin="-0.2s"
+            ></animate>
+            <animate
+                attributeName="height"
+                repeatCount="indefinite"
+                dur="1s"
+                calcMode="spline"
+                keyTimes="0;0.5;1"
+                values="64;40;40"
+                keySplines="0 0.5 0.5 1;0 0.5 0.5 1"
+                begin="-0.2s"
+            ></animate>
+        </rect>
+
+        <rect x="42.5" y="30" width="15" height="40" fill="#dd3b40">
+            <animate
+                attributeName="y"
+                repeatCount="indefinite"
+                dur="1s"
+                calcMode="spline"
+                keyTimes="0;0.5;1"
+                values="20.999999999999996;30;30"
+                keySplines="0 0.5 0.5 1;0 0.5 0.5 1"
+                begin="-0.1s"
+            ></animate>
+            <animate
+                attributeName="height"
+                repeatCount="indefinite"
+                dur="1s"
+                calcMode="spline"
+                keyTimes="0;0.5;1"
+                values="58.00000000000001;40;40"
+                keySplines="0 0.5 0.5 1;0 0.5 0.5 1"
+                begin="-0.1s"
+            ></animate>
+        </rect>
+
+        <rect x="67.5" y="30" width="15" height="40" fill="#dd3b40">
+            <animate
+                attributeName="y"
+                repeatCount="indefinite"
+                dur="1s"
+                calcMode="spline"
+                keyTimes="0;0.5;1"
+                values="20.999999999999996;30;30"
+                keySplines="0 0.5 0.5 1;0 0.5 0.5 1"
+            ></animate>
+            <animate
+                attributeName="height"
+                repeatCount="indefinite"
+                dur="1s"
+                calcMode="spline"
+                keyTimes="0;0.5;1"
+                values="58.00000000000001;40;40"
+                keySplines="0 0.5 0.5 1;0 0.5 0.5 1"
+            ></animate>
+        </rect>
     </svg>
 );

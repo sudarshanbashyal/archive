@@ -8,16 +8,18 @@
     position: relative;
     padding: 0rem 1.3rem 2rem 1.3rem;
 
-    svg {
-        position: absolute;
-        top: 15px;
-        right: 15px;
-        transform: scale(0.5);
-        cursor: pointer;
-        transition: 0.2s ease-in-out;
+    .close-modal {
+        svg {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            transform: scale(0.5);
+            cursor: pointer;
+            transition: 0.2s ease-in-out;
 
-        &:hover {
-            transform: scale(0.6);
+            &:hover {
+                transform: scale(0.6);
+            }
         }
     }
 
@@ -54,6 +56,10 @@
         max-height: 300px;
         overflow-y: auto;
 
+        .no-users {
+            color: lightgray;
+        }
+
         .user {
             display: flex;
             align-items: center;
@@ -77,6 +83,32 @@
                 margin-top: 10px;
                 margin-left: auto;
             }
+        }
+    }
+
+    .topics-container {
+        @extend .users-container;
+
+        .topic {
+            @extend .user;
+
+            .topic-profile {
+                @extend .user-profile;
+
+                .follow-btn {
+                    @extend .follow-btn;
+                }
+            }
+        }
+    }
+
+    .svg-container {
+        width: 100%;
+        display: grid;
+        place-items: center;
+
+        svg {
+            transform: scale(0.5);
         }
     }
 }
