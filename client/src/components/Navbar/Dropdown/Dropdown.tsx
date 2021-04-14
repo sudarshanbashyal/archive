@@ -23,8 +23,13 @@ const Dropdown = () => {
         <div className="dropdown">
             <div className="profile">
                 <div className="user-info">
-                    <p className="user-name">Carson Turner</p>
-                    <p className="user-interest">Software Engineer</p>
+                    <p className="user-name">
+                        {userState && userState.client?.profile.firstName}{' '}
+                        {userState && userState.client?.profile.lastName}
+                    </p>
+                    <p className="user-interest">
+                        {userState && userState.client?.profile?.interest}
+                    </p>
                 </div>
             </div>
 

@@ -1,7 +1,7 @@
 import Express from 'express';
 import { isAuth, PayloadType } from '../utils/auth';
 import { db } from '../database/db';
-import { uploadHeader } from '../utils/uploadImage';
+import { uploadImage } from '../utils/uploadImage';
 
 const router = Express.Router();
 
@@ -26,7 +26,10 @@ router.post('/postBlog', isAuth, async (_req: PayloadType, _res) => {
         const { blogTitle, blogContent, topicId, encodedImage } = _req.body;
         const userId = _req.userId;
 
-        const uploadedImage = await uploadHeader(encodedImage);
+        const uploadedImage = await uploadImage({
+            encodedImage,
+            preset: 'headers',
+        });
         if (uploadedImage.ok) {
             const { secure_url } = uploadedImage.uploadedResponse;
 
