@@ -33,10 +33,10 @@ const ProfileSettings = () => {
 
     // image preview states
     const [profilePreview, setProfilePreview] = useState<
-        string | ArrayBuffer | null | undefined
+        string | ArrayBuffer | null | undefined | any
     >();
     const [bannerPreview, setBannerPreview] = useState<
-        string | ArrayBuffer | null | undefined
+        string | ArrayBuffer | null | undefined | any
     >();
 
     const [profileImageError, setProfileImageError] = useState<
@@ -71,7 +71,7 @@ const ProfileSettings = () => {
         const file = e.target.files[0];
         if (file) {
             if (!file.name.match(/.(jpg|jpeg|png|gif)$/i)) {
-                errorState('THe uploaded file must be an image.');
+                errorState('The uploaded file must be an image.');
                 return;
             }
             if (file.size > 1000000) {
@@ -79,6 +79,7 @@ const ProfileSettings = () => {
                 return;
             }
             previewImage(file, previewState);
+            errorState(null);
         }
     };
 
@@ -130,9 +131,10 @@ const ProfileSettings = () => {
                     >
                         <span>Click here to change your profile</span>
                     </div>
+
                     <input
                         type="file"
-                        name="bannerImage"
+                        name="profileImage"
                         ref={profileUpload}
                         style={{ display: 'none' }}
                         onChange={e => {
@@ -143,7 +145,16 @@ const ProfileSettings = () => {
                             );
                         }}
                     />
-                    <div className="profile"></div>
+                    {/* checking if profile picture has been uploaded */}
+                    {profilePreview ? (
+                        <div className="profile">
+                            <img src={profilePreview} alt="profile image" />
+                        </div>
+                    ) : null}
+
+                    <strong className="error-message">
+                        {profileImageError}
+                    </strong>
                 </div>
 
                 {/* header image */}
@@ -162,8 +173,24 @@ const ProfileSettings = () => {
                         name="bannerImage"
                         ref={bannerUpload}
                         style={{ display: 'none' }}
+                        onChange={e => {
+                            handleFileInputChange(
+                                e,
+                                setBannerPreview,
+                                setBannerImageError
+                            );
+                        }}
                     />
-                    <div className="header"></div>
+                    {/* checking if banner image has been uploaded */}
+                    {bannerPreview ? (
+                        <div className="header">
+                            <img src={bannerPreview} alt="banner image" />
+                        </div>
+                    ) : null}
+
+                    <strong className="error-message">
+                        {bannerImageError}
+                    </strong>
                 </div>
             </div>
 

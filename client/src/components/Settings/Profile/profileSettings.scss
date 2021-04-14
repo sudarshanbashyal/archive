@@ -62,6 +62,13 @@
                 background-color: teal;
                 margin-right: 30px;
                 border-radius: 7px;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    border-radius: 7px;
+                    object-fit: cover;
+                }
             }
 
             .change-profile {
@@ -74,6 +81,10 @@
                 font-size: 0.8rem;
                 cursor: pointer;
             }
+
+            .error-message {
+                color: $red-dark;
+            }
         }
 
         .header-images {
@@ -82,6 +93,14 @@
 
             div {
                 height: 130px;
+                border-radius: 7px;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    border-radius: 7px;
+                }
             }
 
             .change-header {
@@ -91,6 +110,10 @@
 
             .header {
                 width: 80%;
+            }
+
+            .error-message {
+                @extend .error-message;
             }
         }
 

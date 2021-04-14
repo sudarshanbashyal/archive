@@ -91,6 +91,13 @@ body .App {
   border-radius: 7px;
 }
 
+.profile-settings .setting-section .profile-pictures div img, .account-setting .setting-section .profile-pictures div img, .profile-settings .setting-section .header-images div img, .account-setting .setting-section .header-images div img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
 .profile-settings .setting-section .profile-pictures .change-profile, .account-setting .setting-section .profile-pictures .change-profile, .profile-settings .setting-section .header-images .change-profile, .account-setting .setting-section .header-images .change-profile, .profile-settings .setting-section .header-images .change-header, .account-setting .setting-section .header-images .change-header {
   background-color: transparent;
   border: 1px dashed #bebebe;
@@ -112,6 +119,13 @@ body .App {
 
 .profile-settings .setting-section .header-images div, .account-setting .setting-section .header-images div {
   height: 130px;
+}
+
+.profile-settings .setting-section .header-images div img, .account-setting .setting-section .header-images div img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .profile-settings .setting-section .header-images .change-header, .account-setting .setting-section .header-images .change-header {

@@ -79,6 +79,14 @@ body .App {
   border-radius: 7px;
 }
 
+.profile-settings .setting-section .profile-pictures div img, .profile-settings .setting-section .header-images div img {
+  width: 100%;
+  height: 100%;
+  border-radius: 7px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
 .profile-settings .setting-section .profile-pictures .change-profile, .profile-settings .setting-section .header-images .change-profile, .profile-settings .setting-section .header-images .change-header {
   background-color: transparent;
   border: 1px dashed #bebebe;
@@ -94,12 +102,25 @@ body .App {
   cursor: pointer;
 }
 
+.profile-settings .setting-section .profile-pictures .error-message, .profile-settings .setting-section .header-images .error-message {
+  color: #dd3b40;
+}
+
 .profile-settings .setting-section .header-images {
   margin-bottom: 0px;
 }
 
 .profile-settings .setting-section .header-images div {
   height: 130px;
+  border-radius: 7px;
+}
+
+.profile-settings .setting-section .header-images div img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 7px;
 }
 
 .profile-settings .setting-section .header-images .change-header {
