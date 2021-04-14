@@ -5,7 +5,14 @@ import { openModal } from 'src/redux/Actions/applicationActions';
 import { RootStore } from 'src/redux/store';
 import './dropdown.css';
 
-const Dropdown = () => {
+const Dropdown = ({
+    dropdown,
+    setDropdown,
+}: {
+    dropdown: boolean;
+    setDropdown: React.SetStateAction<any>;
+}) => {
+    //
     const dispatch = useDispatch();
     const userState = useSelector((state: RootStore) => state.client);
 
@@ -20,7 +27,15 @@ const Dropdown = () => {
     ];
 
     return (
-        <div className="dropdown">
+        <div
+            className="dropdown"
+            onMouseEnter={() => {
+                setDropdown(true);
+            }}
+            onMouseLeave={() => {
+                setDropdown(false);
+            }}
+        >
             <div className="profile">
                 <div className="user-info">
                     <p className="user-name">

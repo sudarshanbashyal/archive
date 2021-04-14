@@ -54,15 +54,21 @@ const Navbar = () => {
 
                     <div
                         className="nav-profile-picture"
-                        onClick={() => {
-                            setDropdown(!dropdown);
+                        onMouseEnter={() => {
+                            setDropdown(true);
+                        }}
+                        onMouseLeave={() => {
+                            setDropdown(false);
                         }}
                     ></div>
                 </div>
 
                 {dropdown && (
                     <div className="navbar-dropdown">
-                        <Dropdown />
+                        <Dropdown
+                            dropdown={dropdown}
+                            setDropdown={setDropdown}
+                        />
                     </div>
                 )}
             </div>
