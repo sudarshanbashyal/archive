@@ -1,14 +1,12 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { openModal } from 'src/redux/Actions/applicationActions';
 import { RootStore } from 'src/redux/store';
 import { showSuccessToast } from '../Utils/ToastNotification';
 import './editor.css';
 import Wysiwyg from './Wysiwyg/Wysiwyg';
 
 const EditorPage = () => {
-    const dispatch = useDispatch();
     const history = useHistory();
 
     const userState = useSelector((state: RootStore) => state.client);
