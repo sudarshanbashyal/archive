@@ -17,8 +17,8 @@ const ProfileBlog = ({
     const [blogLikes, setBlogLikes] = useState<any>(likes);
     const userState = useSelector((state: RootStore) => state.client);
 
-    const changeBlogStatus = async (route: string) => {
-        const res = await fetch(`/blog/${route}/${blogId}`, {
+    const toggleLikes = async (status: string) => {
+        const res = await fetch(`/blog/toggleLikes/${blogId}/${status}`, {
             headers: {
                 authorization: `bearer ${
                     userState && userState.client?.accessToken
@@ -48,7 +48,7 @@ const ProfileBlog = ({
                     ) ? (
                         <span
                             onClick={() => {
-                                changeBlogStatus('dislikeBlog');
+                                toggleLikes('array_remove');
                             }}
                             className="heart-filled"
                         >
@@ -57,7 +57,7 @@ const ProfileBlog = ({
                     ) : (
                         <span
                             onClick={() => {
-                                changeBlogStatus('likeBlog');
+                                toggleLikes('array_append');
                             }}
                             className="heart-stroke"
                         >
