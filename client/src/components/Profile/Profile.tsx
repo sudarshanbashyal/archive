@@ -15,6 +15,8 @@ interface ProfileInfoType {
     topicsFollowed: number[];
     usersFollowed: number[];
     userFollowers: number;
+    profileimage?: string | undefined;
+    headerimage?: string | undefined;
 }
 
 export interface ProfileBlogType {
@@ -50,6 +52,7 @@ const Profile = (props: any) => {
 
             if (data.ok) {
                 // set up profile info
+                console.log(data.info[0]);
                 let {
                     first_name,
                     last_name,
@@ -57,6 +60,8 @@ const Profile = (props: any) => {
                     workplace,
                     users_followed,
                     topics_followed,
+                    profileimage,
+                    headerimage,
                 } = data.info[0];
                 setProfileInfo({
                     firstName: first_name,
@@ -66,6 +71,8 @@ const Profile = (props: any) => {
                     topicsFollowed: topics_followed,
                     usersFollowed: users_followed,
                     userFollowers: data.followers.length,
+                    profileimage,
+                    headerimage,
                 });
 
                 if (!data.info[0].title) {
@@ -104,12 +111,31 @@ const Profile = (props: any) => {
     }, [profileId]);
 
     return (
-        <div className="profile">
-            <div className="header-image"></div>
+        <div
+            className="profile"
+            style={{
+                marginTop:
+                    profileInfo && profileInfo.headerimage ? '0px' : '50px',
+            }}
+        >
+            {profileInfo && profileInfo.headerimage ? (
+                <div className="header-image">
+                    <img src={profileInfo.headerimage} alt="" />
+                </div>
+            ) : null}
 
             <div className="content-container">
                 <div className="profile">
-                    <div className="profile-picture"></div>
+                    <div className="profile-picture">
+                        <img
+                            src={
+                                profileInfo && profileInfo.profileimage
+                                    ? profileInfo.profileimage
+                                    : 'https://www.pngitem.com/pimgs/m/150-1503941_user-windows-10-user-icon-png-transparent-png.png'
+                            }
+                            alt=""
+                        />
+                    </div>
 
                     {/* check user id and display buttons accordingly */}
                     {+profileId === userState.client!.profile.userId ? (

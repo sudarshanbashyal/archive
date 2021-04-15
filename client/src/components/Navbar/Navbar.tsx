@@ -11,6 +11,7 @@ const Navbar = () => {
     const applicationState = useSelector(
         (state: RootStore) => state.application
     );
+    const userState = useSelector((state: RootStore) => state.client);
 
     // get current route
     const currentRoute = useLocation();
@@ -60,7 +61,17 @@ const Navbar = () => {
                         onMouseLeave={() => {
                             setDropdown(false);
                         }}
-                    ></div>
+                    >
+                        <img
+                            src={
+                                userState &&
+                                userState.client?.profile.profileImage
+                                    ? userState.client?.profile.profileImage
+                                    : 'https://www.pngitem.com/pimgs/m/150-1503941_user-windows-10-user-icon-png-transparent-png.png'
+                            }
+                            alt=""
+                        />
+                    </div>
                 </div>
 
                 {dropdown && (

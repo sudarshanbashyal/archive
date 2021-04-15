@@ -101,6 +101,12 @@ body .App {
   margin-right: 10px;
 }
 
+.info-modal .users-container .user .user-profile img, .info-modal .topics-container .user .user-profile img, .info-modal .topics-container .topic .user-profile img, .info-modal .topics-container .topic .topic-profile img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
 .info-modal .users-container .user .follow-btn, .info-modal .topics-container .user .follow-btn, .info-modal .topics-container .topic .follow-btn, .info-modal .topics-container .topic .topic-profile .follow-btn {
   width: 150px;
   border: none;

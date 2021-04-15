@@ -25,8 +25,8 @@ export type UserType = {
     bio: string;
     usersFollowed: number[];
     topicsFollowed: number[];
-    profileImage: string;
-    headerImage: string;
+    profileImage: string | null;
+    headerImage: string | null;
 };
 
 export type UserProfileType = {

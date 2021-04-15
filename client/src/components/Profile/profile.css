@@ -17,6 +17,13 @@ body .App {
   margin-bottom: 20px;
 }
 
+.profile .header-image img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
 .profile .content-container {
   width: 1200px;
   margin: auto;
@@ -36,7 +43,14 @@ body .App {
   height: 150px;
   width: 150px;
   border-radius: 7px;
-  background-color: teal;
+}
+
+.profile .content-container .profile .profile-picture img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 7px;
 }
 
 .profile .content-container .profile .follow-btn {

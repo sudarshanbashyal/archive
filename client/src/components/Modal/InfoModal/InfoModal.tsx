@@ -53,7 +53,7 @@ const InfoModal = ({ infoType }: { infoType: String }) => {
                             userId: u.user_id,
                             firstName: u.first_name,
                             lastName: u.last_name,
-                            profileImage: u.profileImage,
+                            profileImage: u.profileimage,
                         };
                         setUsers(users => [...users, newUser]);
                     });

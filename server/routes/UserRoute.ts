@@ -376,6 +376,8 @@ router.get('/getUser/:id', async (_req, _res) => {
                 u.workplace, 
                 u.users_followed,
                 u.topics_followed,
+                u.headerImage,
+                u.profileImage,
                 b.blog_id,
                 b.title,
                 b.header_image,
@@ -627,7 +629,7 @@ router.post('/updateBannerImage', isAuth, async (_req: PayloadType, _res) => {
         const { encodedImage } = _req.body;
         const uploadedImage = await uploadImage({
             encodedImage,
-            preset: 'headers',
+            preset: 'banners',
         });
 
         if (uploadedImage.ok) {

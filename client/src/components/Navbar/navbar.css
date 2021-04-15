@@ -81,6 +81,14 @@ body .App {
   cursor: pointer;
 }
 
+.navbar .nav-container .nav-items .nav-profile-picture img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 50%;
+}
+
 .navbar .nav-container .navbar-dropdown {
   position: absolute;
   top: 40px;

@@ -15,16 +15,27 @@ const UsersInfoContainer = ({ users }: { users: infoUserInterface[] }) => {
             ) : (
                 users.map((user: infoUserInterface) => (
                     <div key={user.userId} className="user">
-                        <div className="user-profile"></div>
+                        <div className="user-profile">
+                            <img
+                                src={
+                                    user.profileImage
+                                        ? user.profileImage
+                                        : 'https://www.pngitem.com/pimgs/m/150-1503941_user-windows-10-user-icon-png-transparent-png.png'
+                                }
+                                alt=""
+                            />
+                        </div>
                         <div className="user-detail">
                             {user.firstName} {user.lastName}
                         </div>
 
                         {/* check if the current user is followed by our user and display follow buttons accordingly */}
                         {userState &&
-                        userState.client?.profile.usersFollowed.includes(
-                            user.userId
-                        ) ? (
+                        userState.client?.profile.userId ===
+                            user.userId ? null : userState &&
+                          userState.client?.profile.usersFollowed.includes(
+                              user.userId
+                          ) ? (
                             <button
                                 onClick={() => {
                                     dispatch(
