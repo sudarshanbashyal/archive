@@ -25,6 +25,7 @@ export interface ProfileBlogType {
     createdAt: Date;
     headerImage: string;
     topicTitle: string;
+    likes: number[];
 }
 
 const Profile = (props: any) => {
@@ -88,6 +89,7 @@ const Profile = (props: any) => {
                             created_at: createdAt,
                             header_image: headerImage,
                             topic_title: topicTitle,
+                            likes,
                         } = blog;
 
                         return {
@@ -96,6 +98,7 @@ const Profile = (props: any) => {
                             createdAt,
                             headerImage,
                             topicTitle,
+                            likes,
                         };
                     }
                 );

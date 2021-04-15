@@ -1,3 +1,15 @@
+body {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: 'Source Sans Pro';
+}
+
+body .App {
+  position: relative;
+}
+
 .p-blog {
   margin-bottom: 40px;
 }
@@ -42,10 +54,21 @@
   -webkit-transform: scale(0.7) translateY(9px);
           transform: scale(0.7) translateY(9px);
   cursor: pointer;
+  -webkit-transition: 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
+}
+
+.p-blog .blog-info .icons svg:active {
+  -webkit-transform: scale(0.6) translateY(9px);
+          transform: scale(0.6) translateY(9px);
 }
 
 .p-blog .blog-info .icons .bookmark-icon {
   margin-left: 10px;
+}
+
+.p-blog .blog-info .icons .heart-filled svg {
+  fill: #dd3b40;
 }
 
 .p-blog .blog-info .published-date {

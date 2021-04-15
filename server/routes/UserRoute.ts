@@ -380,6 +380,7 @@ router.get('/getUser/:id', async (_req, _res) => {
                 u.profileImage,
                 b.blog_id,
                 b.title,
+                b.likes,
                 b.header_image,
                 b.created_at,
                 t.topic_title

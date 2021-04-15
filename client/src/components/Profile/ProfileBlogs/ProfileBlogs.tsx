@@ -18,6 +18,7 @@ const ProfileBlogs = ({ profileBlogs }: BlogPropType) => {
                     createdAt={blog.createdAt}
                     topicTitle={blog.topicTitle}
                     headerImage={blog.headerImage}
+                    likes={blog.likes}
                 />
             ))}
         </div>

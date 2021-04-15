@@ -182,4 +182,80 @@ router.get('/unfollowTopic/:id', isAuth, async (_req: PayloadType, _res) => {
     }
 });
 
+router.get('/likeBlog/:id', isAuth, async (_req: PayloadType, _res) => {
+    try {
+        const userId = _req.userId;
+        const blogId = +_req.params.id;
+
+        try {
+            const likeQuery = await db.query(
+                `
+                UPDATE blogs
+                SET likes = array_append(likes, $1)
+                WHERE blog_id=$2
+                RETURNING likes
+                `,
+                [userId, blogId]
+            );
+
+            return _res.status(201).json({
+                ok: true,
+                blog: likeQuery.rows[0].likes,
+            });
+
+            //
+        } catch (error) {
+            return _res.status(500).json({
+                ok: false,
+                error,
+            });
+        }
+
+        //
+    } catch (error) {
+        return _res.status(500).json({
+            ok: false,
+            error,
+        });
+    }
+});
+
+router.get('/dislikeBlog/:id', isAuth, async (_req: PayloadType, _res) => {
+    try {
+        const userId = _req.userId;
+        const blogId = _req.params.id;
+
+        try {
+            const dislikeQuery = await db.query(
+                `
+                UPDATE blogs
+                SET likes = array_remove(likes, $1)
+                WHERE blog_id=$2
+                RETURNING likes
+                `,
+                [userId, blogId]
+            );
+
+            return _res.status(201).json({
+                ok: true,
+                blog: dislikeQuery.rows[0].likes,
+            });
+
+            //
+        } catch (error) {
+            return _res.status(500).json({
+                ok: false,
+                error,
+            });
+        }
+
+        //
+    } catch (error) {
+        return _res.status(500).json({
+            ok: false,
+            error,
+        });
+    }
+});
+
 export default router;

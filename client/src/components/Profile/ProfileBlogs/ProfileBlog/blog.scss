@@ -1,3 +1,5 @@
+@import '../../../../index.scss';
+
 .p-blog {
     margin-bottom: 40px;
 
@@ -33,10 +35,21 @@
             svg {
                 transform: scale(0.7) translateY(9px);
                 cursor: pointer;
+                transition: 0.3s ease-in-out;
+
+                &:active {
+                    transform: scale(0.6) translateY(9px);
+                }
             }
 
             .bookmark-icon {
                 margin-left: 10px;
+            }
+
+            .heart-filled {
+                svg {
+                    fill: $red-dark;
+                }
             }
         }
 
