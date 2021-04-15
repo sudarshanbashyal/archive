@@ -1,6 +1,10 @@
 import React, { useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateUserProfile } from 'src/redux/Actions/userActions';
+import {
+    updateUserBannerImage,
+    updateUserProfile,
+    updateUserProfileImage,
+} from 'src/redux/Actions/userActions';
 import { RootStore } from 'src/redux/store';
 import './profileSettings.css';
 
@@ -17,6 +21,8 @@ const ProfileSettings = () => {
         interest: profile.interest,
         workplace: profile.workplace,
         bio: profile.bio,
+        profileImage: profile.profileImage,
+        profileHeader: profile.headerImage,
     });
 
     const handleChange = (e: any) => {
@@ -34,18 +40,20 @@ const ProfileSettings = () => {
     // image preview states
     const [profilePreview, setProfilePreview] = useState<
         string | ArrayBuffer | null | undefined | any
-    >();
+    >(profile.profileImage);
     const [bannerPreview, setBannerPreview] = useState<
         string | ArrayBuffer | null | undefined | any
-    >();
+    >(profile.headerImage);
 
+    // image preview error states
     const [profileImageError, setProfileImageError] = useState<
         string | null | undefined
-    >();
+    >(null);
     const [bannerImageError, setBannerImageError] = useState<
         string | null | undefined
-    >();
+    >(null);
 
+    // input file references
     const profileUpload = useRef<any>(null);
     const bannerUpload = useRef<any>(null);
 
@@ -78,12 +86,12 @@ const ProfileSettings = () => {
                 errorState('The image must be under 1MB.');
                 return;
             }
-            previewImage(file, previewState);
+            uploadImage(file, previewState);
             errorState(null);
         }
     };
 
-    const previewImage = (
+    const uploadImage = (
         file: Blob,
         previewState: React.Dispatch<
             React.SetStateAction<string | ArrayBuffer | null | undefined>
@@ -92,7 +100,12 @@ const ProfileSettings = () => {
         const reader = new FileReader();
         reader.readAsDataURL(file);
         reader.onloadend = () => {
-            previewState(reader.result);
+            // previewState(reader.result);
+            if (previewState == setProfilePreview) {
+                dispatch(updateUserProfileImage(reader.result, accessToken));
+            } else {
+                dispatch(updateUserBannerImage(reader.result, accessToken));
+            }
         };
     };
 
@@ -146,9 +159,12 @@ const ProfileSettings = () => {
                         }}
                     />
                     {/* checking if profile picture has been uploaded */}
-                    {profilePreview ? (
+                    {profileData.profileImage ? (
                         <div className="profile">
-                            <img src={profilePreview} alt="profile image" />
+                            <img
+                                src={profileData.profileImage}
+                                alt="profile image"
+                            />
                         </div>
                     ) : null}
 
@@ -182,9 +198,12 @@ const ProfileSettings = () => {
                         }}
                     />
                     {/* checking if banner image has been uploaded */}
-                    {bannerPreview ? (
+                    {profileData.profileHeader ? (
                         <div className="header">
-                            <img src={bannerPreview} alt="banner image" />
+                            <img
+                                src={profileData.profileHeader}
+                                alt="banner image"
+                            />
                         </div>
                     ) : null}
 

@@ -7,7 +7,8 @@ import {
     createRefreshToken,
     PayloadType,
 } from '../utils/auth';
-import jwt, { verify } from 'jsonwebtoken';
+import { verify } from 'jsonwebtoken';
+import { uploadImage } from '../utils/uploadImage';
 
 const router = Express.Router();
 
@@ -547,6 +548,124 @@ router.get('/getFollowers/:id', async (_req, _res) => {
         return _res.json({
             ok: true,
             profileUsers: queryUsers.rows,
+        });
+        //
+    } catch (err) {
+        return _res.status(500).json({
+            ok: false,
+            error: {
+                message: 'Something went wrong.',
+                err,
+            },
+        });
+    }
+});
+
+router.post('/updateProfileImage', isAuth, async (_req: PayloadType, _res) => {
+    try {
+        const userId = _req.userId;
+
+        const { encodedImage } = _req.body;
+        const uploadedImage = await uploadImage({
+            encodedImage,
+            preset: 'profiles',
+        });
+
+        if (uploadedImage.ok) {
+            const { secure_url } = uploadedImage.uploadedResponse;
+            try {
+                const updatedProfile = await db.query(
+                    `
+                    UPDATE users
+                    SET profileImage = $1
+                    WHERE user_id = $2
+                    RETURNING profileImage
+                `,
+                    [secure_url, userId]
+                );
+
+                return _res.status(201).json({
+                    ok: true,
+                    user: {
+                        profileImage: updatedProfile.rows[0].profileImage,
+                    },
+                });
+
+                //
+            } catch (error) {
+                return _res.json({
+                    ok: false,
+                    error: {
+                        message: 'Something went wrong, please try again.',
+                    },
+                });
+            }
+        }
+
+        return _res.json({
+            ok: false,
+            error: {
+                message: 'Something went wrong, please try again.',
+            },
+        });
+        //
+    } catch (err) {
+        return _res.status(500).json({
+            ok: false,
+            error: {
+                message: 'Something went wrong.',
+                err,
+            },
+        });
+    }
+});
+
+router.post('/updateBannerImage', isAuth, async (_req: PayloadType, _res) => {
+    try {
+        const userId = _req.userId;
+
+        const { encodedImage } = _req.body;
+        const uploadedImage = await uploadImage({
+            encodedImage,
+            preset: 'headers',
+        });
+
+        if (uploadedImage.ok) {
+            const { secure_url } = uploadedImage.uploadedResponse;
+            try {
+                const updatedProfile = await db.query(
+                    `
+                    UPDATE users
+                    SET headerImage = $1
+                    WHERE user_id = $2
+                    RETURNING headerImage
+                `,
+                    [secure_url, userId]
+                );
+
+                return _res.status(201).json({
+                    ok: true,
+                    user: {
+                        headerImage: updatedProfile.rows[0].headerImage,
+                    },
+                });
+
+                //
+            } catch (error) {
+                return _res.json({
+                    ok: false,
+                    error: {
+                        message: 'Something went wrong, please try again.',
+                    },
+                });
+            }
+        }
+
+        return _res.json({
+            ok: false,
+            error: {
+                message: 'Something went wrong, please try again.',
+            },
         });
         //
     } catch (err) {

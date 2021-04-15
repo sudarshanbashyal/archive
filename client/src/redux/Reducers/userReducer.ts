@@ -13,6 +13,8 @@ import {
     USER_UNFOLLOWED,
     TOPIC_FOLLOWED,
     TOPIC_UNFOLLOWED,
+    USER_PROFILE_PICTURE_UPDATED,
+    USER_BANNER_PICTURE_UPDATED,
 } from '../Actions/userActionTypes';
 
 interface DefaultUserState {
@@ -151,6 +153,34 @@ export const userReducer = (
                     profile: {
                         ...state.client!.profile,
                         topicsFollowed: action.payload,
+                    },
+                },
+            };
+
+        case USER_PROFILE_PICTURE_UPDATED:
+            return {
+                ...state,
+                loading: false,
+                error: '',
+                client: {
+                    accessToken: state.client!.accessToken,
+                    profile: {
+                        ...state.client!.profile,
+                        profileImage: action.payload,
+                    },
+                },
+            };
+
+        case USER_BANNER_PICTURE_UPDATED:
+            return {
+                ...state,
+                loading: false,
+                error: '',
+                client: {
+                    accessToken: state.client!.accessToken,
+                    profile: {
+                        ...state.client!.profile,
+                        headerImage: action.payload,
                     },
                 },
             };

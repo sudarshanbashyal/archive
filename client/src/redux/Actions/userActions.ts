@@ -6,7 +6,6 @@ import {
 import {
     USER_FAILED,
     USER_SUCCESS,
-    USER_LOADING,
     USER_LOGIN_FAILED,
     UserDispatchType,
     USER_LOGGED_OUT,
@@ -18,6 +17,8 @@ import {
     USER_UNFOLLOWED,
     TOPIC_FOLLOWED,
     TOPIC_UNFOLLOWED,
+    USER_PROFILE_PICTURE_UPDATED,
+    USER_BANNER_PICTURE_UPDATED,
 } from './userActionTypes';
 
 export const loginUser = (user: object) => async (
@@ -259,5 +260,63 @@ export const unfollowTopic = (
             });
             showSuccessToast('Topic Unfollowed!');
         }
+    } catch (error) {}
+};
+
+export const updateUserProfileImage = (
+    encodedImage: string | ArrayBuffer | null,
+    accessToken: string | undefined
+) => async (dispatch: Dispatch<UserDispatchType>) => {
+    try {
+        const res = await fetch('/user/updateProfileImage', {
+            method: 'POST',
+            headers: {
+                authorization: `bearer ${accessToken}`,
+                'Content-Type': 'application/json',
+            },
+            credentials: 'include',
+            body: JSON.stringify({
+                encodedImage,
+            }),
+        });
+
+        const data = await res.json();
+        if (data.ok) {
+            dispatch({
+                type: USER_PROFILE_PICTURE_UPDATED,
+                payload: data.user.profileImage,
+            });
+            showSuccessToast('Profile Picture Updated!');
+        }
+        //
+    } catch (error) {}
+};
+
+export const updateUserBannerImage = (
+    encodedImage: string | ArrayBuffer | null,
+    accessToken: string | undefined
+) => async (dispatch: Dispatch<UserDispatchType>) => {
+    try {
+        const res = await fetch('/user/updateBannerImage', {
+            method: 'POST',
+            headers: {
+                authorization: `bearer ${accessToken}`,
+                'Content-Type': 'application/json',
+            },
+            credentials: 'include',
+            body: JSON.stringify({
+                encodedImage,
+            }),
+        });
+
+        const data = await res.json();
+        if (data.ok) {
+            dispatch({
+                type: USER_BANNER_PICTURE_UPDATED,
+                payload: data.user.headerImage,
+            });
+            showSuccessToast('Banner Updated!');
+        }
+        //
     } catch (error) {}
 };
