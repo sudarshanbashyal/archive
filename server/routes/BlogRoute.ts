@@ -224,4 +224,50 @@ router.get(
         }
     }
 );
+
+router.get('/getBlog/:id', async (_req, _res) => {
+    try {
+        const blogId = _req.params.id;
+
+        const blogQuery = await db.query(
+            `SELECT 
+                b.title, 
+                b.blog_content, 
+                b.header_image, 
+                b.created_at,
+                b.likes,
+                u.user_id,
+                u.first_name,
+                u.last_name,
+                u.profileimage,
+                u.interest
+            FROM blogs b
+            INNER JOIN users u ON u.user_id=b.creator_id
+            WHERE b.blog_id=$1;`,
+            [blogId]
+        );
+
+        if (!blogQuery.rows[0]) {
+            return _res.status(404).json({
+                ok: false,
+                error: {
+                    message: 'No blog found.',
+                },
+            });
+        }
+
+        return _res.json({
+            ok: true,
+            blog: blogQuery.rows[0],
+        });
+
+        //
+    } catch (error) {
+        return _res.status(500).json({
+            ok: false,
+            error,
+        });
+    }
+});
+
 export default router;

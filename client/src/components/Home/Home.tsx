@@ -3,9 +3,9 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import EditorPage from '../Editor/EditorPage';
 import Explore from '../Explore/Explore';
 import Feed from '../Feed/Feed';
-import ModalContainer from '../Modal/ModalContainer';
 import Navbar from '../Navbar/Navbar';
 import Profile from '../Profile/Profile';
+import Reader from '../Reader/Reader';
 import Settings from '../Settings/Settings';
 
 const Home = () => {
@@ -19,6 +19,7 @@ const Home = () => {
                     <Route path="/settings" component={Settings} />
                     <Route exact path="/explore" component={Explore} />
                     <Route exact path="/editor" component={EditorPage} />
+                    <Route exact path="/blog/:id" component={Reader} />
                 </Switch>
             </BrowserRouter>
         </div>
