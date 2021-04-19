@@ -5,6 +5,7 @@
     margin: auto;
     margin-top: 40px;
     position: relative;
+    overflow-x: hidden;
 
     .blog-container {
         width: 100%;
@@ -42,6 +43,8 @@
             width: 60%;
             margin: auto;
             min-height: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid lightgray;
 
             .blog-title {
                 font-family: 'Playfair Display', serif;

@@ -270,4 +270,52 @@ router.get('/getBlog/:id', async (_req, _res) => {
     }
 });
 
+// router.get('/getComments/:id', async (_req, _res) => {
+//     try {
+//         return;
+//         //
+//     } catch (error) {
+//         return _res.status(500).json({
+//             ok: false,
+//             error,
+//         });
+//     }
+// });
+
+router.post('/postComment/:id', isAuth, async (_req: PayloadType, _res) => {
+    try {
+        const blogId = +_req.params.id;
+        const userId = _req.userId;
+        const commentContent = _req.body.commentContent;
+
+        if (!commentContent) {
+            return _res.status(400).json({
+                ok: false,
+                error: {
+                    message: 'No comment found.',
+                },
+            });
+        }
+
+        const commentQuery = await db.query(
+            `INSERT INTO comments(user_id, blog_id, comment_content)
+            VALUES($1, $2, $3)
+            RETURNING *;`,
+            [userId, blogId, commentContent]
+        );
+
+        return _res.status(201).json({
+            ok: true,
+            comment: commentQuery.rows[0],
+        });
+
+        //
+    } catch (error) {
+        return _res.status(500).json({
+            ok: false,
+            error,
+        });
+    }
+});
+
 export default router;

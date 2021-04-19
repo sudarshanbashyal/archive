@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { RootStore } from 'src/redux/store';
 import Comments from './Comments/Comments';
 import './reader.css';
 import ReaderBlog from './ReaderBlog';
@@ -19,6 +21,9 @@ interface blogInterface {
 
 const Reader = (props: any) => {
     const { id: blogId } = props.match.params;
+
+    const userState = useSelector((state: RootStore) => state.client);
+
     const [blog, setBlog] = useState<blogInterface | null>();
     const [loading, setLoading] = useState<boolean>(true);
 
@@ -61,13 +66,16 @@ const Reader = (props: any) => {
     ) : (
         <div className="container">
             <div className="blog-container">
-                <ReaderUserInfo
-                    userId={blog!.userId}
-                    firstName={blog!.firstName}
-                    lastName={blog!.lastName}
-                    interest={blog!.interest}
-                    profileImage={blog!.profileImage}
-                />
+                {userState &&
+                userState.client?.profile.userId !== blog?.userId ? (
+                    <ReaderUserInfo
+                        userId={blog!.userId}
+                        firstName={blog!.firstName}
+                        lastName={blog!.lastName}
+                        interest={blog!.interest}
+                        profileImage={blog!.profileImage}
+                    />
+                ) : null}
 
                 <ReaderBlog
                     blogId={blogId}
@@ -76,13 +84,15 @@ const Reader = (props: any) => {
                     headerImage={blog!.headerImage}
                     createdAt={blog!.createdAt}
                     likes={blog!.likes}
+                    setCommentExpanded={setCommentExpanded}
+                    commentExpanded={commentExpanded}
                 />
             </div>
 
             <Comments
+                blogId={blogId}
                 commentExpanded={commentExpanded}
                 setCommentExpanded={setCommentExpanded}
-                blogId={blogId}
             />
         </div>
     );

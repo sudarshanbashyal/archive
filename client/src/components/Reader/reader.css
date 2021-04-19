@@ -15,6 +15,7 @@ body .App {
   margin: auto;
   margin-top: 40px;
   position: relative;
+  overflow-x: hidden;
 }
 
 .container .blog-container {
@@ -54,6 +55,8 @@ body .App {
   width: 60%;
   margin: auto;
   min-height: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid lightgray;
 }
 
 .container .blog-container .reader-blog-container .blog-title {

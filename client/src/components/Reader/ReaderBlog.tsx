@@ -17,6 +17,8 @@ interface readerBlogInterface {
     headerImage: string;
     createdAt: string;
     likes: number[] | null;
+    commentExpanded: boolean;
+    setCommentExpanded: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const ReaderBlog = ({
@@ -26,6 +28,7 @@ const ReaderBlog = ({
     headerImage,
     createdAt,
     likes,
+    setCommentExpanded,
 }: readerBlogInterface) => {
     const [blogLikes, setBlogLikes] = useState<any>(likes);
     const userState = useSelector((state: RootStore) => state.client);
@@ -80,7 +83,14 @@ const ReaderBlog = ({
                             </span>
                         )}
                     </span>
-                    <span className="comment-icon">{commentIcon}</span>
+                    <span
+                        className="comment-icon"
+                        onClick={() => {
+                            setCommentExpanded(true);
+                        }}
+                    >
+                        {commentIcon}
+                    </span>
                     <span className="bookmark-icon">{bookmarkStrokeIcon}</span>
                 </div>
             </div>
