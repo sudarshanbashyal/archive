@@ -14,6 +14,7 @@ export const TOPIC_FOLLOWED = 'TOPIC_FOLLOWED';
 export const TOPIC_UNFOLLOWED = 'TOPIC_UNFOLLOWED';
 export const USER_PROFILE_PICTURE_UPDATED = 'USER_PROFILE_PICTURE_UPDATED';
 export const USER_BANNER_PICTURE_UPDATED = 'USER_BANNER_PICTURE_UPDATED';
+export const TOGGLE_BOOKMARK = 'TOGGLE_BOOKMARK';
 
 export type UserType = {
     userId: number;
@@ -27,6 +28,7 @@ export type UserType = {
     topicsFollowed: number[];
     profileImage: string | null;
     headerImage: string | null;
+    bookmarks: number[] | null;
 };
 
 export type UserProfileType = {
@@ -115,6 +117,11 @@ export interface UserBannerPictureUpdated {
     payload: string;
 }
 
+export interface ToggleBookmark {
+    type: typeof TOGGLE_BOOKMARK;
+    payload: number[] | null;
+}
+
 export type UserDispatchType =
     | UserLoading
     | UserFailed
@@ -129,4 +136,5 @@ export type UserDispatchType =
     | TopicFollowed
     | TopicUnfollowed
     | UserProfilePictureUpdated
-    | UserBannerPictureUpdated;
+    | UserBannerPictureUpdated
+    | ToggleBookmark;

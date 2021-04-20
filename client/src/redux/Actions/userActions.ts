@@ -19,6 +19,7 @@ import {
     TOPIC_UNFOLLOWED,
     USER_PROFILE_PICTURE_UPDATED,
     USER_BANNER_PICTURE_UPDATED,
+    TOGGLE_BOOKMARK,
 } from './userActionTypes';
 
 export const loginUser = (user: object) => async (
@@ -317,6 +318,38 @@ export const updateUserBannerImage = (
             });
             showSuccessToast('Banner Updated!');
         }
+        //
+    } catch (error) {}
+};
+
+export const toggleBookmark = (
+    id: number,
+    status: string,
+    accessToken: string | undefined
+) => async (dispatch: Dispatch<UserDispatchType>) => {
+    try {
+        const res = await fetch(`/blog/toggleBookmark/${id}/${status}`, {
+            headers: {
+                authorization: `bearer ${accessToken}`,
+            },
+            credentials: 'include',
+        });
+
+        const data = await res.json();
+        if (data.ok) {
+            dispatch({
+                type: TOGGLE_BOOKMARK,
+                payload: data.bookmarks,
+            });
+            let successMessage;
+            if (status === 'array_append') {
+                successMessage = 'Bookmark saved!';
+            } else {
+                successMessage = 'Bookmark unsaved!';
+            }
+            showSuccessToast(successMessage);
+        }
+
         //
     } catch (error) {}
 };

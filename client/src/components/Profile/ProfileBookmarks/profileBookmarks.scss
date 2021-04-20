@@ -1,0 +1,22 @@
+@import '../../../index.scss';
+
+.bookmark-container {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-column-gap: 50px;
+
+    .text-blog::before {
+        content: '';
+        display: block;
+        height: 1px;
+        width: 70px;
+        background-color: rgb(204, 204, 204);
+        margin-bottom: 40px;
+    }
+
+    .text-blog:first-child::before,
+    .text-blog:nth-child(2)::before {
+        display: none;
+    }
+}

@@ -250,3 +250,6 @@ export const loadingAnimation = (
         </rect>
     </svg>
 );
+
+export const defaultProfileImage =
+    'https://www.pngitem.com/pimgs/m/150-1503941_user-windows-10-user-icon-png-transparent-png.png';

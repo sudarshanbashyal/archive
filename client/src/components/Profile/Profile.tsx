@@ -70,7 +70,6 @@ const Profile = (props: any) => {
 
             if (data.ok) {
                 // set up profile info
-                console.log(data.info[0]);
                 let {
                     first_name,
                     last_name,

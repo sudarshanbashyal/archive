@@ -15,6 +15,7 @@ import {
     TOPIC_UNFOLLOWED,
     USER_PROFILE_PICTURE_UPDATED,
     USER_BANNER_PICTURE_UPDATED,
+    TOGGLE_BOOKMARK,
 } from '../Actions/userActionTypes';
 
 interface DefaultUserState {
@@ -181,6 +182,20 @@ export const userReducer = (
                     profile: {
                         ...state.client!.profile,
                         headerImage: action.payload,
+                    },
+                },
+            };
+
+        case TOGGLE_BOOKMARK:
+            return {
+                ...state,
+                loading: false,
+                error: '',
+                client: {
+                    accessToken: state.client!.accessToken,
+                    profile: {
+                        ...state.client!.profile,
+                        bookmarks: action.payload,
                     },
                 },
             };

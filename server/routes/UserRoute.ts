@@ -128,6 +128,7 @@ router.post('/login', async (_req, _res) => {
             topics_followed,
             profileimage,
             headerimage,
+            bookmarks,
         } = user.rows[0];
 
         return _res.json({
@@ -145,6 +146,7 @@ router.post('/login', async (_req, _res) => {
                 topicsFollowed: topics_followed,
                 profileImage: profileimage,
                 headerImage: headerimage,
+                bookmarks: bookmarks,
             },
         });
         //
@@ -207,6 +209,7 @@ router.post('/refreshToken', async (_req, _res) => {
                 topics_followed,
                 profileimage,
                 headerimage,
+                bookmarks,
             } = user.rows[0];
 
             return _res.json({
@@ -224,6 +227,7 @@ router.post('/refreshToken', async (_req, _res) => {
                     topicsFollowed: topics_followed,
                     profileImage: profileimage,
                     headerImage: headerimage,
+                    bookmarks: bookmarks,
                 },
             });
 

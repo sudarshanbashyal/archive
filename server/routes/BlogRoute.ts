@@ -340,4 +340,85 @@ router.post('/postComment/:id', isAuth, async (_req: PayloadType, _res) => {
     }
 });
 
+router.get('/getBookmarks', isAuth, async (_req: PayloadType, _res) => {
+    try {
+        const userId = _req.userId;
+        let bookmarkQuery = await db.query(
+            `
+            SELECT bookmarks FROM users WHERE user_id=$1; 
+            `,
+            [userId]
+        );
+
+        if (!bookmarkQuery.rows[0].bookmarks) {
+            return _res.json({
+                ok: true,
+                bookmarks: [],
+            });
+        }
+
+        bookmarkQuery = await db.query(
+            `
+            SELECT
+                u.first_name,
+                u.user_id,
+                u.profileimage,
+                b.blog_id,
+                b.title,
+                t.topic_title
+            FROM users u
+            INNER JOIN blogs b ON b.creator_id=u.user_id
+            INNER JOIN topics t ON t.topic_id=b.topic_id
+            WHERE b.blog_id IN (${bookmarkQuery.rows[0].bookmarks.toString()});
+            `
+        );
+
+        return _res.json({
+            ok: true,
+            bookmarks: bookmarkQuery.rows,
+        });
+        //
+    } catch (error) {
+        return _res.status(500).json({
+            ok: false,
+            error,
+        });
+    }
+});
+
+router.get(
+    '/toggleBookmark/:id/:status',
+    isAuth,
+    async (_req: PayloadType, _res) => {
+        try {
+            const blogId = _req.params.id;
+            const userId = _req.userId;
+            const status = _req.params.status;
+
+            console.log(status);
+            console.log(userId);
+            const bookmarkQuery = await db.query(
+                `
+                UPDATE users
+                SET bookmarks = ${status}(bookmarks, $1)
+                WHERE user_id=$2
+                RETURNING bookmarks;
+                `,
+                [blogId, userId]
+            );
+
+            return _res.status(201).json({
+                ok: true,
+                bookmarks: bookmarkQuery.rows[0].bookmarks,
+            });
+            //
+        } catch (error) {
+            return _res.status(500).json({
+                ok: false,
+                error,
+            });
+        }
+    }
+);
+
 export default router;

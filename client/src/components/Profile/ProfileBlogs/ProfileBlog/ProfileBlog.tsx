@@ -2,9 +2,16 @@ import React, { useState } from 'react';
 import { ProfileBlogType } from '../../Profile';
 import moment from 'moment';
 import './blog.css';
-import { heartFilledIcon, heartStrokeIcon } from 'src/assets/SVGs';
-import { useSelector } from 'react-redux';
+import {
+    bookmarkFilledIcon,
+    bookmarkStrokeIcon,
+    heartFilledIcon,
+    heartStrokeIcon,
+} from 'src/assets/SVGs';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootStore } from 'src/redux/store';
+import { spawn } from 'child_process';
+import { toggleBookmark } from 'src/redux/Actions/userActions';
 
 const ProfileBlog = ({
     blogId,
@@ -16,6 +23,8 @@ const ProfileBlog = ({
 }: ProfileBlogType) => {
     const [blogLikes, setBlogLikes] = useState<any>(likes);
     const userState = useSelector((state: RootStore) => state.client);
+
+    const dispatch = useDispatch();
 
     const toggleLikes = async (status: string) => {
         const res = await fetch(`/blog/toggleLikes/${blogId}/${status}`, {
@@ -30,6 +39,16 @@ const ProfileBlog = ({
         if (data.ok) {
             setBlogLikes(data.blog);
         }
+    };
+
+    const toggleBookmarkStatus = (status: string) => {
+        dispatch(
+            toggleBookmark(
+                blogId,
+                status,
+                userState && userState.client?.accessToken
+            )
+        );
     };
 
     return (
@@ -66,15 +85,24 @@ const ProfileBlog = ({
                     )}
                     {blogLikes ? blogLikes.length : null}
 
-                    <svg
-                        className="bookmark-icon"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                    >
-                        <path d="M16 2v17.582l-4-3.512-4 3.512v-17.582h8zm2-2h-12v24l6-5.269 6 5.269v-24z" />
-                    </svg>
+                    {userState &&
+                    userState.client?.profile.bookmarks?.includes(blogId) ? (
+                        <span
+                            onClick={() => {
+                                toggleBookmarkStatus('array_remove');
+                            }}
+                        >
+                            {bookmarkFilledIcon}
+                        </span>
+                    ) : (
+                        <span
+                            onClick={() => {
+                                toggleBookmarkStatus('array_append');
+                            }}
+                        >
+                            {bookmarkStrokeIcon}
+                        </span>
+                    )}
                 </div>
                 <span className="published-date">
                     {moment(createdAt).format('DD')}{' '}

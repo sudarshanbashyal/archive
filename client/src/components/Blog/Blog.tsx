@@ -1,7 +1,15 @@
 import React from 'react';
 import './blog.css';
 
-const Blog = ({ authorName, blogTopic, blogTitle }: any) => {
+const Blog = ({
+    authorName,
+    blogTopic,
+    blogTitle,
+}: {
+    authorName: string;
+    blogTopic: string;
+    blogTitle: string;
+}) => {
     return (
         <div className="blog">
             <div className="blog-header">
