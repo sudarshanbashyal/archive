@@ -2,12 +2,23 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { closeIcon, pencilIcon } from 'src/assets/SVGs';
 import { RootStore } from 'src/redux/store';
+import Comment from './Comment';
 import './comments.css';
 
 interface readerCommentInterface {
     blogId: number;
     commentExpanded: boolean;
     setCommentExpanded: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export interface commentInterface {
+    userId: number;
+    profileImage: string | null;
+    firstName: string;
+    lastName: string;
+    commentId: number;
+    commentContent: string;
+    likedBy: number[] | null;
 }
 
 const Comments = ({
@@ -17,6 +28,8 @@ const Comments = ({
 }: readerCommentInterface) => {
     //
     const [currentComment, setCurrentComment] = useState<string>('');
+    const [blogComments, setBlogComments] = useState<commentInterface[]>([]);
+
     const userState = useSelector((state: RootStore) => state.client);
     const accessToken = userState.client?.accessToken;
 
@@ -41,7 +54,29 @@ const Comments = ({
     };
 
     useEffect(() => {
-        console.log('fetching comments');
+        setBlogComments([]);
+
+        (async function getComments() {
+            const res = await fetch(`/blog/getComments/${blogId}`);
+            const data = await res.json();
+
+            if (data.ok) {
+                data.comments.map((comment: any) => {
+                    setBlogComments(blogComments => [
+                        {
+                            userId: comment.user_id,
+                            profileImage: comment.profileimage,
+                            firstName: comment.first_name,
+                            lastName: comment.last_name,
+                            commentId: comment.comment_id,
+                            commentContent: comment.comment_content,
+                            likedBy: comment.liked_by,
+                        },
+                        ...blogComments,
+                    ]);
+                });
+            }
+        })();
     }, []);
 
     return (
@@ -74,6 +109,10 @@ const Comments = ({
 
                 <span onClick={submitComment}>{pencilIcon}</span>
             </div>
+
+            {blogComments.map(com => (
+                <Comment key={com.commentId} comment={com} />
+            ))}
         </div>
     );
 };

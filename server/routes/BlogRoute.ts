@@ -270,17 +270,39 @@ router.get('/getBlog/:id', async (_req, _res) => {
     }
 });
 
-// router.get('/getComments/:id', async (_req, _res) => {
-//     try {
-//         return;
-//         //
-//     } catch (error) {
-//         return _res.status(500).json({
-//             ok: false,
-//             error,
-//         });
-//     }
-// });
+router.get('/getComments/:id', async (_req, _res) => {
+    try {
+        const blogId = +_req.params.id;
+        const commentQuery = await db.query(
+            `
+            SELECT 
+                u.user_id, 
+                u.profileimage, 
+                u.first_name, 
+                u.last_name, 
+                c.comment_id, 
+                c.comment_content, 
+                c.liked_by
+            FROM users u
+            INNER JOIN comments c ON c.user_id = u.user_id
+            INNER JOIN blogs b ON b.blog_id = c.blog_id
+            WHERE b.blog_id = $1;
+        `,
+            [blogId]
+        );
+
+        return _res.json({
+            ok: true,
+            comments: commentQuery.rows,
+        });
+        //
+    } catch (error) {
+        return _res.status(500).json({
+            ok: false,
+            error,
+        });
+    }
+});
 
 router.post('/postComment/:id', isAuth, async (_req: PayloadType, _res) => {
     try {

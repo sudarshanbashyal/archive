@@ -4,6 +4,10 @@
     @extend .blogs;
     grid-column-gap: 70px;
 
+    .no-blogs-message {
+        color: rgb(165, 165, 165);
+    }
+
     .blog {
         @extend .blog;
     }

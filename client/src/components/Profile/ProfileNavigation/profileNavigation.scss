@@ -1,0 +1,28 @@
+@import '../../../index.scss';
+
+.profile-navigation {
+    ul {
+        width: 100%;
+        padding: 0px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 50px;
+        list-style: none;
+
+        li {
+            width: 100%;
+            text-align: center;
+            padding: 20px 0px;
+            font-weight: bold;
+            color: darkgray;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .active-navigation {
+            border-bottom: 2px solid $red-dark;
+            color: $red-dark;
+        }
+    }
+}

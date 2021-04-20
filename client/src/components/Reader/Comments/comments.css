@@ -43,6 +43,7 @@ body .App {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+  margin-bottom: 30px;
 }
 
 .comments-container .comment-box form {
@@ -60,6 +61,41 @@ body .App {
   cursor: pointer;
   -webkit-transform: scale(0.8);
           transform: scale(0.8);
+}
+
+.comments-container .comment {
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid lightgray;
+}
+
+.comments-container .comment .comment-user-info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.comments-container .comment .comment-user-info .user-profile {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+.comments-container .comment .comment-user-info .user-profile img {
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.comments-container .comment .comment-user-info .user-name {
+  margin-top: 10px;
+  font-weight: bold;
 }
 
 .expanded-comment-container {

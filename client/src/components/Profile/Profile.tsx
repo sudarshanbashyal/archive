@@ -5,7 +5,11 @@ import { openModal } from 'src/redux/Actions/applicationActions';
 import { followUser, unfollowUser } from 'src/redux/Actions/userActions';
 import { RootStore } from 'src/redux/store';
 import './profile.css';
+import ProfileBlog from './ProfileBlogs/ProfileBlog/ProfileBlog';
 import ProfileBlogs from './ProfileBlogs/ProfileBlogs';
+import ProfileBookmarks from './ProfileBookmarks/ProfileBookmarks';
+import ProfileDrafts from './ProfileDrafts/ProfileDrafts';
+import ProfileNavigation from './ProfileNavigation/ProfileNavigation';
 
 interface ProfileInfoType {
     firstName: string;
@@ -28,6 +32,14 @@ export interface ProfileBlogType {
     likes: number[];
 }
 
+export const blogsType = 'blogs';
+export const bookmarksType = 'bookmarks';
+export const draftsType = 'drafts';
+export type ProfileNavigationType =
+    | typeof blogsType
+    | typeof bookmarksType
+    | typeof draftsType;
+
 const Profile = (props: any) => {
     const { id: profileId } = props.match.params;
     const userState = useSelector((state: RootStore) => state.client);
@@ -44,6 +56,11 @@ const Profile = (props: any) => {
         userFollowers: 0,
     });
     const [profileBlogs, setProfileBlogs] = useState<ProfileBlogType[]>([]);
+
+    const [
+        currentProfileNavigation,
+        setCurrentProfileNavigation,
+    ] = useState<ProfileNavigationType>('blogs');
 
     useEffect(() => {
         (async function () {
@@ -218,14 +235,24 @@ const Profile = (props: any) => {
                         </div>
                     </div>
 
-                    <hr />
-
-                    {profileBlogs[0] ? (
-                        <ProfileBlogs profileBlogs={profileBlogs} />
+                    {/* Profile Navigation */}
+                    {+profileId === userState.client?.profile.userId ? (
+                        <ProfileNavigation
+                            currentProfileNavigation={currentProfileNavigation}
+                            setCurrentProfileNavigation={
+                                setCurrentProfileNavigation
+                            }
+                        />
                     ) : (
-                        <h2 className="no-blogs-message">
-                            This user does not have any blogs.
-                        </h2>
+                        <hr />
+                    )}
+
+                    {currentProfileNavigation === 'blogs' ? (
+                        <ProfileBlogs profileBlogs={profileBlogs} />
+                    ) : currentProfileNavigation === 'bookmarks' ? (
+                        <ProfileBookmarks />
+                    ) : (
+                        <ProfileDrafts />
                     )}
                 </div>
             </div>

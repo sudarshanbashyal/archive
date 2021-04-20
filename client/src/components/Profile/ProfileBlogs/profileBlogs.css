@@ -24,4 +24,8 @@
 .profile-blogs {
   grid-column-gap: 70px;
 }
+
+.profile-blogs .no-blogs-message {
+  color: #a5a5a5;
+}
 /*# sourceMappingURL=profileBlogs.css.map */
