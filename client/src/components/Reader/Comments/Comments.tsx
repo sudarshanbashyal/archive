@@ -60,6 +60,31 @@ const Comments = ({ blogId }: readerCommentInterface) => {
         setCurrentComment('');
     };
 
+    const toggleComment = async (commentId: number, status: string) => {
+        const res = await fetch(`/blog/toggleComment/${commentId}/${status}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                authorization: `bearer ${
+                    userState && userState.client?.accessToken
+                }`,
+            },
+        });
+
+        const data = await res.json();
+        if (data.ok) {
+            const newArray = blogComments.map(comment => {
+                if (comment.commentId === commentId) {
+                    comment.likedBy = data.likedBy;
+                    return comment;
+                }
+                return comment;
+            });
+
+            setBlogComments(newArray);
+        }
+    };
+
     useEffect(() => {
         setBlogComments([]);
 
@@ -105,7 +130,11 @@ const Comments = ({ blogId }: readerCommentInterface) => {
             </div>
 
             {blogComments.map(com => (
-                <Comment key={com.commentId} comment={com} />
+                <Comment
+                    key={com.commentId}
+                    comment={com}
+                    toggleComment={toggleComment}
+                />
             ))}
         </div>
     );

@@ -1,8 +1,19 @@
 import moment from 'moment';
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { heartFilledIcon, heartStrokeIcon } from 'src/assets/SVGs';
+import { RootStore } from 'src/redux/store';
 import { commentInterface } from './Comments';
 
-const Comment = ({ comment }: { comment: commentInterface }) => {
+const Comment = ({
+    comment,
+    toggleComment,
+}: {
+    comment: commentInterface;
+    toggleComment: (commentId: number, status: string) => void;
+}) => {
+    const userState = useSelector((state: RootStore) => state.client);
+
     return (
         <div className="comment">
             <div className="comment-user-info">
@@ -25,6 +36,39 @@ const Comment = ({ comment }: { comment: commentInterface }) => {
             </div>
 
             <div className="comment-body">{comment.commentContent}</div>
+
+            <div className="comment-functions">
+                <span className="like-comment">
+                    {comment.likedBy!.includes(
+                        userState && userState.client!.profile.userId
+                    ) ? (
+                        <span
+                            className="heart-filled"
+                            onClick={() => {
+                                toggleComment(
+                                    comment.commentId,
+                                    'array_remove'
+                                );
+                            }}
+                        >
+                            {heartFilledIcon}
+                        </span>
+                    ) : (
+                        <span
+                            onClick={() => {
+                                toggleComment(
+                                    comment.commentId,
+                                    'array_append'
+                                );
+                            }}
+                        >
+                            {heartStrokeIcon}
+                        </span>
+                    )}
+                </span>
+
+                <span className="reply-comment">Reply To</span>
+            </div>
         </div>
     );
 };

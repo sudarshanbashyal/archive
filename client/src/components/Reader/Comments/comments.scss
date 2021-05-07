@@ -71,6 +71,47 @@
         .comment-body {
             margin-top: 10px;
         }
+
+        .comment-functions {
+            margin-top: 10px;
+
+            .like-comment {
+                user-select: none;
+                svg {
+                    transform: scale(0.8) translateY(8px);
+                    transition: 0.1s ease-in-out;
+
+                    &:hover {
+                        transform: scale(0.9) translateY(8px);
+                    }
+
+                    &:active {
+                        transform: scale(0.7) translateY(8px);
+                    }
+                }
+
+                .heart-filled {
+                    svg {
+                        fill: $red-dark;
+                    }
+                }
+
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+
+            .reply-comment {
+                user-select: none;
+                margin-left: 10px;
+                font-weight: 600;
+                color: rgb(185, 185, 185);
+
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+        }
     }
 }
 

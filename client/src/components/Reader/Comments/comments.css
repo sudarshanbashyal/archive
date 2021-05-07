@@ -94,6 +94,56 @@ body .App {
   margin-top: 10px;
 }
 
+.comments-container .comment .comment-functions {
+  margin-top: 10px;
+}
+
+.comments-container .comment .comment-functions .like-comment {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.comments-container .comment .comment-functions .like-comment svg {
+  -webkit-transform: scale(0.8) translateY(8px);
+          transform: scale(0.8) translateY(8px);
+  -webkit-transition: 0.1s ease-in-out;
+  transition: 0.1s ease-in-out;
+}
+
+.comments-container .comment .comment-functions .like-comment svg:hover {
+  -webkit-transform: scale(0.9) translateY(8px);
+          transform: scale(0.9) translateY(8px);
+}
+
+.comments-container .comment .comment-functions .like-comment svg:active {
+  -webkit-transform: scale(0.7) translateY(8px);
+          transform: scale(0.7) translateY(8px);
+}
+
+.comments-container .comment .comment-functions .like-comment .heart-filled svg {
+  fill: #dd3b40;
+}
+
+.comments-container .comment .comment-functions .like-comment:hover {
+  cursor: pointer;
+}
+
+.comments-container .comment .comment-functions .reply-comment {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  margin-left: 10px;
+  font-weight: 600;
+  color: #b9b9b9;
+}
+
+.comments-container .comment .comment-functions .reply-comment:hover {
+  cursor: pointer;
+}
+
 .expanded-comment-container {
   right: 0px;
   -webkit-box-shadow: -10px 10px 20px rgba(0, 0, 0, 0.1);

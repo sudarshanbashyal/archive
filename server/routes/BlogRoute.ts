@@ -441,4 +441,39 @@ router.get(
     }
 );
 
+router.post(
+    '/toggleComment/:id/:status',
+    isAuth,
+    async (_req: PayloadType, _res) => {
+        try {
+            const userId = _req.userId;
+            const commentId = _req.params.id;
+            const commentStatus = _req.params.status;
+            console.log(userId, commentId, commentStatus);
+
+            const toggleQuery = await db.query(
+                `
+                UPDATE comments
+                SET liked_by = ${commentStatus}(liked_by, $1)
+                WHERE comment_id=$2
+                RETURNING liked_by;
+                `,
+                [userId, commentId]
+            );
+
+            return _res.status(201).json({
+                ok: true,
+                likedBy: toggleQuery.rows[0].liked_by,
+            });
+
+            //
+        } catch (error) {
+            return _res.status(500).json({
+                ok: false,
+                error,
+            });
+        }
+    }
+);
+
 export default router;
