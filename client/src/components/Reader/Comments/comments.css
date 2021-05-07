@@ -53,15 +53,9 @@ body .App {
   padding-bottom: 20px;
   margin-bottom: 20px;
   border-bottom: 1px solid lightgray;
-}
-
-.comments-container .comment .comment-user-info {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
 }
 
 .comments-container .comment .comment-user-info .user-profile {
@@ -79,58 +73,71 @@ body .App {
      object-fit: cover;
 }
 
-.comments-container .comment .comment-user-info .user-name {
-  display: inline-block;
+.comments-container .comment .comment-body {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  margin-top: -10px;
+}
+
+.comments-container .comment .comment-body .user-name {
   font-weight: bold;
 }
 
-.comments-container .comment .comment-user-info .comment-date {
+.comments-container .comment .comment-body .user-name .author-icon svg {
+  fill: #151f2e;
+  margin-left: 5px;
+  -webkit-transform: scale(0.8) translateY(0.5rem);
+          transform: scale(0.8) translateY(0.5rem);
+}
+
+.comments-container .comment .comment-body .comment-date {
   margin-left: 15px;
   font-weight: 600;
   color: #b9b9b9;
 }
 
-.comments-container .comment .comment-body {
+.comments-container .comment .comment-body .comment-content {
+  margin-top: 5px;
+}
+
+.comments-container .comment .comment-body .comment-functions {
   margin-top: 10px;
 }
 
-.comments-container .comment .comment-functions {
-  margin-top: 10px;
-}
-
-.comments-container .comment .comment-functions .like-comment {
+.comments-container .comment .comment-body .comment-functions .like-comment {
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
 }
 
-.comments-container .comment .comment-functions .like-comment svg {
+.comments-container .comment .comment-body .comment-functions .like-comment svg {
   -webkit-transform: scale(0.8) translateY(8px);
           transform: scale(0.8) translateY(8px);
   -webkit-transition: 0.1s ease-in-out;
   transition: 0.1s ease-in-out;
 }
 
-.comments-container .comment .comment-functions .like-comment svg:hover {
+.comments-container .comment .comment-body .comment-functions .like-comment svg:hover {
   -webkit-transform: scale(0.9) translateY(8px);
           transform: scale(0.9) translateY(8px);
 }
 
-.comments-container .comment .comment-functions .like-comment svg:active {
+.comments-container .comment .comment-body .comment-functions .like-comment svg:active {
   -webkit-transform: scale(0.7) translateY(8px);
           transform: scale(0.7) translateY(8px);
 }
 
-.comments-container .comment .comment-functions .like-comment .heart-filled svg {
+.comments-container .comment .comment-body .comment-functions .like-comment .heart-filled svg {
   fill: #dd3b40;
 }
 
-.comments-container .comment .comment-functions .like-comment:hover {
+.comments-container .comment .comment-body .comment-functions .like-comment:hover {
   cursor: pointer;
 }
 
-.comments-container .comment .comment-functions .reply-comment {
+.comments-container .comment .comment-body .comment-functions .reply-comment {
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
@@ -140,13 +147,51 @@ body .App {
   color: #b9b9b9;
 }
 
-.comments-container .comment .comment-functions .reply-comment:hover {
+.comments-container .comment .comment-body .comment-functions .reply-comment:hover {
   cursor: pointer;
 }
 
-.expanded-comment-container {
-  right: 0px;
-  -webkit-box-shadow: -10px 10px 20px rgba(0, 0, 0, 0.1);
-          box-shadow: -10px 10px 20px rgba(0, 0, 0, 0.1);
+.comments-container .comment .comment-body .reply-textfield {
+  margin-top: 20px;
+  width: 100%;
+}
+
+.comments-container .comment .comment-body .reply-textfield input {
+  outline: none;
+  width: 100%;
+  border: none;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid lightgray;
+}
+
+.comments-container .comment .comment-body .reply-textfield input:focus {
+  border-bottom: 1px solid darkgray;
+}
+
+.comments-container .comment .comment-body .reply-textfield .reply-buttons {
+  width: 100%;
+  margin-top: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+.comments-container .comment .comment-body .reply-textfield .reply-buttons .reply-submit-button {
+  padding: 0.5rem 1rem;
+  border: 1px solid black;
+  background-color: transparent;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.comments-container .comment .comment-body .reply-textfield .reply-buttons .cancel-button {
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  font-weight: 600;
+  margin-left: 10px;
 }
 /*# sourceMappingURL=comments.css.map */

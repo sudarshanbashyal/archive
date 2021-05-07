@@ -37,11 +37,9 @@
         padding-bottom: 20px;
         margin-bottom: 20px;
         border-bottom: 1px solid lightgray;
+        display: flex;
 
         .comment-user-info {
-            display: flex;
-            align-items: center;
-
             .user-profile {
                 width: 30px;
                 height: 30px;
@@ -55,10 +53,21 @@
                     object-fit: cover;
                 }
             }
+        }
 
+        .comment-body {
+            flex: 1;
+            margin-top: -10px;
             .user-name {
-                display: inline-block;
                 font-weight: bold;
+
+                .author-icon {
+                    svg {
+                        fill: $blue-dark;
+                        margin-left: 5px;
+                        transform: scale(0.8) translateY(0.5rem);
+                    }
+                }
             }
 
             .comment-date {
@@ -66,56 +75,91 @@
                 font-weight: 600;
                 color: rgb(185, 185, 185);
             }
-        }
 
-        .comment-body {
-            margin-top: 10px;
-        }
+            .comment-content {
+                margin-top: 5px;
+            }
 
-        .comment-functions {
-            margin-top: 10px;
+            .comment-functions {
+                margin-top: 10px;
 
-            .like-comment {
-                user-select: none;
-                svg {
-                    transform: scale(0.8) translateY(8px);
-                    transition: 0.1s ease-in-out;
+                .like-comment {
+                    user-select: none;
+                    svg {
+                        transform: scale(0.8) translateY(8px);
+                        transition: 0.1s ease-in-out;
+
+                        &:hover {
+                            transform: scale(0.9) translateY(8px);
+                        }
+
+                        &:active {
+                            transform: scale(0.7) translateY(8px);
+                        }
+                    }
+
+                    .heart-filled {
+                        svg {
+                            fill: $red-dark;
+                        }
+                    }
 
                     &:hover {
-                        transform: scale(0.9) translateY(8px);
-                    }
-
-                    &:active {
-                        transform: scale(0.7) translateY(8px);
+                        cursor: pointer;
                     }
                 }
 
-                .heart-filled {
-                    svg {
-                        fill: $red-dark;
-                    }
-                }
+                .reply-comment {
+                    user-select: none;
+                    margin-left: 10px;
+                    font-weight: 600;
+                    color: rgb(185, 185, 185);
 
-                &:hover {
-                    cursor: pointer;
+                    &:hover {
+                        cursor: pointer;
+                    }
                 }
             }
 
-            .reply-comment {
-                user-select: none;
-                margin-left: 10px;
-                font-weight: 600;
-                color: rgb(185, 185, 185);
+            .reply-textfield {
+                margin-top: 20px;
+                width: 100%;
 
-                &:hover {
-                    cursor: pointer;
+                input {
+                    outline: none;
+                    width: 100%;
+                    border: none;
+                    padding-bottom: 0.5rem;
+                    border-bottom: 1px solid lightgray;
+
+                    &:focus {
+                        border-bottom: 1px solid darkgray;
+                    }
+                }
+
+                .reply-buttons {
+                    width: 100%;
+                    margin-top: 10px;
+                    display: flex;
+                    justify-content: flex-end;
+
+                    .reply-submit-button {
+                        padding: 0.5rem 1rem;
+                        border: 1px solid black;
+                        background-color: transparent;
+                        font-weight: 600;
+                        cursor: pointer;
+                    }
+
+                    .cancel-button {
+                        border: none;
+                        cursor: pointer;
+                        background-color: transparent;
+                        font-weight: 600;
+                        margin-left: 10px;
+                    }
                 }
             }
         }
     }
-}
-
-.expanded-comment-container {
-    right: 0px;
-    box-shadow: -10px 10px 20px rgba(0, 0, 0, 0.1);
 }

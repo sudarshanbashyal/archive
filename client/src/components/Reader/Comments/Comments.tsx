@@ -7,6 +7,7 @@ import './comments.css';
 
 interface readerCommentInterface {
     blogId: number;
+    blogAuthorId: number;
 }
 
 export interface commentInterface {
@@ -20,7 +21,7 @@ export interface commentInterface {
     createdAt: string;
 }
 
-const Comments = ({ blogId }: readerCommentInterface) => {
+const Comments = ({ blogId, blogAuthorId }: readerCommentInterface) => {
     //
     const [currentComment, setCurrentComment] = useState<string>('');
     const [blogComments, setBlogComments] = useState<commentInterface[]>([]);
@@ -133,6 +134,7 @@ const Comments = ({ blogId }: readerCommentInterface) => {
                 <Comment
                     key={com.commentId}
                     comment={com}
+                    blogAuthorId={blogAuthorId}
                     toggleComment={toggleComment}
                 />
             ))}

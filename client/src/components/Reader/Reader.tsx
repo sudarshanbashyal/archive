@@ -84,7 +84,7 @@ const Reader = (props: any) => {
                     likes={blog!.likes}
                 />
 
-                <Comments blogId={blogId} />
+                <Comments blogId={blogId} blogAuthorId={blog!.userId} />
             </div>
         </div>
     );

@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import moment from 'moment';
 import {
     bookmarkStrokeIcon,
-    commentIcon,
     heartFilledIcon,
     heartStrokeIcon,
 } from 'src/assets/SVGs';
