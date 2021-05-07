@@ -194,4 +194,14 @@ body .App {
   font-weight: 600;
   margin-left: 10px;
 }
+
+.comments-container .comment .comment-body .show-all-replies {
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.comments-container .comment .comment-body .show-all-replies .down-arrow svg {
+  -webkit-transform: scale(0.5) translateY(0.8rem);
+          transform: scale(0.5) translateY(0.8rem);
+}
 /*# sourceMappingURL=comments.css.map */

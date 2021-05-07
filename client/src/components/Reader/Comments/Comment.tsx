@@ -1,12 +1,12 @@
 import moment from 'moment';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import {
     crownIcon,
     defaultProfileImage,
+    downArrowIcon,
     heartFilledIcon,
     heartStrokeIcon,
-    pencilIcon,
 } from 'src/assets/SVGs';
 import { RootStore } from 'src/redux/store';
 import { commentInterface } from './Comments';
@@ -23,6 +23,19 @@ const Comment = ({
     const userState = useSelector((state: RootStore) => state.client);
 
     const [replyToggled, setReplyToggled] = useState<boolean>(false);
+    const [childComments, setChildComments] = useState<number | null>(null);
+
+    // find out number of replies a comment has.
+    useEffect(() => {
+        (async function calculateChildren() {
+            const res = await fetch(`/blog/countChildren/${comment.commentId}`);
+            const data = await res.json();
+
+            if (data.ok) {
+                setChildComments(+data.children);
+            }
+        })();
+    }, []);
 
     return (
         <div className="comment">
@@ -76,6 +89,7 @@ const Comment = ({
                                 {heartStrokeIcon}
                             </span>
                         )}
+                        {comment.likedBy!.length || null}
                     </span>
 
                     <span
@@ -103,6 +117,16 @@ const Comment = ({
                             <button className="cancel-button">Cancel</button>
                         </div>
                     </div>
+                ) : null}
+
+                {/* checking for replies */}
+                {childComments ? (
+                    <p className="show-all-replies">
+                        {childComments > 1
+                            ? `Show ${childComments} replies`
+                            : `Show 1 reply`}
+                        <span className="down-arrow">{downArrowIcon}</span>
+                    </p>
                 ) : null}
             </div>
         </div>

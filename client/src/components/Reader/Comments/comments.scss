@@ -160,6 +160,17 @@
                     }
                 }
             }
+
+            .show-all-replies {
+                font-weight: 600;
+                cursor: pointer;
+
+                .down-arrow {
+                    svg {
+                        transform: scale(0.5) translateY(0.8rem);
+                    }
+                }
+            }
         }
     }
 }

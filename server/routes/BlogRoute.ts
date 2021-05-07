@@ -287,7 +287,7 @@ router.get('/getComments/:id', async (_req, _res) => {
             FROM users u
             INNER JOIN comments c ON c.user_id = u.user_id
             INNER JOIN blogs b ON b.blog_id = c.blog_id
-            WHERE b.blog_id = $1;
+            WHERE b.blog_id = $1 AND c.parent_id IS NULL;
         `,
             [blogId]
         );
@@ -341,7 +341,8 @@ router.post('/postComment/:id', isAuth, async (_req: PayloadType, _res) => {
             FROM users u
             INNER JOIN comments c ON c.user_id = u.user_id
             INNER JOIN blogs b ON b.blog_id = c.blog_id
-            WHERE c.comment_id = $1;
+            WHERE c.comment_id = $1
+            ORDER BY c.created_at;
         `,
             [commentQuery.rows[0].comment_id]
         );
@@ -475,5 +476,29 @@ router.post(
         }
     }
 );
+
+router.get('/countChildren/:id', async (_req, _res) => {
+    try {
+        const commentId = _req.params.id;
+        const childrenQuery = await db.query(
+            `
+            SELECT COUNT(*) FROM comments WHERE parent_id=$1;
+        `,
+            [commentId]
+        );
+
+        return _res.json({
+            ok: true,
+            children: childrenQuery.rows[0].count,
+        });
+
+        //
+    } catch (error) {
+        return _res.status(500).json({
+            ok: false,
+            error,
+        });
+    }
+});
 
 export default router;
