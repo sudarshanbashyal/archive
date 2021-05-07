@@ -27,8 +27,6 @@ const Reader = (props: any) => {
     const [blog, setBlog] = useState<blogInterface | null>();
     const [loading, setLoading] = useState<boolean>(true);
 
-    const [commentExpanded, setCommentExpanded] = useState<boolean>(false);
-
     useEffect(() => {
         (async function getBlog() {
             const res = await fetch(`/blog/getBlog/${blogId}`);
@@ -84,16 +82,10 @@ const Reader = (props: any) => {
                     headerImage={blog!.headerImage}
                     createdAt={blog!.createdAt}
                     likes={blog!.likes}
-                    setCommentExpanded={setCommentExpanded}
-                    commentExpanded={commentExpanded}
                 />
-            </div>
 
-            <Comments
-                blogId={blogId}
-                commentExpanded={commentExpanded}
-                setCommentExpanded={setCommentExpanded}
-            />
+                <Comments blogId={blogId} />
+            </div>
         </div>
     );
 };

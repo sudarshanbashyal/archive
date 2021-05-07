@@ -6,22 +6,9 @@
     margin: auto;
     margin-top: 50px;
     margin-bottom: 50px;
-    position: absolute;
-    top: 0px;
-    right: -800px;
-    height: 50vh;
     overflow: auto;
     background-color: white;
     // transition: 0.3s ease-in-out;
-
-    .close-icon {
-        position: absolute;
-        top: 10px;
-        right: 3rem;
-        transform: scale(0.7);
-        fill: lightgray;
-        cursor: pointer;
-    }
 
     .comment-box {
         padding: 1rem;
@@ -70,12 +57,19 @@
             }
 
             .user-name {
-                margin-top: 10px;
+                display: inline-block;
                 font-weight: bold;
+            }
+
+            .comment-date {
+                margin-left: 15px;
+                font-weight: 600;
+                color: rgb(185, 185, 185);
             }
         }
 
         .comment-body {
+            margin-top: 10px;
         }
     }
 }

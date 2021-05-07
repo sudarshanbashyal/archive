@@ -282,7 +282,8 @@ router.get('/getComments/:id', async (_req, _res) => {
                 u.last_name, 
                 c.comment_id, 
                 c.comment_content, 
-                c.liked_by
+                c.liked_by,
+                c.created_at
             FROM users u
             INNER JOIN comments c ON c.user_id = u.user_id
             INNER JOIN blogs b ON b.blog_id = c.blog_id
@@ -322,13 +323,32 @@ router.post('/postComment/:id', isAuth, async (_req: PayloadType, _res) => {
         const commentQuery = await db.query(
             `INSERT INTO comments(user_id, blog_id, comment_content)
             VALUES($1, $2, $3)
-            RETURNING *;`,
+            RETURNING comment_id;`,
             [userId, blogId, commentContent]
+        );
+
+        const postedCommentQuery = await db.query(
+            `
+            SELECT 
+                u.user_id, 
+                u.profileimage, 
+                u.first_name, 
+                u.last_name, 
+                c.comment_id, 
+                c.comment_content, 
+                c.liked_by,
+                c.created_at
+            FROM users u
+            INNER JOIN comments c ON c.user_id = u.user_id
+            INNER JOIN blogs b ON b.blog_id = c.blog_id
+            WHERE c.comment_id = $1;
+        `,
+            [commentQuery.rows[0].comment_id]
         );
 
         return _res.status(201).json({
             ok: true,
-            comment: commentQuery.rows[0],
+            comment: postedCommentQuery.rows[0],
         });
 
         //

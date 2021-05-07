@@ -1,3 +1,4 @@
+import moment from 'moment';
 import React from 'react';
 import { commentInterface } from './Comments';
 
@@ -15,9 +16,12 @@ const Comment = ({ comment }: { comment: commentInterface }) => {
                         alt="user-profile-image"
                     />
                 </div>
-                <p className="user-name">
+                <span className="user-name">
                     {comment.firstName} {comment.lastName}
-                </p>
+                </span>
+                <span className="comment-date">
+                    {moment(comment.createdAt).format('MMM Do')}
+                </span>
             </div>
 
             <div className="comment-body">{comment.commentContent}</div>
