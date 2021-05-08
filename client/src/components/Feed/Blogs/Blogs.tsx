@@ -1,68 +1,58 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { loadingAnimation } from 'src/assets/SVGs';
+import { bookmarkBlogInterface } from 'src/components/Profile/ProfileBookmarks/ProfileBookmarks';
+import TextBlog from 'src/components/Profile/TextBlogs/TextBlog';
+import { showFailureToast } from 'src/components/Utils/ToastNotification';
+import { RootStore } from 'src/redux/store';
 import Blog from '../../Blog/Blog';
 import './blogs.css';
 
 const Blogs = () => {
-    const blogArray = [
-        {
-            authorName: 'Carson',
-            blogTopic: 'Programming',
-            blogTitle:
-                'When should you alternate between vanilla JS and a JS framework?',
-        },
-        {
-            authorName: 'Carson',
-            blogTopic: 'Programming',
-            blogTitle:
-                'How do you go about learning algorithms and data structures?',
-        },
-        {
-            authorName: 'Carson',
-            blogTopic: 'Programming',
-            blogTitle:
-                'Creating a fullstack reddit clone with React, PostgresSQL and Node...',
-        },
-        {
-            authorName: 'Carson',
-            blogTopic: 'Programming',
-            blogTitle:
-                'How I got a job offer at Facebook right after graduating from college.',
-        },
-        {
-            authorName: 'Jessica',
-            blogTopic: 'Cooking',
-            blogTitle:
-                'You should definitely make this easy homemade Pizza...Yum',
-        },
-        {
-            authorName: 'Carson',
-            blogTopic: 'Programming',
-            blogTitle:
-                'What is the difference between a frontend developer and a backend developer?',
-        },
-        {
-            authorName: 'Carson',
-            blogTopic: 'Programming',
-            blogTitle: 'Best Design Books that will boost up your UI/UX.',
-        },
-        {
-            authorName: 'Carson',
-            blogTopic: 'Programming',
-            blogTitle: 'Best Design Books that will boost up your UI/UX.',
-        },
-    ];
+    const userState = useSelector((state: RootStore) => state.client);
+    const [loading, setLoading] = useState<boolean>(false);
 
-    return (
+    const [feedBlogs, setFeedBlogs] = useState<bookmarkBlogInterface[]>([]);
+
+    useEffect(() => {
+        setLoading(true);
+        (async function generateFeed() {
+            const res = await fetch(`/blog/generateFeed`, {
+                headers: {
+                    authorization: `bearer ${
+                        userState && userState.client?.accessToken
+                    }`,
+                },
+            });
+
+            const data = await res.json();
+            if (data.ok) {
+                console.log(data);
+                setFeedBlogs(data.feed);
+                setLoading(false);
+            } else {
+                setLoading(false);
+                showFailureToast('Something Went Wrong! Please try again.');
+            }
+        })();
+    }, []);
+
+    return !loading ? (
         <div className="blogs">
-            {blogArray.map((blog, index) => (
-                <Blog
-                    key={index}
-                    authorName={blog.authorName}
-                    blogTopic={blog.blogTopic}
+            {feedBlogs.map(blog => (
+                <TextBlog
+                    key={blog.blogId}
+                    blogId={blog.blogId}
                     blogTitle={blog.blogTitle}
+                    authorId={blog.authorId}
+                    authorName={blog.authorName}
+                    authorProfileImage={blog.authorProfileImage}
+                    blogTopic={blog.blogTopic}
                 />
             ))}
         </div>
+    ) : (
+        loadingAnimation
     );
 };
 

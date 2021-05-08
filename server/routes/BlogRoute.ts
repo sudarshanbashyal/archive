@@ -501,4 +501,47 @@ router.get('/countChildren/:id', async (_req, _res) => {
     }
 });
 
+router.get('/generateFeed', isAuth, async (_req: PayloadType, _res) => {
+    try {
+        const userId = _req.userId;
+
+        const userPreferencesQuery = await db.query(
+            `SELECT users_followed, topics_followed FROM users WHERE user_id=$1`,
+            [userId]
+        );
+
+        // get topics and users followed by a user
+        const usersFollowedArray = userPreferencesQuery.rows[0].users_followed.toString();
+        const topicsFollowedArray = userPreferencesQuery.rows[0].topics_followed.toString();
+
+        // generate feed according to those follows
+        const feedGenerationQuery = await db.query(`     
+            SELECT 
+                b.blog_id as "blogId",
+                b.title as "blogTitle",
+                u.user_id as "authorId",
+                u.first_name as "authorName",
+                u.profileimage as "authorProfileImage",
+                t.topic_title as "blogTopic"
+            FROM blogs b
+            INNER JOIN users u ON u.user_id = b.creator_id
+            INNER JOIN topics t on t.topic_id = b.topic_id
+            WHERE (t.topic_id IN (${topicsFollowedArray}) OR b.creator_id IN (${usersFollowedArray}))
+            ORDER BY b.created_at DESC;
+        `);
+
+        return _res.json({
+            ok: true,
+            feed: feedGenerationQuery.rows,
+        });
+
+        //
+    } catch (error) {
+        return _res.status(500).json({
+            ok: false,
+            error,
+        });
+    }
+});
+
 export default router;

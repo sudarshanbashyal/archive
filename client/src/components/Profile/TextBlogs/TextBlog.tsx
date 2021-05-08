@@ -1,7 +1,12 @@
+import { spawn } from 'child_process';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { bookmarkFilledIcon, defaultProfileImage } from 'src/assets/SVGs';
+import {
+    bookmarkFilledIcon,
+    bookmarkStrokeIcon,
+    defaultProfileImage,
+} from 'src/assets/SVGs';
 import { toggleBookmark } from 'src/redux/Actions/userActions';
 import { RootStore } from 'src/redux/store';
 import { bookmarkBlogInterface } from '../ProfileBookmarks/ProfileBookmarks';
@@ -31,20 +36,38 @@ const TextBlog = ({
                     <span className="author-name">{authorName}</span>
                 </Link>
                 |<span className="blog-topic">{blogTopic}</span>
-                <span
-                    className="bookmark-icon"
-                    onClick={() => {
-                        dispatch(
-                            toggleBookmark(
-                                blogId,
-                                'array_remove',
-                                userState && userState.client?.accessToken
-                            )
-                        );
-                    }}
-                >
-                    {bookmarkFilledIcon}
-                </span>
+                {userState &&
+                userState.client?.profile.bookmarks!.includes(blogId) ? (
+                    <span
+                        className="bookmark-icon"
+                        onClick={() => {
+                            dispatch(
+                                toggleBookmark(
+                                    blogId,
+                                    'array_remove',
+                                    userState && userState.client?.accessToken
+                                )
+                            );
+                        }}
+                    >
+                        {bookmarkFilledIcon}
+                    </span>
+                ) : (
+                    <span
+                        className="bookmark-icon"
+                        onClick={() => {
+                            dispatch(
+                                toggleBookmark(
+                                    blogId,
+                                    'array_append',
+                                    userState && userState.client?.accessToken
+                                )
+                            );
+                        }}
+                    >
+                        {bookmarkStrokeIcon}
+                    </span>
+                )}
             </div>
             <Link
                 style={{ color: 'black', textDecoration: 'none' }}
