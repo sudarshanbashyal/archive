@@ -544,17 +544,28 @@ router.get('/generateFeed', isAuth, async (_req: PayloadType, _res) => {
     }
 });
 
-router.get('/generateExplore/:category/:topic', async (_req, _res) => {
-    try {
-        const category = _req.params.category;
-        const selectedTopic = _req.params.topic;
+router.get(
+    '/generateExplore/:category/:topic/:timeline',
+    async (_req, _res) => {
+        try {
+            const category = _req.params.category;
+            const selectedTopic = _req.params.topic;
+            const timeline = _req.params.timeline;
 
-        const optionalTopicQuery =
-            selectedTopic !== 'undefined'
-                ? `WHERE t.topic_id=${selectedTopic}`
-                : '';
+            let optionalTopicQuery =
+                selectedTopic !== 'undefined'
+                    ? `WHERE t.topic_id=${selectedTopic}`
+                    : '';
 
-        const exploreQuery = await db.query(`
+            if (timeline !== 'all') {
+                if (optionalTopicQuery !== '') {
+                    optionalTopicQuery += ` AND b.created_at > now() - interval '1 ${timeline}'`;
+                } else {
+                    optionalTopicQuery = `WHERE b.created_at > now() - interval '1 ${timeline}'`;
+                }
+            }
+
+            const exploreQuery = await db.query(`
             SELECT 
                 b.blog_id as "blogId",
                 b.title as "blogTitle",
@@ -568,18 +579,19 @@ router.get('/generateExplore/:category/:topic', async (_req, _res) => {
             ${optionalTopicQuery}
             ORDER BY ${category} DESC;`);
 
-        return _res.json({
-            ok: true,
-            blogs: exploreQuery.rows,
-        });
+            return _res.json({
+                ok: true,
+                blogs: exploreQuery.rows,
+            });
 
-        //
-    } catch (error) {
-        return _res.status(500).json({
-            ok: false,
-            error,
-        });
+            //
+        } catch (error) {
+            return _res.status(500).json({
+                ok: false,
+                error,
+            });
+        }
     }
-});
+);
 
 export default router;

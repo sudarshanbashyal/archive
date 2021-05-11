@@ -7,16 +7,24 @@ import Recommendations from './Recommendations/Recommendations';
 
 const Feed = () => {
     const userState = useSelector((state: RootStore) => state.client);
+    const currentTime = new Date().getHours();
+    console.log(currentTime);
+
+    let greeting;
+    if (currentTime < 12) greeting = 'Morning,';
+    else if (currentTime >= 12 && currentTime < 17) greeting = 'Day,';
+    else if (currentTime >= 17 && currentTime < 20) greeting = 'Afternoon,';
+    else greeting = 'Night,';
 
     return (
         <div className="outer-container">
             <div className="feed">
                 <div className="header">
                     <h1>
-                        Good Afternoon, <br />
+                        Good {greeting} <br />
                         {userState && userState.client?.profile.firstName}...
                     </h1>
-                    <p>Hope you have a good read today!</p>
+                    <p>Hope you have a good read!</p>
 
                     <button className="cta-button">
                         <svg

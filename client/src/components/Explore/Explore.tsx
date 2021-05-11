@@ -30,6 +30,12 @@ const Explore = () => {
         []
     );
 
+    // timeline for 'hot' category
+    const [categoryTimeline, setCategoryTimeline] = useState('all');
+    const changeTimelines = (e: any) => {
+        setCategoryTimeline(e.target.value);
+    };
+
     const [loading, setLoading] = useState<boolean>(false);
 
     // get all the topics
@@ -50,10 +56,13 @@ const Explore = () => {
             blogCategory === 'latest' ? 'b.created_at' : 'cardinality(b.likes)';
 
         (async function generateBlogs() {
+            if (blogCategory === 'latest') {
+                setCategoryTimeline('all');
+            }
             setLoading(true);
 
             const res = await fetch(
-                `/blog/generateExplore/${currentCategory}/${currentTopic}`
+                `/blog/generateExplore/${currentCategory}/${currentTopic}/${categoryTimeline}`
             );
             const data = await res.json();
 
@@ -64,7 +73,7 @@ const Explore = () => {
 
             setLoading(false);
         })();
-    }, [currentTopic, blogCategory]);
+    }, [currentTopic, blogCategory, categoryTimeline]);
 
     return (
         <div className="explore">
@@ -110,10 +119,12 @@ const Explore = () => {
 
                 {/* display select only if 'hot' category is selected */}
                 {blogCategory === 'hot' ? (
-                    <select>
-                        <option>This Week</option>
-                        <option>This Month</option>
-                        <option>All Time</option>
+                    <select onChange={changeTimelines}>
+                        <option value="week">This Week</option>
+                        <option value="month">This Month</option>
+                        <option value="all" selected>
+                            All Time
+                        </option>
                     </select>
                 ) : null}
 
@@ -160,19 +171,23 @@ const Explore = () => {
             </div>
 
             <div className="blogs">
-                {loading
-                    ? loadingAnimation
-                    : exploreBlogs.map(blog => (
-                          <TextBlog
-                              key={blog.blogId}
-                              blogId={blog.blogId}
-                              blogTitle={blog.blogTitle}
-                              authorId={blog.authorId}
-                              authorName={blog.authorName}
-                              authorProfileImage={blog.authorProfileImage}
-                              blogTopic={blog.blogTopic}
-                          />
-                      ))}
+                {loading ? (
+                    loadingAnimation
+                ) : exploreBlogs.length === 0 ? (
+                    <h2>No Blogs Found :(</h2>
+                ) : (
+                    exploreBlogs.map(blog => (
+                        <TextBlog
+                            key={blog.blogId}
+                            blogId={blog.blogId}
+                            blogTitle={blog.blogTitle}
+                            authorId={blog.authorId}
+                            authorName={blog.authorName}
+                            authorProfileImage={blog.authorProfileImage}
+                            blogTopic={blog.blogTopic}
+                        />
+                    ))
+                )}
             </div>
         </div>
     );
