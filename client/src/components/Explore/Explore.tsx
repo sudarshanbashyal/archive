@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { clockIcon, fireIcon } from 'src/assets/SVGs';
+import { clockIcon, fireIcon, loadingAnimation } from 'src/assets/SVGs';
 import { followTopic, unfollowTopic } from 'src/redux/Actions/userActions';
 import { RootStore } from 'src/redux/store';
+import { bookmarkBlogInterface } from '../Profile/ProfileBookmarks/ProfileBookmarks';
+import TextBlog from '../Profile/TextBlogs/TextBlog';
 import './explore.css';
 import ExploreTopics from './ExploreTopics/ExploreTopics';
 
@@ -16,10 +18,19 @@ const Explore = () => {
     const userState = useSelector((state: RootStore) => state.client);
     const dispatch = useDispatch();
 
+    // array of blog topics that can be selected
     const [topics, setTopics] = useState<topicInterface[]>([]);
+
+    // the current blog topic selected
     const [currentTopic, setCurrentTopic] = useState<number>();
 
+    // sorting category of the displayed blogs
     const [blogCategory, setBlogCategory] = useState<string>('latest');
+    const [exploreBlogs, setExploreBlogs] = useState<bookmarkBlogInterface[]>(
+        []
+    );
+
+    const [loading, setLoading] = useState<boolean>(false);
 
     // get all the topics
     useEffect(() => {
@@ -34,6 +45,26 @@ const Explore = () => {
     }, []);
 
     // get all the blogs depending on the topic selected
+    useEffect(() => {
+        const currentCategory =
+            blogCategory === 'latest' ? 'b.created_at' : 'cardinality(b.likes)';
+
+        (async function generateBlogs() {
+            setLoading(true);
+
+            const res = await fetch(
+                `/blog/generateExplore/${currentCategory}/${currentTopic}`
+            );
+            const data = await res.json();
+
+            if (data.ok) {
+                setExploreBlogs(data.blogs);
+                setLoading(false);
+            }
+
+            setLoading(false);
+        })();
+    }, [currentTopic, blogCategory]);
 
     return (
         <div className="explore">
@@ -126,6 +157,22 @@ const Explore = () => {
                             Follow Topic
                         </button>
                     ))}
+            </div>
+
+            <div className="blogs">
+                {loading
+                    ? loadingAnimation
+                    : exploreBlogs.map(blog => (
+                          <TextBlog
+                              key={blog.blogId}
+                              blogId={blog.blogId}
+                              blogTitle={blog.blogTitle}
+                              authorId={blog.authorId}
+                              authorName={blog.authorName}
+                              authorProfileImage={blog.authorProfileImage}
+                              blogTopic={blog.blogTopic}
+                          />
+                      ))}
             </div>
         </div>
     );

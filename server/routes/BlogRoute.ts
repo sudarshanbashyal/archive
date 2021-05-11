@@ -544,4 +544,42 @@ router.get('/generateFeed', isAuth, async (_req: PayloadType, _res) => {
     }
 });
 
+router.get('/generateExplore/:category/:topic', async (_req, _res) => {
+    try {
+        const category = _req.params.category;
+        const selectedTopic = _req.params.topic;
+
+        const optionalTopicQuery =
+            selectedTopic !== 'undefined'
+                ? `WHERE t.topic_id=${selectedTopic}`
+                : '';
+
+        const exploreQuery = await db.query(`
+            SELECT 
+                b.blog_id as "blogId",
+                b.title as "blogTitle",
+                u.user_id as "authorId",
+                u.first_name as "authorName",
+                u.profileimage as "authorProfileImage",
+                t.topic_title as "blogTopic"
+            FROM blogs b
+            INNER JOIN users u ON u.user_id = b.creator_id
+            INNER JOIN topics t on t.topic_id = b.topic_id
+            ${optionalTopicQuery}
+            ORDER BY ${category} DESC;`);
+
+        return _res.json({
+            ok: true,
+            blogs: exploreQuery.rows,
+        });
+
+        //
+    } catch (error) {
+        return _res.status(500).json({
+            ok: false,
+            error,
+        });
+    }
+});
+
 export default router;

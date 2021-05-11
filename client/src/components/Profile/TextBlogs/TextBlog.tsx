@@ -1,4 +1,3 @@
-import { spawn } from 'child_process';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -73,7 +72,7 @@ const TextBlog = ({
                 style={{ color: 'black', textDecoration: 'none' }}
                 to={`/blog/${blogId}`}
             >
-                <h2>{blogTitle}</h2>
+                <p className="blog-title">{blogTitle}</p>
             </Link>
         </div>
     );

@@ -90,4 +90,11 @@
             margin-left: auto;
         }
     }
+
+    .blogs {
+        margin-top: 80px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        grid-column-gap: 50px;
+    }
 }

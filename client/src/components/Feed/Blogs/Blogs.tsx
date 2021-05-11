@@ -5,7 +5,6 @@ import { bookmarkBlogInterface } from 'src/components/Profile/ProfileBookmarks/P
 import TextBlog from 'src/components/Profile/TextBlogs/TextBlog';
 import { showFailureToast } from 'src/components/Utils/ToastNotification';
 import { RootStore } from 'src/redux/store';
-import Blog from '../../Blog/Blog';
 import './blogs.css';
 
 const Blogs = () => {

@@ -58,7 +58,9 @@ body .App {
   margin-left: 15px;
 }
 
-.text-blog h2 {
+.text-blog .blog-title {
+  font-weight: bold;
+  font-size: 1.2rem;
   margin-top: 10px;
   cursor: pointer;
   line-height: 1.6rem;
