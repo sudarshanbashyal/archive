@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { loadingAnimation } from 'src/assets/SVGs';
 import { openModal } from 'src/redux/Actions/applicationActions';
 import { followUser, unfollowUser } from 'src/redux/Actions/userActions';
 import { RootStore } from 'src/redux/store';
@@ -45,6 +46,8 @@ const Profile = (props: any) => {
     const userState = useSelector((state: RootStore) => state.client);
     const dispatch = useDispatch();
 
+    const [loading, setLoading] = useState<boolean>(false);
+
     const [userExists, setUserExists] = useState<boolean>(true);
     const [profileInfo, setProfileInfo] = useState<ProfileInfoType>({
         firstName: '',
@@ -57,13 +60,12 @@ const Profile = (props: any) => {
     });
     const [profileBlogs, setProfileBlogs] = useState<ProfileBlogType[]>([]);
 
-    const [
-        currentProfileNavigation,
-        setCurrentProfileNavigation,
-    ] = useState<ProfileNavigationType>('blogs');
+    const [currentProfileNavigation, setCurrentProfileNavigation] =
+        useState<ProfileNavigationType>('blogs');
 
     useEffect(() => {
         (async function () {
+            setLoading(true);
             setProfileBlogs([]);
             const res = await fetch(`/user/getUser/${profileId}`);
             const data = await res.json();
@@ -123,13 +125,18 @@ const Profile = (props: any) => {
                     ...profileBlogs,
                     ...retrievedBlogs,
                 ]);
+
+                setLoading(false);
             } else {
                 setUserExists(false);
+                setLoading(false);
             }
         })();
     }, [profileId]);
 
-    return (
+    return loading ? (
+        <div className="loading-animation">{loadingAnimation}</div>
+    ) : (
         <div
             className="profile"
             style={{

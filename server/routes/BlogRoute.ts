@@ -511,8 +511,10 @@ router.get('/generateFeed', isAuth, async (_req: PayloadType, _res) => {
         );
 
         // get topics and users followed by a user
-        const usersFollowedArray = userPreferencesQuery.rows[0].users_followed.toString();
-        const topicsFollowedArray = userPreferencesQuery.rows[0].topics_followed.toString();
+        const usersFollowedArray =
+            userPreferencesQuery.rows[0].users_followed.toString();
+        const topicsFollowedArray =
+            userPreferencesQuery.rows[0].topics_followed.toString();
 
         // generate feed according to those follows
         const feedGenerationQuery = await db.query(`     
@@ -593,5 +595,152 @@ router.get(
         }
     }
 );
+
+router.post('/saveDraft', isAuth, async (_req: PayloadType, _res) => {
+    try {
+        const userId = _req.userId;
+        const draftTitle = _req.body.draftTitle;
+        const draftContent = _req.body.draftContent || '';
+
+        const savedDraft = await db.query(
+            `
+            INSERT INTO drafts(draft_title, draft_content, creator_id)
+            VALUES($1, $2, $3)
+            RETURNING *;
+            `,
+
+            [draftTitle, draftContent, userId]
+        );
+
+        if (savedDraft.rows[0]) {
+            return _res.status(201).json({
+                ok: true,
+                error: {
+                    message: 'Something went wrong. Please try again.',
+                },
+            });
+        }
+
+        return _res.status(500).json({
+            ok: false,
+            error: {
+                message: 'Something went wrong. Please try again.',
+            },
+        });
+
+        //
+    } catch (error) {
+        return _res.status(500).json({
+            ok: false,
+            error,
+        });
+    }
+});
+
+router.post('/updateDraft/:id', isAuth, async (_req: PayloadType, _res) => {
+    try {
+        const userId = _req.userId;
+        const draftId = _req.params.id;
+        const draftTitle = _req.body.draftTitle;
+        const draftContent = _req.body.draftContent || '';
+
+        const savedDraft = await db.query(
+            `
+            UPDATE drafts SET draft_title = $1, draft_content=$2, last_modified = now()
+            WHERE draft_id=$3 AND creator_id=$4 RETURNING *;
+            `,
+
+            [draftTitle, draftContent, draftId, userId]
+        );
+
+        if (savedDraft.rows[0]) {
+            return _res.status(201).json({
+                ok: true,
+                error: {
+                    message: 'Something went wrong. Please try again.',
+                },
+            });
+        }
+
+        return _res.status(500).json({
+            ok: false,
+            error: {
+                message: 'Something went wrong. Please try again.',
+            },
+        });
+
+        //
+    } catch (error) {
+        return _res.status(500).json({
+            ok: false,
+            error,
+        });
+    }
+});
+
+router.get('/getDrafts', isAuth, async (_req: PayloadType, _res) => {
+    try {
+        const userId = _req.userId;
+        const draftQuery = await db.query(
+            `
+            SELECT 
+                draft_id as "draftId",
+                draft_title as "draftTitle",
+                draft_content as "draftContent",
+                last_modified as "lastModified"
+            FROM drafts
+            WHERE creator_id=$1;
+        `,
+            [userId]
+        );
+
+        return _res.json({
+            ok: true,
+            drafts: draftQuery.rows,
+        });
+
+        //
+    } catch (error) {
+        return _res.status(500).json({
+            ok: false,
+            error,
+        });
+    }
+});
+
+router.get('/getDraft/:id', isAuth, async (_req: PayloadType, _res) => {
+    try {
+        const userId = _req.userId;
+        const draftId = _req.params.id;
+
+        const draftQuery = await db.query(
+            `
+            SELECT * FROM drafts WHERE draft_id=$1 AND creator_id=$2
+        `,
+            [draftId, userId]
+        );
+
+        if (draftQuery.rows[0]) {
+            return _res.json({
+                ok: true,
+                draft: draftQuery.rows[0],
+            });
+        }
+
+        return _res.status(500).json({
+            ok: false,
+            error: {
+                message: 'Something went wrong. Please try again.',
+            },
+        });
+
+        //
+    } catch (error) {
+        return _res.status(500).json({
+            ok: false,
+            error,
+        });
+    }
+});
 
 export default router;

@@ -6,7 +6,7 @@ import { showSuccessToast } from '../Utils/ToastNotification';
 import './editor.css';
 import Wysiwyg from './Wysiwyg/Wysiwyg';
 
-const EditorPage = () => {
+const EditorPage = (props: any) => {
     const history = useHistory();
 
     const userState = useSelector((state: RootStore) => state.client);
@@ -31,6 +31,9 @@ const EditorPage = () => {
     const openFileUploader = (): void => {
         imageUpload.current!.click();
     };
+
+    //
+    const draftId = props.match.params.id;
 
     const handleFileInputChange = (e: any): void => {
         const file = e.target.files![0];
@@ -79,6 +82,40 @@ const EditorPage = () => {
         }
     };
 
+    const saveAsDraft = async () => {
+        const draftingURL = draftId
+            ? `/blog/updateDraft/${draftId}`
+            : '/blog/saveDraft';
+
+        if (!blogTitle) {
+            setEditorError('Your draft must have a title.');
+        } else {
+            const draftData = {
+                draftTitle: blogTitle,
+                draftContent: editorHTML,
+            };
+
+            const res = await fetch(draftingURL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    authorization: `bearer ${
+                        userState && userState.client?.accessToken
+                    }`,
+                },
+                body: JSON.stringify(draftData),
+            });
+
+            const data = await res.json();
+            if (data.ok) {
+                showSuccessToast('Draft Successfully Saved.');
+                history.push(
+                    `/user/${userState && userState.client?.profile.userId}`
+                );
+            }
+        }
+    };
+
     const uploadBlog = async () => {
         const blogData = {
             blogTitle,
@@ -109,10 +146,33 @@ const EditorPage = () => {
 
     useEffect(() => {
         (async function () {
-            const res = await fetch('blog/getTopics');
+            const res = await fetch('/blog/getTopics');
             const data = await res.json();
             setBlogTopics(data.data);
         })();
+    }, []);
+
+    // fetch draft contents in case it was a draft
+    useEffect(() => {
+        async function getDraft() {
+            const res = await fetch(`/blog/getDraft/${draftId}`, {
+                headers: {
+                    authorization: `bearer ${
+                        userState && userState.client?.accessToken
+                    }`,
+                },
+            });
+
+            const data = await res.json();
+            if (data.ok) {
+                setBlogTitle(data.draft.draft_title);
+                setEditorHTML(data.draft.draft_content);
+            }
+        }
+
+        if (draftId) {
+            getDraft();
+        }
     }, []);
 
     return (
@@ -124,6 +184,7 @@ const EditorPage = () => {
                 onChange={e => {
                     setBlogTitle(e.target.value);
                 }}
+                value={blogTitle || ''}
             />
 
             <input
@@ -184,6 +245,8 @@ const EditorPage = () => {
                 setEditorHTML={setEditorHTML}
                 editorHTML={editorHTML}
                 handleSubmit={handleSubmit}
+                draftId={null}
+                saveAsDraft={saveAsDraft}
             />
         </div>
     );

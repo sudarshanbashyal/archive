@@ -18,7 +18,7 @@ const Home = () => {
                     <Route exact path="/user/:id" component={Profile} />
                     <Route path="/settings" component={Settings} />
                     <Route exact path="/explore" component={Explore} />
-                    <Route exact path="/editor" component={EditorPage} />
+                    <Route exact path="/editor/:id?" component={EditorPage} />
                     <Route exact path="/blog/:id" component={Reader} />
                 </Switch>
             </BrowserRouter>

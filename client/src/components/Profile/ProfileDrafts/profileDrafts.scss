@@ -1,0 +1,17 @@
+@import '../../../index.scss';
+
+.drafts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-column-gap: 50px;
+
+    .draft {
+        h2 {
+            cursor: pointer;
+        }
+
+        .last-modified {
+            margin-top: -10px;
+        }
+    }
+}

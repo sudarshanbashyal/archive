@@ -3,9 +3,13 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.bubble.css';
 import 'react-quill/dist/quill.snow.css';
 
-const Wysiwyg = ({ setEditorHTML, editorHTML, handleSubmit }: any) => {
-    // const [editorHTML, setEditorHTML] = useState('');
-
+const Wysiwyg = ({
+    setEditorHTML,
+    editorHTML,
+    handleSubmit,
+    draftId,
+    saveAsDraft,
+}: any) => {
     const handleEditorChange = (html: string) => {
         setEditorHTML(html);
     };
@@ -60,7 +64,9 @@ const Wysiwyg = ({ setEditorHTML, editorHTML, handleSubmit }: any) => {
             />
 
             <div className="editor-controls">
-                <button className="draft-btn">Save as draft</button>
+                <button className="draft-btn" onClick={saveAsDraft}>
+                    Save as draft
+                </button>
                 <button className="publish-btn" onClick={handleSubmit}>
                     Publish Story
                 </button>

@@ -1,0 +1,28 @@
+body {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: 'Source Sans Pro';
+}
+
+body .App {
+  position: relative;
+}
+
+.drafts {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (minmax(300px, 1fr))[auto-fit];
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-column-gap: 50px;
+}
+
+.drafts .draft h2 {
+  cursor: pointer;
+}
+
+.drafts .draft .last-modified {
+  margin-top: -10px;
+}
+/*# sourceMappingURL=profileDrafts.css.map */
