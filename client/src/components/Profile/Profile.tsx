@@ -44,6 +44,10 @@ export type ProfileNavigationType =
 const Profile = (props: any) => {
     const { id: profileId } = props.match.params;
     const userState = useSelector((state: RootStore) => state.client);
+    const applicationState = useSelector(
+        (state: RootStore) => state.application
+    );
+
     const dispatch = useDispatch();
 
     const [loading, setLoading] = useState<boolean>(false);
@@ -138,7 +142,13 @@ const Profile = (props: any) => {
         <div className="loading-animation">{loadingAnimation}</div>
     ) : (
         <div
-            className="profile"
+            className={
+                'profile ' +
+                (applicationState &&
+                applicationState.applicationTheme === 'dark'
+                    ? 'profile-dark'
+                    : '')
+            }
             style={{
                 marginTop:
                     profileInfo && profileInfo.headerimage ? '0px' : '50px',

@@ -8,9 +8,19 @@ body {
 
 body .App {
   position: relative;
+  min-height: 100vh;
 }
 
-.container {
+body .App-dark {
+  background-color: #151f2e;
+  color: #becfe2;
+}
+
+.loading-animation {
+  margin-top: 30vh;
+}
+
+.reader-container {
   width: 1200px;
   margin: auto;
   margin-top: 40px;
@@ -18,30 +28,30 @@ body .App {
   overflow-x: hidden;
 }
 
-.container .blog-container {
+.reader-container .blog-container {
   width: 100%;
   position: relative;
   margin-top: 80px;
 }
 
-.container .blog-container .reader-user-container {
+.reader-container .blog-container .reader-user-container {
   position: absolute;
   left: 0px;
   width: 20%;
   min-height: 20px;
 }
 
-.container .blog-container .reader-user-container .user-name {
+.reader-container .blog-container .reader-user-container .user-name {
   font-weight: bold;
   margin-bottom: 10px;
 }
 
-.container .blog-container .reader-user-container .user-interest {
+.reader-container .blog-container .reader-user-container .user-interest {
   display: inline-block;
   margin-bottom: 10px;
 }
 
-.container .blog-container .reader-user-container button {
+.reader-container .blog-container .reader-user-container button {
   background-color: transparent;
   border: 1px solid black;
   border-radius: 7px;
@@ -51,7 +61,7 @@ body .App {
   outline: none;
 }
 
-.container .blog-container .reader-blog-container {
+.reader-container .blog-container .reader-blog-container {
   width: 60%;
   margin: auto;
   min-height: 20px;
@@ -59,7 +69,7 @@ body .App {
   border-bottom: 1px solid lightgray;
 }
 
-.container .blog-container .reader-blog-container .blog-title {
+.reader-container .blog-container .reader-blog-container .blog-title {
   font-family: 'Playfair Display', serif;
   font-size: 2.5rem;
   font-weight: 700;
@@ -67,7 +77,7 @@ body .App {
   margin-bottom: 15px;
 }
 
-.container .blog-container .reader-blog-container .blog-info {
+.reader-container .blog-container .reader-blog-container .blog-info {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -79,15 +89,15 @@ body .App {
           justify-content: space-between;
 }
 
-.container .blog-container .reader-blog-container .blog-info .blog-date {
+.reader-container .blog-container .reader-blog-container .blog-info .blog-date {
   font-weight: bold;
 }
 
-.container .blog-container .reader-blog-container .blog-info .blog-icons span {
+.reader-container .blog-container .reader-blog-container .blog-info .blog-icons span {
   margin-right: 15px;
 }
 
-.container .blog-container .reader-blog-container .blog-info .blog-icons svg {
+.reader-container .blog-container .reader-blog-container .blog-info .blog-icons svg {
   -webkit-transform: scale(0.8) translateY(7px);
           transform: scale(0.8) translateY(7px);
   cursor: pointer;
@@ -95,23 +105,23 @@ body .App {
   transition: 0.2s ease-in-out;
 }
 
-.container .blog-container .reader-blog-container .blog-info .blog-icons svg:active {
+.reader-container .blog-container .reader-blog-container .blog-info .blog-icons svg:active {
   -webkit-transform: scale(0.7) translateY(7px);
           transform: scale(0.7) translateY(7px);
 }
 
-.container .blog-container .reader-blog-container .blog-info .blog-icons .filled-heart svg {
+.reader-container .blog-container .reader-blog-container .blog-info .blog-icons .filled-heart svg {
   fill: #dd3b40;
 }
 
-.container .blog-container .reader-blog-container .blog-header {
+.reader-container .blog-container .reader-blog-container .blog-header {
   margin-top: 20px;
   margin-bottom: 20px;
   width: 100%;
   height: 300px;
 }
 
-.container .blog-container .reader-blog-container .blog-header img {
+.reader-container .blog-container .reader-blog-container .blog-header img {
   width: 100%;
   height: 100%;
   -o-object-fit: cover;
@@ -119,7 +129,11 @@ body .App {
   border-radius: 7px;
 }
 
-.container .blog-container .reader-blog-container .ql-container {
+.reader-container .blog-container .reader-blog-container .ql-container {
   font-size: 1.1rem;
+}
+
+.reader-container-dark svg {
+  fill: #becfe2;
 }
 /*# sourceMappingURL=reader.css.map */

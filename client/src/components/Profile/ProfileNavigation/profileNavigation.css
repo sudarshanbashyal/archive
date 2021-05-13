@@ -8,6 +8,12 @@ body {
 
 body .App {
   position: relative;
+  min-height: 100vh;
+}
+
+body .App-dark {
+  background-color: #151f2e;
+  color: #becfe2;
 }
 
 .profile-navigation ul {
@@ -42,5 +48,9 @@ body .App {
 .profile-navigation ul .active-navigation {
   border-bottom: 2px solid #dd3b40;
   color: #dd3b40;
+}
+
+.profile-navigation-dark ul li {
+  color: #becfe2;
 }
 /*# sourceMappingURL=profileNavigation.css.map */

@@ -27,6 +27,10 @@ const Comments = ({ blogId, blogAuthorId }: readerCommentInterface) => {
     const [blogComments, setBlogComments] = useState<commentInterface[]>([]);
 
     const userState = useSelector((state: RootStore) => state.client);
+    const applicationState = useSelector(
+        (state: RootStore) => state.application
+    );
+
     const accessToken = userState.client?.accessToken;
 
     const submitComment = async (e: any) => {
@@ -114,7 +118,15 @@ const Comments = ({ blogId, blogAuthorId }: readerCommentInterface) => {
     }, []);
 
     return (
-        <div className="comments-container ">
+        <div
+            className={
+                'comments-container ' +
+                (applicationState &&
+                applicationState.applicationTheme === 'dark'
+                    ? 'comments-container-dark'
+                    : '')
+            }
+        >
             <div className="comment-box">
                 <form onSubmit={submitComment}>
                     <input

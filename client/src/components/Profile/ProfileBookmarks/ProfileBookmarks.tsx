@@ -16,6 +16,7 @@ export interface bookmarkBlogInterface {
 
 const ProfileBookmarks = () => {
     const userState = useSelector((state: RootStore) => state.client);
+
     const [bookmarkBlogs, setBookmarkBlogs] = useState<bookmarkBlogInterface[]>(
         []
     );

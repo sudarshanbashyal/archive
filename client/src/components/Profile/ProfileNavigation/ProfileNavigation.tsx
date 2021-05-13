@@ -1,6 +1,8 @@
 import React from 'react';
 import './profileNavigation.css';
 import { ProfileNavigationType } from '../Profile';
+import { useSelector } from 'react-redux';
+import { RootStore } from 'src/redux/store';
 
 const ProfileNavigation = ({
     currentProfileNavigation,
@@ -15,8 +17,20 @@ const ProfileNavigation = ({
         setCurrentProfileNavigation(e.target.id);
     };
 
+    const applicationState = useSelector(
+        (state: RootStore) => state.application
+    );
+
     return (
-        <div className="profile-navigation">
+        <div
+            className={
+                'profile-navigation ' +
+                (applicationState &&
+                applicationState.applicationTheme === 'dark'
+                    ? 'profile-navigation-dark'
+                    : '')
+            }
+        >
             <ul>
                 <li
                     className={

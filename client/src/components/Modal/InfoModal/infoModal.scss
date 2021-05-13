@@ -118,3 +118,28 @@
         }
     }
 }
+
+.info-modal-dark {
+    background-color: $blue-dark;
+    color: $dark-font;
+
+    svg {
+        fill: $dark-font;
+    }
+
+    .users-container {
+        .follow-btn {
+            color: $dark-font;
+        }
+    }
+
+    .topics-container {
+        .follow-btn {
+            color: $dark-font;
+        }
+    }
+
+    .active-topic {
+        border-bottom: 2px solid $dark-font !important;
+    }
+}

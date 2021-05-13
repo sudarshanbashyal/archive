@@ -8,6 +8,12 @@ body {
 
 body .App {
   position: relative;
+  min-height: 100vh;
+}
+
+body .App-dark {
+  background-color: #151f2e;
+  color: #becfe2;
 }
 
 .recommendations {
@@ -72,5 +78,14 @@ body .App {
 
 .recommendations .users .user:last-child {
   margin-bottom: 0px;
+}
+
+.recommendations-dark {
+  color: #becfe2;
+  border-left-color: #becfe2;
+}
+
+.recommendations-dark .follow-btn {
+  color: #becfe2;
 }
 /*# sourceMappingURL=recommendations.css.map */

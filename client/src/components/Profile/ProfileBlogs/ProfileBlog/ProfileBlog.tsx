@@ -10,8 +10,8 @@ import {
 } from 'src/assets/SVGs';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootStore } from 'src/redux/store';
-import { spawn } from 'child_process';
 import { toggleBookmark } from 'src/redux/Actions/userActions';
+import { Link } from 'react-router-dom';
 
 const ProfileBlog = ({
     blogId,
@@ -23,6 +23,9 @@ const ProfileBlog = ({
 }: ProfileBlogType) => {
     const [blogLikes, setBlogLikes] = useState<any>(likes);
     const userState = useSelector((state: RootStore) => state.client);
+    const applicationState = useSelector(
+        (state: RootStore) => state.application
+    );
 
     const dispatch = useDispatch();
 
@@ -52,9 +55,20 @@ const ProfileBlog = ({
     };
 
     return (
-        <div className="p-blog">
+        <div
+            className={
+                'p-blog ' +
+                (applicationState &&
+                applicationState.applicationTheme === 'dark'
+                    ? 'p-blog-dark'
+                    : '')
+            }
+        >
             <strong>{topicTitle}</strong>
-            <h2>{title}</h2>
+            <Link className="link" to={`/blog/${blogId}`}>
+                <h2>{title}</h2>
+            </Link>
+
             <div className="blog-header-image">
                 <img src={headerImage} alt="" />
             </div>

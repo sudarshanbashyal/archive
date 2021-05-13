@@ -4,6 +4,7 @@ $red-dark: #dd3b40;
 $green-primary: #4a6163;
 $blue-dark: #151f2e;
 $blue-light: #222e40;
+$dark-font: #becfe2;
 
 body {
     margin: 0;
@@ -13,5 +14,11 @@ body {
 
     .App {
         position: relative;
+        min-height: 100vh;
+    }
+
+    .App-dark {
+        background-color: $blue-dark;
+        color: $dark-font;
     }
 }

@@ -156,3 +156,35 @@
         }
     }
 }
+
+.profile-settings-dark {
+    .setting-section {
+        border-bottom: 1px solid $blue-light !important;
+    }
+
+    form {
+        input,
+        textarea {
+            background-color: $blue-light !important;
+            color: white;
+
+            &::placeholder {
+                color: lightgray;
+            }
+        }
+    }
+
+    .themes {
+        .light-theme {
+            background-color: white;
+            color: black;
+        }
+
+        .dark-theme {
+            border: 1px solid $dark-font !important;
+        }
+
+        .high-contract {
+        }
+    }
+}

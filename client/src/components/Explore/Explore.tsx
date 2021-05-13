@@ -16,6 +16,9 @@ interface topicInterface {
 
 const Explore = () => {
     const userState = useSelector((state: RootStore) => state.client);
+    const applicationState = useSelector(
+        (state: RootStore) => state.application
+    );
     const dispatch = useDispatch();
 
     // array of blog topics that can be selected
@@ -76,7 +79,15 @@ const Explore = () => {
     }, [currentTopic, blogCategory, categoryTimeline]);
 
     return (
-        <div className="explore">
+        <div
+            className={
+                'explore ' +
+                (applicationState &&
+                applicationState.applicationTheme === 'dark'
+                    ? 'explore-dark'
+                    : '')
+            }
+        >
             <div className="topics-showcase">
                 {topics.map(topic => (
                     <ExploreTopics

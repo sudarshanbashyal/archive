@@ -174,3 +174,44 @@
         }
     }
 }
+
+.comments-container-dark {
+    background-color: $blue-dark;
+
+    svg {
+        fill: $dark-font;
+    }
+
+    .comment-box input {
+        background-color: $blue-dark;
+        color: white;
+    }
+
+    .comment {
+        border-bottom: 1px solid $dark-font;
+
+        .comment-content {
+            color: white;
+        }
+
+        .author-icon svg {
+            fill: $dark-font !important;
+        }
+
+        .reply-textfield {
+            input {
+                background-color: $blue-dark;
+                color: white;
+            }
+
+            .reply-submit-button {
+                color: $dark-font;
+                border-color: $dark-font !important;
+            }
+
+            .cancel-button {
+                color: $dark-font;
+            }
+        }
+    }
+}

@@ -8,6 +8,12 @@ body {
 
 body .App {
   position: relative;
+  min-height: 100vh;
+}
+
+body .App-dark {
+  background-color: #151f2e;
+  color: #becfe2;
 }
 
 .navbar {
@@ -94,5 +100,19 @@ body .App {
   top: 40px;
   right: 0;
   z-index: 99;
+}
+
+.navbar-dark {
+  background-color: #151f2e;
+  color: #becfe2;
+}
+
+.navbar-dark svg {
+  fill: #becfe2;
+}
+
+.navbar-dark .navbar-dropdown {
+  background-color: #151f2e;
+  color: #becfe2;
 }
 /*# sourceMappingURL=navbar.css.map */

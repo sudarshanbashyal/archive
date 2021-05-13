@@ -8,6 +8,12 @@ body {
 
 body .App {
   position: relative;
+  min-height: 100vh;
+}
+
+body .App-dark {
+  background-color: #151f2e;
+  color: #becfe2;
 }
 
 .landing {
@@ -18,6 +24,8 @@ body .App {
   display: flex;
   position: relative;
   overflow: hidden;
+  background-color: white;
+  color: black;
 }
 
 .landing .image-section {

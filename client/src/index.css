@@ -8,5 +8,11 @@ body {
 
 body .App {
   position: relative;
+  min-height: 100vh;
+}
+
+body .App-dark {
+  background-color: #151f2e;
+  color: #becfe2;
 }
 /*# sourceMappingURL=index.css.map */

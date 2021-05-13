@@ -8,6 +8,12 @@ body {
 
 body .App {
   position: relative;
+  min-height: 100vh;
+}
+
+body .App-dark {
+  background-color: #151f2e;
+  color: #becfe2;
 }
 
 .drafts {
@@ -18,11 +24,43 @@ body .App {
   grid-column-gap: 50px;
 }
 
-.drafts .draft h2 {
+.drafts .link {
+  color: black;
+  text-decoration: none;
+}
+
+.drafts .draft {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.drafts .draft .index {
+  margin: 0;
+  margin-right: 15px;
+  font-size: 3rem;
+  font-weight: 800;
+  color: lightgray;
+}
+
+.drafts .draft .draft-info {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.drafts .draft .draft-info h2 {
   cursor: pointer;
 }
 
-.drafts .draft .last-modified {
+.drafts .draft .draft-info .last-modified {
   margin-top: -10px;
+}
+
+.drafts-dark .link {
+  color: #becfe2;
 }
 /*# sourceMappingURL=profileDrafts.css.map */

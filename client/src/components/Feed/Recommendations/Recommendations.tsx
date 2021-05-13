@@ -1,7 +1,13 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { RootStore } from 'src/redux/store';
 import './recommendations.css';
 
 const Recommendations = () => {
+    const applicationState = useSelector(
+        (state: RootStore) => state.application
+    );
+
     const userArray = [
         {
             userName: 'Carson Turner',
@@ -20,7 +26,15 @@ const Recommendations = () => {
     ];
 
     return (
-        <div className="recommendations">
+        <div
+            className={
+                'recommendations ' +
+                (applicationState &&
+                applicationState.applicationTheme === 'dark'
+                    ? 'recommendations-dark'
+                    : '')
+            }
+        >
             <h2>people you might want to follow</h2>
 
             <div className="users">

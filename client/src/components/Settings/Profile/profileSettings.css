@@ -8,6 +8,12 @@ body {
 
 body .App {
   position: relative;
+  min-height: 100vh;
+}
+
+body .App-dark {
+  background-color: #151f2e;
+  color: #becfe2;
 }
 
 .profile-settings .setting-section {
@@ -166,5 +172,44 @@ body .App {
   cursor: pointer;
   background: -webkit-gradient(linear, left top, right top, from(#ffc94b), to(#f17a7e));
   background: linear-gradient(90deg, #ffc94b 0%, #f17a7e 100%);
+}
+
+.profile-settings-dark .setting-section {
+  border-bottom: 1px solid #222e40 !important;
+}
+
+.profile-settings-dark form input,
+.profile-settings-dark form textarea {
+  background-color: #222e40 !important;
+  color: white;
+}
+
+.profile-settings-dark form input::-webkit-input-placeholder,
+.profile-settings-dark form textarea::-webkit-input-placeholder {
+  color: lightgray;
+}
+
+.profile-settings-dark form input:-ms-input-placeholder,
+.profile-settings-dark form textarea:-ms-input-placeholder {
+  color: lightgray;
+}
+
+.profile-settings-dark form input::-ms-input-placeholder,
+.profile-settings-dark form textarea::-ms-input-placeholder {
+  color: lightgray;
+}
+
+.profile-settings-dark form input::placeholder,
+.profile-settings-dark form textarea::placeholder {
+  color: lightgray;
+}
+
+.profile-settings-dark .themes .light-theme {
+  background-color: white;
+  color: black;
+}
+
+.profile-settings-dark .themes .dark-theme {
+  border: 1px solid #becfe2 !important;
 }
 /*# sourceMappingURL=profileSettings.css.map */

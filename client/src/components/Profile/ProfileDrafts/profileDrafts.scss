@@ -5,13 +5,39 @@
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     grid-column-gap: 50px;
 
+    .link {
+        color: black;
+        text-decoration: none;
+    }
+
     .draft {
-        h2 {
-            cursor: pointer;
+        display: flex;
+        align-items: center;
+
+        .index {
+            margin: 0;
+            margin-right: 15px;
+            font-size: 3rem;
+            font-weight: 800;
+            color: lightgray;
         }
 
-        .last-modified {
-            margin-top: -10px;
+        .draft-info {
+            flex: 1;
+
+            h2 {
+                cursor: pointer;
+            }
+
+            .last-modified {
+                margin-top: -10px;
+            }
         }
+    }
+}
+
+.drafts-dark {
+    .link {
+        color: $dark-font;
     }
 }

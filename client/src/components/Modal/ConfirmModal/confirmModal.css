@@ -8,6 +8,12 @@ body {
 
 body .App {
   position: relative;
+  min-height: 100vh;
+}
+
+body .App-dark {
+  background-color: #151f2e;
+  color: #becfe2;
 }
 
 body {
@@ -20,6 +26,12 @@ body {
 
 body .App {
   position: relative;
+  min-height: 100vh;
+}
+
+body .App-dark {
+  background-color: #151f2e;
+  color: #becfe2;
 }
 
 .logout-modal, .confirm-modal {
@@ -83,11 +95,28 @@ body .App {
   border-radius: 7px;
 }
 
+.logout-modal-dark {
+  background-color: #151f2e;
+}
+
+.logout-modal-dark .cancel-btn, .logout-modal-dark .logout-modal .content-section .logout-btn, .logout-modal .content-section .logout-modal-dark .logout-btn, .logout-modal-dark .confirm-modal .content-section .logout-btn, .confirm-modal .content-section .logout-modal-dark .logout-btn, .logout-modal-dark .confirm-modal .content-section .confirm-btn, .confirm-modal .content-section .logout-modal-dark .confirm-btn {
+  color: #becfe2;
+}
+
 .confirm-modal .content-section {
   padding: 1.5rem 1rem;
 }
 
 .confirm-modal .content-section h3 {
   margin-bottom: 30px;
+}
+
+.confirm-modal-dark {
+  background-color: #151f2e;
+  color: #becfe2;
+}
+
+.confirm-modal-dark svg {
+  fill: #becfe2;
 }
 /*# sourceMappingURL=confirmModal.css.map */

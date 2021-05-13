@@ -55,3 +55,12 @@
         }
     }
 }
+
+.recommendations-dark {
+    color: $dark-font;
+    border-left-color: $dark-font;
+
+    .follow-btn {
+        color: $dark-font;
+    }
+}

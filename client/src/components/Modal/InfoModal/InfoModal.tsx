@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { closeIcon, loadingAnimation } from 'src/assets/SVGs';
 import { closeModal } from 'src/redux/Actions/applicationActions';
+import { RootStore } from 'src/redux/store';
 import './infoModal.css';
 import TopicsInfoContainer from './TopicsInfoContainer';
 import UsersInfoContainer from './UsersInfoContainer';
@@ -21,6 +22,10 @@ export interface infoTopicInterface {
 
 const InfoModal = ({ infoType }: { infoType: String }) => {
     const currentURL = window.location.href;
+
+    const applicationState = useSelector(
+        (state: RootStore) => state.application
+    );
 
     const profileId = +currentURL.charAt(currentURL.length - 1);
     const infoEndPoint =
@@ -91,7 +96,15 @@ const InfoModal = ({ infoType }: { infoType: String }) => {
     }, [currentInfo]);
 
     return (
-        <div className="info-modal">
+        <div
+            className={
+                'info-modal ' +
+                (applicationState &&
+                applicationState.applicationTheme === 'dark'
+                    ? 'info-modal-dark'
+                    : '')
+            }
+        >
             <span
                 className="close-modal"
                 onClick={() => {

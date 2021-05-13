@@ -8,13 +8,19 @@ body {
 
 body .App {
   position: relative;
+  min-height: 100vh;
+}
+
+body .App-dark {
+  background-color: #151f2e;
+  color: #becfe2;
 }
 
 .settings {
   width: 950px;
   margin: auto;
   margin-top: 70px;
-  margin-bottom: 70px;
+  padding-bottom: 70px;
 }
 
 .settings h1 {
@@ -70,5 +76,13 @@ body .App {
 
 .settings .settings-container .setting-content h2 {
   margin: 0;
+}
+
+.settings-dark .inactive-link {
+  color: #becfe2 !important;
+}
+
+.settings-dark .settings-container .setting-content {
+  border: 1px solid #222e40;
 }
 /*# sourceMappingURL=settings.css.map */

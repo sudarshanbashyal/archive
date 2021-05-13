@@ -8,6 +8,12 @@ body {
 
 body .App {
   position: relative;
+  min-height: 100vh;
+}
+
+body .App-dark {
+  background-color: #151f2e;
+  color: #becfe2;
 }
 
 .explore {
@@ -124,5 +130,31 @@ body .App {
   -ms-grid-columns: (minmax(300px, 1fr))[auto-fit];
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   grid-column-gap: 50px;
+}
+
+.explore-dark {
+  color: #becfe2;
+}
+
+.explore-dark svg {
+  fill: #becfe2;
+}
+
+.explore-dark .topics-showcase {
+  border-bottom-color: #becfe2;
+}
+
+.explore-dark .function-btn, .explore-dark .explore .explore-function .follow-topic-btn, .explore .explore-function .explore-dark .follow-topic-btn, .explore-dark .follow-topic-btn {
+  color: #becfe2;
+  border: 1px solid #becfe2 !important;
+}
+
+.explore-dark .selected-function-btn {
+  color: black;
+  border: 1px solid #ffc94b !important;
+}
+
+.explore-dark .selected-function-btn svg {
+  fill: black;
 }
 /*# sourceMappingURL=explore.css.map */

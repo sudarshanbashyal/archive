@@ -38,7 +38,15 @@ const Navbar = () => {
     ];
 
     return (
-        <div className="navbar">
+        <div
+            className={
+                'navbar ' +
+                (applicationState &&
+                applicationState.applicationTheme === 'dark'
+                    ? 'navbar-dark'
+                    : '')
+            }
+        >
             <div className="nav-container">
                 <div className="logo">
                     <Link style={{ textDecoration: 'none' }} to="/">

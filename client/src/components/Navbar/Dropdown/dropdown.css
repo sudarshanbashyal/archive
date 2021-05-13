@@ -8,6 +8,12 @@ body {
 
 body .App {
   position: relative;
+  min-height: 100vh;
+}
+
+body .App-dark {
+  background-color: #151f2e;
+  color: #becfe2;
 }
 
 .dropdown {
@@ -17,6 +23,11 @@ body .App {
   border-radius: 7px;
   -webkit-box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1);
           box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown .link {
+  color: black;
+  text-decoration: none;
 }
 
 .dropdown .profile {
@@ -64,5 +75,20 @@ body .App {
 
 .dropdown .sign-out:hover {
   font-weight: 600;
+}
+
+.dropdown-dark {
+  background-color: #151f2e;
+  color: #becfe2;
+  -webkit-box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1);
+          box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-dark .link {
+  color: #becfe2;
+}
+
+.dropdown-dark .sign-out {
+  color: #becfe2;
 }
 /*# sourceMappingURL=dropdown.css.map */

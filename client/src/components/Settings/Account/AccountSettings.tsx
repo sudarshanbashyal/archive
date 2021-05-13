@@ -6,9 +6,13 @@ import './accountSettings.css';
 
 const AccountSettings = () => {
     const userState = useSelector((state: RootStore) => state.client);
+    const applicationState = useSelector(
+        (state: RootStore) => state.application
+    );
     const dispatch = useDispatch();
 
-    const emailFormat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    const emailFormat =
+        /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
     const [accountData, setAccountData] = useState({
         email: userState.client?.profile.email,
         currentPassword: '',
@@ -74,7 +78,15 @@ const AccountSettings = () => {
     };
 
     return (
-        <div className="account-setting">
+        <div
+            className={
+                'account-setting ' +
+                (applicationState &&
+                applicationState.applicationTheme === 'dark'
+                    ? 'account-setting-dark'
+                    : '')
+            }
+        >
             <div className="setting-section">
                 <h2 className="section-title">account</h2>
                 <form>

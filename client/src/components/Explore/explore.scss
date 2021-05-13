@@ -98,3 +98,33 @@
         grid-column-gap: 50px;
     }
 }
+
+.explore-dark {
+    color: $dark-font;
+
+    svg {
+        fill: $dark-font;
+    }
+
+    .topics-showcase {
+        border-bottom-color: $dark-font;
+    }
+
+    .function-btn {
+        color: $dark-font;
+        border: 1px solid $dark-font !important;
+    }
+
+    .follow-topic-btn {
+        @extend .function-btn;
+    }
+
+    .selected-function-btn {
+        color: black;
+        border: 1px solid $yellow-primary !important;
+
+        svg {
+            fill: black;
+        }
+    }
+}

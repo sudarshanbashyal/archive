@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { changeTheme } from 'src/redux/Actions/applicationActions';
 import {
     updateUserBannerImage,
     updateUserProfile,
@@ -11,6 +12,10 @@ import './profileSettings.css';
 const ProfileSettings = () => {
     const userState = useSelector((state: RootStore) => state.client);
     const dispatch = useDispatch();
+
+    const applicationState = useSelector(
+        (state: RootStore) => state.application
+    );
 
     // extract the profile information from redux state
     const accessToken = userState && userState.client?.accessToken;
@@ -46,12 +51,10 @@ const ProfileSettings = () => {
     >(profile.headerImage);
 
     // image preview error states
-    const [profileImageError, setProfileImageError] = useState<
-        string | null | undefined
-    >(null);
-    const [bannerImageError, setBannerImageError] = useState<
-        string | null | undefined
-    >(null);
+    const [profileImageError, setProfileImageError] =
+        useState<string | null | undefined>(null);
+    const [bannerImageError, setBannerImageError] =
+        useState<string | null | undefined>(null);
 
     // input file references
     const profileUpload = useRef<any>(null);
@@ -110,7 +113,15 @@ const ProfileSettings = () => {
     };
 
     return (
-        <div className="profile-settings">
+        <div
+            className={
+                'profile-settings ' +
+                (applicationState &&
+                applicationState.applicationTheme === 'dark'
+                    ? 'profile-settings-dark'
+                    : '')
+            }
+        >
             <div className="setting-section">
                 <h2 className="section-title">theme</h2>
                 <p className="section-description">
@@ -119,14 +130,21 @@ const ProfileSettings = () => {
                 </p>
 
                 <div className="themes">
-                    <div className="theme light-theme">
+                    <div
+                        className="theme light-theme"
+                        onClick={() => {
+                            dispatch(changeTheme('light'));
+                        }}
+                    >
                         <span>Light</span>
                     </div>
-                    <div className="theme dark-theme">
+                    <div
+                        onClick={() => {
+                            dispatch(changeTheme('dark'));
+                        }}
+                        className="theme dark-theme"
+                    >
                         <span>Dark</span>
-                    </div>
-                    <div className="theme high-contrast">
-                        <span>High Contrast</span>
                     </div>
                 </div>
             </div>

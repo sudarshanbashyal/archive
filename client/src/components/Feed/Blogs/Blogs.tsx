@@ -9,6 +9,7 @@ import './blogs.css';
 
 const Blogs = () => {
     const userState = useSelector((state: RootStore) => state.client);
+
     const [loading, setLoading] = useState<boolean>(false);
 
     const [feedBlogs, setFeedBlogs] = useState<bookmarkBlogInterface[]>([]);

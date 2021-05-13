@@ -3,6 +3,12 @@
 .text-blog {
     margin-bottom: 35px;
 
+    .link {
+        color: black;
+        text-decoration: none;
+        font-family: 'Playfair Display', serif;
+    }
+
     .blog-info {
         display: flex;
         align-items: center;
@@ -25,6 +31,7 @@
         .author-name {
             margin-right: 15px;
             cursor: pointer;
+            font-family: 'Source Sans Pro';
         }
 
         .bookmark-icon {
@@ -53,5 +60,17 @@
         .bookmark-icon {
             display: block;
         }
+    }
+}
+
+.text-blog-dark {
+    color: $dark-font;
+
+    .link {
+        color: $dark-font;
+    }
+
+    svg {
+        fill: $dark-font;
     }
 }

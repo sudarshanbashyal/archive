@@ -8,11 +8,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootStore } from './redux/store';
 import { refreshToken } from './redux/Actions/userActions';
 import { ToastContainer } from 'react-toastify';
+import { changeTheme } from './redux/Actions/applicationActions';
 
 const App = () => {
     const dispatch = useDispatch();
     const [userLogged, setUserLogged] = useState(
         localStorage.getItem('userLoggedIn')
+    );
+
+    const [applicationTheme, setApplicationTheme] = useState<string | null>(
+        localStorage.getItem('applicationTheme')
     );
 
     // get user from the state
@@ -29,9 +34,24 @@ const App = () => {
     }, []);
 
     //
+    useEffect(() => {
+        if (applicationTheme) {
+            dispatch(changeTheme(applicationTheme));
+        }
+    }, []);
+
+    //
 
     return (
-        <div className="App">
+        <div
+            className={
+                'App ' +
+                (applicationState &&
+                applicationState.applicationTheme === 'dark'
+                    ? 'App-dark'
+                    : '')
+            }
+        >
             {/* Render Home page if the user is in the store */}
             {userState.loading ? null : userState.client?.profile ? (
                 <Home />

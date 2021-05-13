@@ -4,7 +4,7 @@
     width: 950px;
     margin: auto;
     margin-top: 70px;
-    margin-bottom: 70px;
+    padding-bottom: 70px;
 
     h1 {
         margin-bottom: 50px;
@@ -51,5 +51,15 @@
                 margin: 0;
             }
         }
+    }
+}
+
+.settings-dark {
+    .inactive-link {
+        color: $dark-font !important;
+    }
+
+    .settings-container .setting-content {
+        border: 1px solid $blue-light;
     }
 }

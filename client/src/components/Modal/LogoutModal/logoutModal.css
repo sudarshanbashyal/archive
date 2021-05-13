@@ -8,6 +8,12 @@ body {
 
 body .App {
   position: relative;
+  min-height: 100vh;
+}
+
+body .App-dark {
+  background-color: #151f2e;
+  color: #becfe2;
 }
 
 .logout-modal {
@@ -69,5 +75,13 @@ body .App {
   background: -webkit-gradient(linear, left top, right top, from(#ffc94b), to(#f17a7e));
   background: linear-gradient(90deg, #ffc94b 0%, #f17a7e 100%);
   border-radius: 7px;
+}
+
+.logout-modal-dark {
+  background-color: #151f2e;
+}
+
+.logout-modal-dark .cancel-btn, .logout-modal-dark .logout-modal .content-section .logout-btn, .logout-modal .content-section .logout-modal-dark .logout-btn {
+  color: #becfe2;
 }
 /*# sourceMappingURL=logoutModal.css.map */

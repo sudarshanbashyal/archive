@@ -1,18 +1,30 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { logoutIcon } from 'src/assets/SVGs';
 import { closeModal } from 'src/redux/Actions/applicationActions';
 import { logOutUser } from 'src/redux/Actions/userActions';
+import { RootStore } from 'src/redux/store';
 import './logoutModal.css';
 
 const LogoutModal = () => {
     const dispatch = useDispatch();
+    const applicationState = useSelector(
+        (state: RootStore) => state.application
+    );
 
     const history = useHistory();
 
     return (
-        <div className="logout-modal">
+        <div
+            className={
+                'logout-modal ' +
+                (applicationState &&
+                applicationState.applicationTheme === 'dark'
+                    ? 'logout-modal-dark'
+                    : '')
+            }
+        >
             <div className="icon-section">{logoutIcon}</div>
 
             <div className="content-section">

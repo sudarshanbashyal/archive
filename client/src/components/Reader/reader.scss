@@ -1,6 +1,10 @@
 @import '../../index.scss';
 
-.container {
+.loading-animation {
+    margin-top: 30vh;
+}
+
+.reader-container {
     width: 1200px;
     margin: auto;
     margin-top: 40px;
@@ -105,5 +109,11 @@
                 font-size: 1.1rem;
             }
         }
+    }
+}
+
+.reader-container-dark {
+    svg {
+        fill: $dark-font;
     }
 }

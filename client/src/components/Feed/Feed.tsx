@@ -7,6 +7,10 @@ import Recommendations from './Recommendations/Recommendations';
 
 const Feed = () => {
     const userState = useSelector((state: RootStore) => state.client);
+    const applicationState = useSelector(
+        (state: RootStore) => state.application
+    );
+
     const currentTime = new Date().getHours();
     console.log(currentTime);
 
@@ -17,7 +21,15 @@ const Feed = () => {
     else greeting = 'Night,';
 
     return (
-        <div className="outer-container">
+        <div
+            className={
+                'outer-container ' +
+                (applicationState &&
+                applicationState.applicationTheme === 'dark'
+                    ? 'outer-container-dark'
+                    : '')
+            }
+        >
             <div className="feed">
                 <div className="header">
                     <h1>

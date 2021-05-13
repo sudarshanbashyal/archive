@@ -8,6 +8,12 @@ body {
 
 body .App {
   position: relative;
+  min-height: 100vh;
+}
+
+body .App-dark {
+  background-color: #151f2e;
+  color: #becfe2;
 }
 
 .editor-page {
@@ -126,7 +132,13 @@ body .App {
   background: linear-gradient(90deg, #ffc94b 0%, #f17a7e 100%);
 }
 
-.sex-container {
-  text-align: center;
+.editor-page-dark .story-title {
+  background-color: #151f2e;
+  color: white;
+}
+
+.editor-page-dark .draft-btn, .editor-page-dark .editor-page .Wysiwyg .editor-controls .publish-btn, .editor-page .Wysiwyg .editor-controls .editor-page-dark .publish-btn {
+  border-color: #becfe2 !important;
+  color: #becfe2;
 }
 /*# sourceMappingURL=editor.css.map */

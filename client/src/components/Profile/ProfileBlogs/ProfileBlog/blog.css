@@ -8,6 +8,12 @@ body {
 
 body .App {
   position: relative;
+  min-height: 100vh;
+}
+
+body .App-dark {
+  background-color: #151f2e;
+  color: #becfe2;
 }
 
 .p-blog {
@@ -73,5 +79,18 @@ body .App {
 
 .p-blog .blog-info .published-date {
   font-weight: 600;
+}
+
+.p-blog .link {
+  color: black;
+  text-decoration: none;
+}
+
+.p-blog-dark .link {
+  color: #becfe2;
+}
+
+.p-blog-dark svg {
+  fill: #becfe2;
 }
 /*# sourceMappingURL=blog.css.map */

@@ -103,6 +103,14 @@
     }
 }
 
-.sex-container {
-    text-align: center;
+.editor-page-dark {
+    .story-title {
+        background-color: $blue-dark;
+        color: white;
+    }
+
+    .draft-btn {
+        border-color: $dark-font !important;
+        color: $dark-font;
+    }
 }

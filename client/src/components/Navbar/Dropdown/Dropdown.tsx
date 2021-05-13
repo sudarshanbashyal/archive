@@ -6,7 +6,6 @@ import { RootStore } from 'src/redux/store';
 import './dropdown.css';
 
 const Dropdown = ({
-    dropdown,
     setDropdown,
 }: {
     dropdown: boolean;
@@ -15,6 +14,9 @@ const Dropdown = ({
     //
     const dispatch = useDispatch();
     const userState = useSelector((state: RootStore) => state.client);
+    const applicationState = useSelector(
+        (state: RootStore) => state.application
+    );
 
     const dropdownLinks = [
         {
@@ -28,7 +30,13 @@ const Dropdown = ({
 
     return (
         <div
-            className="dropdown"
+            className={
+                'dropdown ' +
+                (applicationState &&
+                applicationState.applicationTheme === 'dark'
+                    ? 'dropdown-dark'
+                    : '')
+            }
             onMouseEnter={() => {
                 setDropdown(true);
             }}
@@ -53,10 +61,7 @@ const Dropdown = ({
             <ul className="dropdown-links">
                 {dropdownLinks.map(link => (
                     <li key={link.title}>
-                        <Link
-                            style={{ textDecoration: 'none', color: 'black' }}
-                            to={link.to}
-                        >
+                        <Link className="link" to={link.to}>
                             {link.title}
                         </Link>
                     </li>

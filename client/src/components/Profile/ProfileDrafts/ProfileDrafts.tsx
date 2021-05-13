@@ -16,6 +16,9 @@ interface draftInterface {
 
 const ProfileDrafts = () => {
     const userState = useSelector((state: RootStore) => state.client);
+    const applicationState = useSelector(
+        (state: RootStore) => state.application
+    );
 
     const [loading, setLoading] = useState<boolean>(false);
     const [draftBlogs, setDraftBlogs] = useState<draftInterface[]>([]);
@@ -44,27 +47,40 @@ const ProfileDrafts = () => {
     return loading ? (
         loadingAnimation
     ) : (
-        <div className="drafts">
+        <div
+            className={
+                'drafts ' +
+                (applicationState &&
+                applicationState.applicationTheme === 'dark'
+                    ? 'drafts-dark'
+                    : '')
+            }
+        >
             {draftBlogs.length === 0 ? (
                 <h2>You do not have any drafts.</h2>
             ) : (
-                draftBlogs.map(draft => (
+                draftBlogs.map((draft, index) => (
                     <div key={draft.draftId} className="draft">
-                        <Link
-                            style={{
-                                textDecoration: 'none',
-                                color: 'black',
-                            }}
-                            to={`/editor/${draft.draftId}`}
-                        >
-                            <h2>{draft.draftTitle}</h2>
-                        </Link>
+                        <h2 className="index">
+                            {index < 10 ? '0' + (index + 1) : index}
+                        </h2>
 
-                        <div className="last-modified">
-                            Last Modified:{' '}
-                            <strong>
-                                {moment(draft.lastModified).format('MMM Do')}
-                            </strong>
+                        <div className="draft-info">
+                            <Link
+                                className="link"
+                                to={`/editor/${draft.draftId}`}
+                            >
+                                <h2>{draft.draftTitle}</h2>
+                            </Link>
+
+                            <div className="last-modified">
+                                Last Modified:{' '}
+                                <strong>
+                                    {moment(draft.lastModified).format(
+                                        'MMM Do'
+                                    )}
+                                </strong>
+                            </div>
                         </div>
                     </div>
                 ))

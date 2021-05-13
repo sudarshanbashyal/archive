@@ -39,6 +39,12 @@ export const applicationReducer = (
                 },
             };
 
+        case CHANGE_THEME:
+            return {
+                ...state,
+                applicationTheme: action.payload,
+            };
+
         default:
             return state;
     }

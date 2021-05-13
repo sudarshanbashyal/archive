@@ -30,3 +30,21 @@
         margin-top: -10px;
     }
 }
+
+.account-setting-dark {
+    .setting-section {
+        border-bottom: 1px solid $blue-light !important;
+    }
+
+    form {
+        input,
+        textarea {
+            background-color: $blue-light !important;
+            color: white;
+
+            &::placeholder {
+                color: lightgray;
+            }
+        }
+    }
+}

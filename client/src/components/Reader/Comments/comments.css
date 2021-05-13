@@ -8,6 +8,12 @@ body {
 
 body .App {
   position: relative;
+  min-height: 100vh;
+}
+
+body .App-dark {
+  background-color: #151f2e;
+  color: #becfe2;
 }
 
 .comments-container {
@@ -203,5 +209,44 @@ body .App {
 .comments-container .comment .comment-body .show-all-replies .down-arrow svg {
   -webkit-transform: scale(0.5) translateY(0.8rem);
           transform: scale(0.5) translateY(0.8rem);
+}
+
+.comments-container-dark {
+  background-color: #151f2e;
+}
+
+.comments-container-dark svg {
+  fill: #becfe2;
+}
+
+.comments-container-dark .comment-box input {
+  background-color: #151f2e;
+  color: white;
+}
+
+.comments-container-dark .comment {
+  border-bottom: 1px solid #becfe2;
+}
+
+.comments-container-dark .comment .comment-content {
+  color: white;
+}
+
+.comments-container-dark .comment .author-icon svg {
+  fill: #becfe2 !important;
+}
+
+.comments-container-dark .comment .reply-textfield input {
+  background-color: #151f2e;
+  color: white;
+}
+
+.comments-container-dark .comment .reply-textfield .reply-submit-button {
+  color: #becfe2;
+  border-color: #becfe2 !important;
+}
+
+.comments-container-dark .comment .reply-textfield .cancel-button {
+  color: #becfe2;
 }
 /*# sourceMappingURL=comments.css.map */

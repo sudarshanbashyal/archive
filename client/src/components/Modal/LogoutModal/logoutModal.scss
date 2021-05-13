@@ -55,3 +55,11 @@
         }
     }
 }
+
+.logout-modal-dark {
+    background-color: $blue-dark;
+
+    .cancel-btn {
+        color: $dark-font;
+    }
+}

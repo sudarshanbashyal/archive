@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { loadingAnimation } from 'src/assets/SVGs';
 import { RootStore } from 'src/redux/store';
 import Comments from './Comments/Comments';
 import './reader.css';
@@ -23,6 +24,9 @@ const Reader = (props: any) => {
     const { id: blogId } = props.match.params;
 
     const userState = useSelector((state: RootStore) => state.client);
+    const applicationState = useSelector(
+        (state: RootStore) => state.application
+    );
 
     const [blog, setBlog] = useState<blogInterface | null>();
     const [loading, setLoading] = useState<boolean>(true);
@@ -58,11 +62,19 @@ const Reader = (props: any) => {
     }, []);
 
     return loading ? (
-        <div>Loading</div>
+        <div className="loading-animation">{loadingAnimation}</div>
     ) : !loading && !blog ? (
         <div>no blog found</div>
     ) : (
-        <div className="container">
+        <div
+            className={
+                'reader-container ' +
+                (applicationState &&
+                applicationState.applicationTheme === 'dark'
+                    ? 'reader-container-dark'
+                    : '')
+            }
+        >
             <div className="blog-container">
                 {userState &&
                 userState.client?.profile.userId !== blog?.userId ? (

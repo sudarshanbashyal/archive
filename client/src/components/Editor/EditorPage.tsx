@@ -10,6 +10,9 @@ const EditorPage = (props: any) => {
     const history = useHistory();
 
     const userState = useSelector((state: RootStore) => state.client);
+    const applicationState = useSelector(
+        (state: RootStore) => state.application
+    );
     //
     const [blogTitle, setBlogTitle] = useState<string | null>(null);
     const [blogTopics, setBlogTopics] = useState<
@@ -176,7 +179,15 @@ const EditorPage = (props: any) => {
     }, []);
 
     return (
-        <div className="editor-page">
+        <div
+            className={
+                'editor-page ' +
+                (applicationState &&
+                applicationState.applicationTheme === 'dark'
+                    ? 'editor-page-dark'
+                    : '')
+            }
+        >
             <input
                 type="text"
                 className="story-title"

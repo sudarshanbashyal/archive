@@ -8,12 +8,18 @@ body {
 
 body .App {
   position: relative;
+  min-height: 100vh;
+}
+
+body .App-dark {
+  background-color: #151f2e;
+  color: #becfe2;
 }
 
 .modal-container {
   height: 100vh;
   width: 100%;
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
   background-color: rgba(17, 17, 17, 0.5);

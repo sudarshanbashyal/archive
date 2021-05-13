@@ -3,10 +3,24 @@ import ProfileSettings from './Profile/ProfileSettings';
 import './settings.css';
 import { Link, NavLink, Route } from 'react-router-dom';
 import AccountSettings from './Account/AccountSettings';
+import { useSelector } from 'react-redux';
+import { RootStore } from 'src/redux/store';
 
 const Settings = () => {
+    const applicationState = useSelector(
+        (state: RootStore) => state.application
+    );
+
     return (
-        <div className="settings">
+        <div
+            className={
+                'settings ' +
+                (applicationState &&
+                applicationState.applicationTheme === 'dark'
+                    ? 'settings-dark'
+                    : '')
+            }
+        >
             <h1>Settings</h1>
             {/* <Link to="/settings/account">account settings</Link>|
             <Link to="/settings/">profile settings</Link> */}

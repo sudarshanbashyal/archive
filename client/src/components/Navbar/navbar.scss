@@ -66,3 +66,17 @@
         }
     }
 }
+
+.navbar-dark {
+    background-color: $blue-dark;
+    color: $dark-font;
+
+    svg {
+        fill: $dark-font;
+    }
+
+    .navbar-dropdown {
+        background-color: $blue-dark;
+        color: $dark-font;
+    }
+}

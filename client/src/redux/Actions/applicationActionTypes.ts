@@ -23,4 +23,9 @@ export interface CloseModal {
     type: typeof MODAL_CLOSE;
 }
 
-export type ApplicationDispatchType = OpenModal | CloseModal;
+export interface ChangeTheme {
+    type: typeof CHANGE_THEME;
+    payload: string;
+}
+
+export type ApplicationDispatchType = OpenModal | CloseModal | ChangeTheme;

@@ -8,6 +8,12 @@ body {
 
 body .App {
   position: relative;
+  min-height: 100vh;
+}
+
+body .App-dark {
+  background-color: #151f2e;
+  color: #becfe2;
 }
 
 .outer-container {
@@ -101,5 +107,10 @@ body .App {
   left: 0px;
   background-position-x: -500px;
   background-size: 850%;
+}
+
+.outer-container-dark {
+  background-color: #151f2e;
+  color: #becfe2;
 }
 /*# sourceMappingURL=feed.css.map */

@@ -8,10 +8,22 @@ body {
 
 body .App {
   position: relative;
+  min-height: 100vh;
+}
+
+body .App-dark {
+  background-color: #151f2e;
+  color: #becfe2;
 }
 
 .text-blog {
   margin-bottom: 35px;
+}
+
+.text-blog .link {
+  color: black;
+  text-decoration: none;
+  font-family: 'Playfair Display', serif;
 }
 
 .text-blog .blog-info {
@@ -42,6 +54,7 @@ body .App {
 .text-blog .blog-info .author-name {
   margin-right: 15px;
   cursor: pointer;
+  font-family: 'Source Sans Pro';
 }
 
 .text-blog .blog-info .bookmark-icon {
@@ -68,5 +81,17 @@ body .App {
 
 .text-blog:hover .bookmark-icon {
   display: block;
+}
+
+.text-blog-dark {
+  color: #becfe2;
+}
+
+.text-blog-dark .link {
+  color: #becfe2;
+}
+
+.text-blog-dark svg {
+  fill: #becfe2;
 }
 /*# sourceMappingURL=textBlog.css.map */

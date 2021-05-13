@@ -20,23 +20,33 @@ const TextBlog = ({
     blogTopic,
 }: bookmarkBlogInterface) => {
     const userState = useSelector((state: RootStore) => state.client);
+    const applicationState = useSelector(
+        (state: RootStore) => state.application
+    );
+
     const dispatch = useDispatch();
 
     return (
-        <div className="text-blog">
+        <div
+            className={
+                'text-blog ' +
+                (applicationState &&
+                applicationState.applicationTheme === 'dark'
+                    ? 'text-blog-dark'
+                    : '')
+            }
+        >
             <div className="blog-info">
                 <div className="author-profile-image">
                     <img src={authorProfileImage || defaultProfileImage} />
                 </div>
-                <Link
-                    style={{ color: 'black', textDecoration: 'none' }}
-                    to={`/user/${authorId}`}
-                >
+                <Link className="link" to={`/user/${authorId}`}>
                     <span className="author-name">{authorName}</span>
                 </Link>
                 |<span className="blog-topic">{blogTopic}</span>
                 {userState &&
-                userState.client?.profile.bookmarks!.includes(blogId) ? (
+                userState.client?.profile.bookmarks &&
+                userState.client?.profile.bookmarks.includes(blogId) ? (
                     <span
                         className="bookmark-icon"
                         onClick={() => {
@@ -68,10 +78,7 @@ const TextBlog = ({
                     </span>
                 )}
             </div>
-            <Link
-                style={{ color: 'black', textDecoration: 'none' }}
-                to={`/blog/${blogId}`}
-            >
+            <Link className="link" to={`/blog/${blogId}`}>
                 <p className="blog-title">{blogTitle}</p>
             </Link>
         </div>
