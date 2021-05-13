@@ -686,4 +686,41 @@ router.post('/updateBannerImage', isAuth, async (_req: PayloadType, _res) => {
     }
 });
 
+router.post('/recommendUsers', async (_req, _res) => {
+    try {
+        const { usersFollowed, userId } = _req.body;
+
+        const recommendationQuery = await db.query(
+            `
+            SELECT DISTINCT
+                u.user_id as "userId",
+                u.first_name as "firstName",
+                u.last_name as "lastName",
+                u.interest as "interest",
+                u.workplace as "workplace",
+                u.profileimage as "profileImage"
+            FROM blogs b
+            INNER JOIN users u ON u.user_id = b.creator_id
+            WHERE b.creator_id NOT IN (${usersFollowed}) AND b.creator_id!=$1 LIMIT 3;
+        `,
+            [userId]
+        );
+
+        return _res.json({
+            ok: true,
+            users: recommendationQuery.rows,
+        });
+
+        //
+    } catch (err) {
+        return _res.status(500).json({
+            ok: false,
+            error: {
+                message: 'Something went wrong.',
+                err,
+            },
+        });
+    }
+});
+
 export default router;
