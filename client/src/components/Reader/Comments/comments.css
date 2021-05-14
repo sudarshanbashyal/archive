@@ -211,6 +211,10 @@ body .App-dark {
           transform: scale(0.5) translateY(0.8rem);
 }
 
+.comments-container .comment:last-child {
+  border-bottom: none;
+}
+
 .comments-container-dark {
   background-color: #151f2e;
 }

@@ -9,21 +9,32 @@ import {
     heartStrokeIcon,
 } from 'src/assets/SVGs';
 import { RootStore } from 'src/redux/store';
+import ChildrenComment from './ChildrenComment';
 import { commentInterface } from './Comments';
 
 const Comment = ({
     comment,
-    toggleComment,
     blogAuthorId,
+    blogId,
 }: {
     comment: commentInterface;
-    toggleComment: (commentId: number, status: string) => void;
     blogAuthorId: number;
+    blogId: number;
 }) => {
     const userState = useSelector((state: RootStore) => state.client);
+    const accessToken = userState.client?.accessToken;
 
     const [replyToggled, setReplyToggled] = useState<boolean>(false);
-    const [childComments, setChildComments] = useState<number | null>(null);
+    const [replyContent, setReplyContent] = useState<string>('');
+
+    const [currentComment, setCurrentComment] =
+        useState<commentInterface>(comment);
+
+    const [childrenToggled, setChildrenToggled] = useState<boolean>(false);
+    const [childrenNumber, setChildrenNumber] = useState<number | null>(0);
+    const [childrenComments, setChildrenComments] = useState<
+        commentInterface[]
+    >([]);
 
     // find out number of replies a comment has.
     useEffect(() => {
@@ -32,10 +43,72 @@ const Comment = ({
             const data = await res.json();
 
             if (data.ok) {
-                setChildComments(+data.children);
+                setChildrenNumber(+data.children);
             }
         })();
     }, []);
+
+    useEffect(() => {
+        if (childrenToggled) {
+            (async function getChildren() {
+                const res = await fetch(
+                    `/blog/getChildrenComment/${comment.commentId}`
+                );
+                const data = await res.json();
+
+                if (data.ok) {
+                    setChildrenComments(data.comments);
+                }
+            })();
+        }
+    }, [childrenToggled]);
+
+    const toggleComment = async (status: string) => {
+        const res = await fetch(
+            `/blog/toggleComment/${comment.commentId}/${status}`,
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    authorization: `bearer ${accessToken}`,
+                },
+            }
+        );
+        const data = await res.json();
+
+        if (data.ok) {
+            setCurrentComment({
+                ...currentComment,
+                likedBy: data.likedBy,
+            });
+        }
+    };
+
+    const postReply = async () => {
+        const res = await fetch(`/blog/postComment/${blogId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                authorization: `bearer ${accessToken}`,
+            },
+            body: JSON.stringify({
+                commentContent: replyContent,
+                parentId: comment.commentId,
+            }),
+        });
+
+        const data = await res.json();
+        if (data.ok) {
+            setChildrenComments(childrenComments => [
+                data.comment,
+                ...childrenComments,
+            ]);
+            setReplyContent('');
+            setReplyToggled(false);
+            setChildrenToggled(true);
+            setChildrenNumber(childrenNumber! + 1);
+        }
+    };
 
     return (
         <div className="comment">
@@ -63,16 +136,13 @@ const Comment = ({
 
                 <div className="comment-functions">
                     <span className="like-comment">
-                        {comment.likedBy!.includes(
+                        {currentComment.likedBy!.includes(
                             userState && userState.client!.profile.userId
                         ) ? (
                             <span
                                 className="heart-filled"
                                 onClick={() => {
-                                    toggleComment(
-                                        comment.commentId,
-                                        'array_remove'
-                                    );
+                                    toggleComment('array_remove');
                                 }}
                             >
                                 {heartFilledIcon}
@@ -80,16 +150,13 @@ const Comment = ({
                         ) : (
                             <span
                                 onClick={() => {
-                                    toggleComment(
-                                        comment.commentId,
-                                        'array_append'
-                                    );
+                                    toggleComment('array_append');
                                 }}
                             >
                                 {heartStrokeIcon}
                             </span>
                         )}
-                        {comment.likedBy!.length || null}
+                        {currentComment.likedBy!.length || null}
                     </span>
 
                     <span
@@ -105,29 +172,61 @@ const Comment = ({
                 {replyToggled ? (
                     <div className="reply-textfield">
                         <input
+                            value={replyContent}
+                            onChange={e => {
+                                setReplyContent(e.target.value);
+                            }}
                             type="text"
                             name="comment-reply"
                             placeholder="Add a reply..."
                         ></input>
 
                         <div className="reply-buttons">
-                            <button className="reply-submit-button">
+                            <button
+                                className="reply-submit-button"
+                                onClick={postReply}
+                            >
                                 Reply
                             </button>
-                            <button className="cancel-button">Cancel</button>
+                            <button
+                                className="cancel-button"
+                                onClick={() => {
+                                    setReplyToggled(false);
+                                }}
+                            >
+                                Cancel
+                            </button>
                         </div>
                     </div>
                 ) : null}
 
                 {/* checking for replies */}
-                {childComments ? (
-                    <p className="show-all-replies">
-                        {childComments > 1
-                            ? `Show ${childComments} replies`
+                {childrenNumber && childrenNumber > 0 ? (
+                    <p
+                        style={{
+                            marginBottom: childrenToggled ? '30px' : '',
+                        }}
+                        onClick={() => {
+                            setChildrenToggled(!childrenToggled);
+                        }}
+                        className="show-all-replies"
+                    >
+                        {childrenNumber > 1
+                            ? `Show ${childrenNumber} replies`
                             : `Show 1 reply`}
                         <span className="down-arrow">{downArrowIcon}</span>
                     </p>
                 ) : null}
+
+                {childrenToggled
+                    ? childrenComments.map(children => (
+                          <ChildrenComment
+                              key={children.commentId}
+                              comment={children}
+                              blogAuthorId={blogAuthorId}
+                          />
+                      ))
+                    : null}
             </div>
         </div>
     );

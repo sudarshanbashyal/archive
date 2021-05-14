@@ -276,18 +276,18 @@ router.get('/getComments/:id', async (_req, _res) => {
         const commentQuery = await db.query(
             `
             SELECT 
-                u.user_id, 
-                u.profileimage, 
-                u.first_name, 
-                u.last_name, 
-                c.comment_id, 
-                c.comment_content, 
-                c.liked_by,
-                c.created_at
+                u.user_id as "userId", 
+                u.profileimage as "profileImage", 
+                u.first_name as "firstName", 
+                u.last_name as "lastName", 
+                c.comment_id as "commentId", 
+                c.comment_content as "commentContent", 
+                c.liked_by as "likedBy",
+                c.created_at as "createdAt"
             FROM users u
             INNER JOIN comments c ON c.user_id = u.user_id
             INNER JOIN blogs b ON b.blog_id = c.blog_id
-            WHERE b.blog_id = $1 AND c.parent_id IS NULL;
+            WHERE b.blog_id = $1 AND c.parent_id IS NULL ORDER BY c.created_at DESC;
         `,
             [blogId]
         );
@@ -310,6 +310,7 @@ router.post('/postComment/:id', isAuth, async (_req: PayloadType, _res) => {
         const blogId = +_req.params.id;
         const userId = _req.userId;
         const commentContent = _req.body.commentContent;
+        const parentId = _req.body.parentId;
 
         if (!commentContent) {
             return _res.status(400).json({
@@ -320,24 +321,39 @@ router.post('/postComment/:id', isAuth, async (_req: PayloadType, _res) => {
             });
         }
 
-        const commentQuery = await db.query(
-            `INSERT INTO comments(user_id, blog_id, comment_content)
-            VALUES($1, $2, $3)
-            RETURNING comment_id;`,
-            [userId, blogId, commentContent]
-        );
+        let commentQuery;
+
+        if (!parentId) {
+            commentQuery = await db.query(
+                `
+                    INSERT INTO comments(user_id, blog_id, comment_content)
+                    VALUES($1, $2, $3)
+                    RETURNING comment_id;
+                    `,
+                [userId, blogId, commentContent]
+            );
+        } else {
+            commentQuery = await db.query(
+                `
+                    INSERT INTO comments(user_id, blog_id, comment_content, parent_id)
+                    VALUES($1, $2, $3, $4)
+                    RETURNING comment_id;
+                    `,
+                [userId, blogId, commentContent, parentId]
+            );
+        }
 
         const postedCommentQuery = await db.query(
             `
             SELECT 
-                u.user_id, 
-                u.profileimage, 
-                u.first_name, 
-                u.last_name, 
-                c.comment_id, 
-                c.comment_content, 
-                c.liked_by,
-                c.created_at
+                u.user_id as "userId", 
+                u.profileimage as "profileImage", 
+                u.first_name as "firstName", 
+                u.last_name as "lastName", 
+                c.comment_id as "commentId", 
+                c.comment_content as "commentContent", 
+                c.liked_by as "likedBy",
+                c.created_at as "createdAt"
             FROM users u
             INNER JOIN comments c ON c.user_id = u.user_id
             INNER JOIN blogs b ON b.blog_id = c.blog_id
@@ -350,6 +366,42 @@ router.post('/postComment/:id', isAuth, async (_req: PayloadType, _res) => {
         return _res.status(201).json({
             ok: true,
             comment: postedCommentQuery.rows[0],
+        });
+
+        //
+    } catch (error) {
+        return _res.status(500).json({
+            ok: false,
+            error,
+        });
+    }
+});
+
+router.get('/getChildrenComment/:parentId', async (_req, _res) => {
+    try {
+        const parentId = _req.params.parentId;
+        const commentQuery = await db.query(
+            `
+            SELECT 
+                u.user_id as "userId", 
+                u.profileimage as "profileImage", 
+                u.first_name as "firstName", 
+                u.last_name as "lastName", 
+                c.comment_id as "commentId", 
+                c.comment_content as "commentContent", 
+                c.liked_by as "likedBy",
+                c.created_at as "createdAt"
+            FROM users u
+            INNER JOIN comments c ON c.user_id = u.user_id
+            INNER JOIN blogs b ON b.blog_id = c.blog_id
+            WHERE c.parent_id=$1;
+        `,
+            [parentId]
+        );
+
+        return _res.json({
+            ok: true,
+            comments: commentQuery.rows,
         });
 
         //

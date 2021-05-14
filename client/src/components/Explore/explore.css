@@ -37,6 +37,7 @@ body .App-dark {
 
 .explore .topics-showcase .topic {
   margin-right: 55px;
+  opacity: 0.5;
 }
 
 .explore .topics-showcase .topic .topic-image {
@@ -61,8 +62,12 @@ body .App-dark {
   font-weight: bold;
 }
 
-.explore .topics-showcase .selected-topic .topic-image {
-  border: 2px solid black;
+.explore .topics-showcase .selected-topic {
+  opacity: 1;
+}
+
+.explore .topics-showcase .selected-topic .topic-image img {
+  opacity: 1;
 }
 
 .explore .topics-showcase::-webkit-scrollbar {
