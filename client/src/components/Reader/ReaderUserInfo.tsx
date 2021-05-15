@@ -47,6 +47,7 @@ const ReaderUserInfo = ({
                         </button>
                     ) : (
                         <button
+                            className="follow-btn"
                             onClick={() => {
                                 dispatch(
                                     followUser(

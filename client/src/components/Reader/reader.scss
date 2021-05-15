@@ -116,4 +116,11 @@
     svg {
         fill: $dark-font;
     }
+
+    .reader-user-container {
+        .follow-btn {
+            color: $dark-font;
+            border-color: $dark-font !important;
+        }
+    }
 }

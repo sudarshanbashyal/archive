@@ -136,4 +136,9 @@ body .App-dark {
 .reader-container-dark svg {
   fill: #becfe2;
 }
+
+.reader-container-dark .reader-user-container .follow-btn {
+  color: #becfe2;
+  border-color: #becfe2 !important;
+}
 /*# sourceMappingURL=reader.css.map */

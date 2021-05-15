@@ -50,13 +50,8 @@ const RegisterModal = () => {
 
     const changeFormStage = () => {
         if (formStage === 1) {
-            const {
-                firstName,
-                lastName,
-                email,
-                password,
-                confirmPassword,
-            } = registerData;
+            const { firstName, lastName, email, password, confirmPassword } =
+                registerData;
 
             if (
                 !firstName ||

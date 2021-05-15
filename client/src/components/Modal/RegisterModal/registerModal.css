@@ -23,6 +23,7 @@ body .App-dark {
   background-color: white;
   padding: 2rem 3rem;
   position: relative;
+  color: black !important;
 }
 
 .register-modal .header {
