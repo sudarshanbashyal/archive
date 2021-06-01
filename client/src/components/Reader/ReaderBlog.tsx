@@ -2,12 +2,14 @@ import React, { useState, lazy, Suspense } from 'react';
 import moment from 'moment';
 import {
     bookmarkStrokeIcon,
+    bookmarkFilledIcon,
     heartFilledIcon,
     heartStrokeIcon,
     loadingAnimation,
 } from 'src/assets/SVGs';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootStore } from 'src/redux/store';
+import { toggleBookmark } from 'src/redux/Actions/userActions';
 
 const ReaderWysiwyg = lazy(() => import('./ReaderWysiwyg'));
 
@@ -30,6 +32,7 @@ const ReaderBlog = ({
 }: readerBlogInterface) => {
     const [blogLikes, setBlogLikes] = useState<any>(likes);
     const userState = useSelector((state: RootStore) => state.client);
+    const dispatch = useDispatch();
 
     const toggleLikes = async (status: string) => {
         const res = await fetch(`/blog/toggleLikes/${blogId}/${status}`, {
@@ -44,6 +47,16 @@ const ReaderBlog = ({
         if (data.ok) {
             setBlogLikes(data.blog);
         }
+    };
+
+    const toggleBookmarkStatus = (status: string) => {
+        dispatch(
+            toggleBookmark(
+                blogId,
+                status,
+                userState && userState.client?.accessToken
+            )
+        );
     };
 
     return (
@@ -82,7 +95,24 @@ const ReaderBlog = ({
                         )}
                     </span>
 
-                    <span className="bookmark-icon">{bookmarkStrokeIcon}</span>
+                    {userState &&
+                    userState.client?.profile.bookmarks?.includes(+blogId) ? (
+                        <span
+                            onClick={() => {
+                                toggleBookmarkStatus('array_remove');
+                            }}
+                        >
+                            {bookmarkFilledIcon}
+                        </span>
+                    ) : (
+                        <span
+                            onClick={() => {
+                                toggleBookmarkStatus('array_append');
+                            }}
+                        >
+                            {bookmarkStrokeIcon}
+                        </span>
+                    )}
                 </div>
             </div>
 
