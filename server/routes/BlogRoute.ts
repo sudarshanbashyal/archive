@@ -795,4 +795,45 @@ router.get('/getDraft/:id', isAuth, async (_req: PayloadType, _res) => {
     }
 });
 
+router.get('/deleteComment/:id', isAuth, async (_req: PayloadType, _res) => {
+    try {
+        const userId = _req.userId;
+        const commentId = _req.params.id;
+
+        await db.query(
+            `
+            DELETE FROM comments WHERE parent_id=$1;
+        `,
+            [commentId]
+        );
+
+        const deleteQuery = await db.query(
+            `
+            DELETE FROM comments WHERE comment_id=$1 AND user_id=$2;
+        `,
+            [commentId, userId]
+        );
+
+        if (deleteQuery) {
+            return _res.status(201).json({
+                ok: true,
+            });
+        }
+
+        return _res.status(500).json({
+            ok: false,
+            error: {
+                message: 'Something went wrong. Please try again.',
+            },
+        });
+
+        //
+    } catch (error) {
+        return _res.status(500).json({
+            ok: false,
+            error,
+        });
+    }
+});
+
 export default router;

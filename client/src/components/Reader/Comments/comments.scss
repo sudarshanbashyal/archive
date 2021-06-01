@@ -38,6 +38,22 @@
         margin-bottom: 20px;
         border-bottom: 1px solid lightgray;
         display: flex;
+        position: relative;
+
+        .delete-comment {
+            position: absolute;
+            top: 0;
+            right: 0;
+            display: none;
+            cursor: pointer;
+            transform: scale(0.8);
+        }
+
+        &:hover {
+            > .delete-comment {
+                display: block;
+            }
+        }
 
         .comment-user-info {
             .user-profile {
@@ -58,6 +74,7 @@
         .comment-body {
             flex: 1;
             margin-top: -10px;
+
             .user-name {
                 font-weight: bold;
 
@@ -176,6 +193,10 @@
         &:last-child {
             border-bottom: none;
         }
+    }
+
+    .child-comment {
+        @extend .comment;
     }
 }
 

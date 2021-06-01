@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, lazy, Suspense } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { loadingAnimation } from 'src/assets/SVGs';
@@ -6,11 +6,13 @@ import { openModal } from 'src/redux/Actions/applicationActions';
 import { followUser, unfollowUser } from 'src/redux/Actions/userActions';
 import { RootStore } from 'src/redux/store';
 import './profile.css';
-import ProfileBlog from './ProfileBlogs/ProfileBlog/ProfileBlog';
-import ProfileBlogs from './ProfileBlogs/ProfileBlogs';
-import ProfileBookmarks from './ProfileBookmarks/ProfileBookmarks';
-import ProfileDrafts from './ProfileDrafts/ProfileDrafts';
 import ProfileNavigation from './ProfileNavigation/ProfileNavigation';
+
+const ProfileBlogs = lazy(() => import('./ProfileBlogs/ProfileBlogs'));
+const ProfileBookmarks = lazy(
+    () => import('./ProfileBookmarks/ProfileBookmarks')
+);
+const ProfileDrafts = lazy(() => import('./ProfileDrafts/ProfileDrafts'));
 
 interface ProfileInfoType {
     firstName: string;
@@ -264,11 +266,17 @@ const Profile = (props: any) => {
                     )}
 
                     {currentProfileNavigation === 'blogs' ? (
-                        <ProfileBlogs profileBlogs={profileBlogs} />
+                        <Suspense fallback={loadingAnimation}>
+                            <ProfileBlogs profileBlogs={profileBlogs} />
+                        </Suspense>
                     ) : currentProfileNavigation === 'bookmarks' ? (
-                        <ProfileBookmarks />
+                        <Suspense fallback={loadingAnimation}>
+                            <ProfileBookmarks />
+                        </Suspense>
                     ) : (
-                        <ProfileDrafts />
+                        <Suspense fallback={loadingAnimation}>
+                            <ProfileDrafts />
+                        </Suspense>
                     )}
                 </div>
             </div>

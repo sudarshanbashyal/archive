@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { pencilIcon } from 'src/assets/SVGs';
+import { showSuccessToast } from 'src/components/Utils/ToastNotification';
 import { RootStore } from 'src/redux/store';
 import Comment from './Comment';
 import './comments.css';
@@ -58,6 +59,22 @@ const Comments = ({ blogId, blogAuthorId }: readerCommentInterface) => {
         }
     };
 
+    const deleteComment = async (commentId: number) => {
+        const res = await fetch(`/blog/deleteComment/${commentId}`, {
+            headers: {
+                authorization: `bearer ${accessToken}`,
+            },
+        });
+
+        const data = await res.json();
+        if (data.ok) {
+            setBlogComments(blogComments =>
+                blogComments.filter(comment => comment.commentId !== commentId)
+            );
+            showSuccessToast('Comment Removed!');
+        }
+    };
+
     useEffect(() => {
         setBlogComments([]);
 
@@ -102,6 +119,7 @@ const Comments = ({ blogId, blogAuthorId }: readerCommentInterface) => {
                     comment={com}
                     blogAuthorId={blogAuthorId}
                     blogId={blogId}
+                    deleteComment={deleteComment}
                 />
             ))}
         </div>

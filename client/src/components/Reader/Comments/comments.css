@@ -55,23 +55,38 @@ body .App-dark {
           transform: scale(0.8);
 }
 
-.comments-container .comment {
+.comments-container .comment, .comments-container .child-comment {
   padding-bottom: 20px;
   margin-bottom: 20px;
   border-bottom: 1px solid lightgray;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  position: relative;
 }
 
-.comments-container .comment .comment-user-info .user-profile {
+.comments-container .comment .delete-comment, .comments-container .child-comment .delete-comment {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: none;
+  cursor: pointer;
+  -webkit-transform: scale(0.8);
+          transform: scale(0.8);
+}
+
+.comments-container .comment:hover > .delete-comment, .comments-container .child-comment:hover > .delete-comment {
+  display: block;
+}
+
+.comments-container .comment .comment-user-info .user-profile, .comments-container .child-comment .comment-user-info .user-profile {
   width: 30px;
   height: 30px;
   border-radius: 50%;
   margin-right: 15px;
 }
 
-.comments-container .comment .comment-user-info .user-profile img {
+.comments-container .comment .comment-user-info .user-profile img, .comments-container .child-comment .comment-user-info .user-profile img {
   height: 100%;
   width: 100%;
   border-radius: 50%;
@@ -79,71 +94,71 @@ body .App-dark {
      object-fit: cover;
 }
 
-.comments-container .comment .comment-body {
+.comments-container .comment .comment-body, .comments-container .child-comment .comment-body {
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
   margin-top: -10px;
 }
 
-.comments-container .comment .comment-body .user-name {
+.comments-container .comment .comment-body .user-name, .comments-container .child-comment .comment-body .user-name {
   font-weight: bold;
 }
 
-.comments-container .comment .comment-body .user-name .author-icon svg {
+.comments-container .comment .comment-body .user-name .author-icon svg, .comments-container .child-comment .comment-body .user-name .author-icon svg {
   fill: #151f2e;
   margin-left: 5px;
   -webkit-transform: scale(0.8) translateY(0.5rem);
           transform: scale(0.8) translateY(0.5rem);
 }
 
-.comments-container .comment .comment-body .comment-date {
+.comments-container .comment .comment-body .comment-date, .comments-container .child-comment .comment-body .comment-date {
   margin-left: 15px;
   font-weight: 600;
   color: #b9b9b9;
 }
 
-.comments-container .comment .comment-body .comment-content {
+.comments-container .comment .comment-body .comment-content, .comments-container .child-comment .comment-body .comment-content {
   margin-top: 5px;
 }
 
-.comments-container .comment .comment-body .comment-functions {
+.comments-container .comment .comment-body .comment-functions, .comments-container .child-comment .comment-body .comment-functions {
   margin-top: 10px;
 }
 
-.comments-container .comment .comment-body .comment-functions .like-comment {
+.comments-container .comment .comment-body .comment-functions .like-comment, .comments-container .child-comment .comment-body .comment-functions .like-comment {
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
 }
 
-.comments-container .comment .comment-body .comment-functions .like-comment svg {
+.comments-container .comment .comment-body .comment-functions .like-comment svg, .comments-container .child-comment .comment-body .comment-functions .like-comment svg {
   -webkit-transform: scale(0.8) translateY(8px);
           transform: scale(0.8) translateY(8px);
   -webkit-transition: 0.1s ease-in-out;
   transition: 0.1s ease-in-out;
 }
 
-.comments-container .comment .comment-body .comment-functions .like-comment svg:hover {
+.comments-container .comment .comment-body .comment-functions .like-comment svg:hover, .comments-container .child-comment .comment-body .comment-functions .like-comment svg:hover {
   -webkit-transform: scale(0.9) translateY(8px);
           transform: scale(0.9) translateY(8px);
 }
 
-.comments-container .comment .comment-body .comment-functions .like-comment svg:active {
+.comments-container .comment .comment-body .comment-functions .like-comment svg:active, .comments-container .child-comment .comment-body .comment-functions .like-comment svg:active {
   -webkit-transform: scale(0.7) translateY(8px);
           transform: scale(0.7) translateY(8px);
 }
 
-.comments-container .comment .comment-body .comment-functions .like-comment .heart-filled svg {
+.comments-container .comment .comment-body .comment-functions .like-comment .heart-filled svg, .comments-container .child-comment .comment-body .comment-functions .like-comment .heart-filled svg {
   fill: #dd3b40;
 }
 
-.comments-container .comment .comment-body .comment-functions .like-comment:hover {
+.comments-container .comment .comment-body .comment-functions .like-comment:hover, .comments-container .child-comment .comment-body .comment-functions .like-comment:hover {
   cursor: pointer;
 }
 
-.comments-container .comment .comment-body .comment-functions .reply-comment {
+.comments-container .comment .comment-body .comment-functions .reply-comment, .comments-container .child-comment .comment-body .comment-functions .reply-comment {
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
@@ -153,16 +168,16 @@ body .App-dark {
   color: #b9b9b9;
 }
 
-.comments-container .comment .comment-body .comment-functions .reply-comment:hover {
+.comments-container .comment .comment-body .comment-functions .reply-comment:hover, .comments-container .child-comment .comment-body .comment-functions .reply-comment:hover {
   cursor: pointer;
 }
 
-.comments-container .comment .comment-body .reply-textfield {
+.comments-container .comment .comment-body .reply-textfield, .comments-container .child-comment .comment-body .reply-textfield {
   margin-top: 20px;
   width: 100%;
 }
 
-.comments-container .comment .comment-body .reply-textfield input {
+.comments-container .comment .comment-body .reply-textfield input, .comments-container .child-comment .comment-body .reply-textfield input {
   outline: none;
   width: 100%;
   border: none;
@@ -170,11 +185,11 @@ body .App-dark {
   border-bottom: 1px solid lightgray;
 }
 
-.comments-container .comment .comment-body .reply-textfield input:focus {
+.comments-container .comment .comment-body .reply-textfield input:focus, .comments-container .child-comment .comment-body .reply-textfield input:focus {
   border-bottom: 1px solid darkgray;
 }
 
-.comments-container .comment .comment-body .reply-textfield .reply-buttons {
+.comments-container .comment .comment-body .reply-textfield .reply-buttons, .comments-container .child-comment .comment-body .reply-textfield .reply-buttons {
   width: 100%;
   margin-top: 10px;
   display: -webkit-box;
@@ -185,7 +200,7 @@ body .App-dark {
           justify-content: flex-end;
 }
 
-.comments-container .comment .comment-body .reply-textfield .reply-buttons .reply-submit-button {
+.comments-container .comment .comment-body .reply-textfield .reply-buttons .reply-submit-button, .comments-container .child-comment .comment-body .reply-textfield .reply-buttons .reply-submit-button {
   padding: 0.5rem 1rem;
   border: 1px solid black;
   background-color: transparent;
@@ -193,7 +208,7 @@ body .App-dark {
   cursor: pointer;
 }
 
-.comments-container .comment .comment-body .reply-textfield .reply-buttons .cancel-button {
+.comments-container .comment .comment-body .reply-textfield .reply-buttons .cancel-button, .comments-container .child-comment .comment-body .reply-textfield .reply-buttons .cancel-button {
   border: none;
   cursor: pointer;
   background-color: transparent;
@@ -201,17 +216,17 @@ body .App-dark {
   margin-left: 10px;
 }
 
-.comments-container .comment .comment-body .show-all-replies {
+.comments-container .comment .comment-body .show-all-replies, .comments-container .child-comment .comment-body .show-all-replies {
   font-weight: 600;
   cursor: pointer;
 }
 
-.comments-container .comment .comment-body .show-all-replies .down-arrow svg {
+.comments-container .comment .comment-body .show-all-replies .down-arrow svg, .comments-container .child-comment .comment-body .show-all-replies .down-arrow svg {
   -webkit-transform: scale(0.5) translateY(0.8rem);
           transform: scale(0.5) translateY(0.8rem);
 }
 
-.comments-container .comment:last-child {
+.comments-container .comment:last-child, .comments-container .child-comment:last-child {
   border-bottom: none;
 }
 
@@ -228,29 +243,29 @@ body .App-dark {
   color: white;
 }
 
-.comments-container-dark .comment {
+.comments-container-dark .comment, .comments-container-dark .comments-container .child-comment, .comments-container .comments-container-dark .child-comment {
   border-bottom: 1px solid #becfe2;
 }
 
-.comments-container-dark .comment .comment-content {
+.comments-container-dark .comment .comment-content, .comments-container-dark .comments-container .child-comment .comment-content, .comments-container .comments-container-dark .child-comment .comment-content {
   color: white;
 }
 
-.comments-container-dark .comment .author-icon svg {
+.comments-container-dark .comment .author-icon svg, .comments-container-dark .comments-container .child-comment .author-icon svg, .comments-container .comments-container-dark .child-comment .author-icon svg {
   fill: #becfe2 !important;
 }
 
-.comments-container-dark .comment .reply-textfield input {
+.comments-container-dark .comment .reply-textfield input, .comments-container-dark .comments-container .child-comment .reply-textfield input, .comments-container .comments-container-dark .child-comment .reply-textfield input {
   background-color: #151f2e;
   color: white;
 }
 
-.comments-container-dark .comment .reply-textfield .reply-submit-button {
+.comments-container-dark .comment .reply-textfield .reply-submit-button, .comments-container-dark .comments-container .child-comment .reply-textfield .reply-submit-button, .comments-container .comments-container-dark .child-comment .reply-textfield .reply-submit-button {
   color: #becfe2;
   border-color: #becfe2 !important;
 }
 
-.comments-container-dark .comment .reply-textfield .cancel-button {
+.comments-container-dark .comment .reply-textfield .cancel-button, .comments-container-dark .comments-container .child-comment .reply-textfield .cancel-button, .comments-container .comments-container-dark .child-comment .reply-textfield .cancel-button {
   color: #becfe2;
 }
 /*# sourceMappingURL=comments.css.map */

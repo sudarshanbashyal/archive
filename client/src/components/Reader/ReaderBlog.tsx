@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, lazy, Suspense } from 'react';
 import moment from 'moment';
 import {
     bookmarkStrokeIcon,
     heartFilledIcon,
     heartStrokeIcon,
+    loadingAnimation,
 } from 'src/assets/SVGs';
 import { useSelector } from 'react-redux';
 import { RootStore } from 'src/redux/store';
-import ReaderWysiwyg from './ReaderWysiwyg';
+
+const ReaderWysiwyg = lazy(() => import('./ReaderWysiwyg'));
 
 interface readerBlogInterface {
     blogId: number;
@@ -88,7 +90,9 @@ const ReaderBlog = ({
                 <img src={headerImage} alt="blog-header" />
             </div>
 
-            <ReaderWysiwyg blogContent={blogContent} />
+            <Suspense fallback={loadingAnimation}>
+                <ReaderWysiwyg blogContent={blogContent} />
+            </Suspense>
         </div>
     );
 };

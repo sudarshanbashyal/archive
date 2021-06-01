@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Suspense, lazy } from 'react';
 import { useSelector } from 'react-redux';
 import { loadingAnimation } from 'src/assets/SVGs';
 import { RootStore } from 'src/redux/store';
-import Comments from './Comments/Comments';
+// import Comments from './Comments/Comments';
 import './reader.css';
 import ReaderBlog from './ReaderBlog';
-import ReaderUserInfo from './ReaderUserInfo';
+// import ReaderUserInfo from './ReaderUserInfo';
+
+const Comments = lazy(() => import('./Comments/Comments'));
+const ReaderUserInfo = lazy(() => import('./ReaderUserInfo'));
 
 interface blogInterface {
     title: string;
@@ -78,13 +81,15 @@ const Reader = (props: any) => {
             <div className="blog-container">
                 {userState &&
                 userState.client?.profile.userId !== blog?.userId ? (
-                    <ReaderUserInfo
-                        userId={blog!.userId}
-                        firstName={blog!.firstName}
-                        lastName={blog!.lastName}
-                        interest={blog!.interest}
-                        profileImage={blog!.profileImage}
-                    />
+                    <Suspense fallback={null}>
+                        <ReaderUserInfo
+                            userId={blog!.userId}
+                            firstName={blog!.firstName}
+                            lastName={blog!.lastName}
+                            interest={blog!.interest}
+                            profileImage={blog!.profileImage}
+                        />
+                    </Suspense>
                 ) : null}
 
                 <ReaderBlog
@@ -96,7 +101,9 @@ const Reader = (props: any) => {
                     likes={blog!.likes}
                 />
 
-                <Comments blogId={blogId} blogAuthorId={blog!.userId} />
+                <Suspense fallback={loadingAnimation}>
+                    <Comments blogId={blogId} blogAuthorId={blog!.userId} />
+                </Suspense>
             </div>
         </div>
     );

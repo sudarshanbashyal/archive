@@ -6,6 +6,7 @@ import {
     defaultProfileImage,
     heartFilledIcon,
     heartStrokeIcon,
+    trashIcon,
 } from 'src/assets/SVGs';
 import { RootStore } from 'src/redux/store';
 import { commentInterface } from './Comments';
@@ -13,9 +14,11 @@ import { commentInterface } from './Comments';
 const ChildrenComment = ({
     comment,
     blogAuthorId,
+    deleteChildComment,
 }: {
     comment: commentInterface;
     blogAuthorId: number;
+    deleteChildComment: (commentId: number) => void;
 }) => {
     const [currentComment, setCurrentComment] =
         useState<commentInterface>(comment);
@@ -46,7 +49,19 @@ const ChildrenComment = ({
     };
 
     return (
-        <div className="comment">
+        <div className="child-comment">
+            {currentComment.userId ===
+            (userState && userState.client?.profile.userId) ? (
+                <span
+                    onClick={() => {
+                        deleteChildComment(comment.commentId);
+                    }}
+                    className="delete-comment"
+                >
+                    {trashIcon}
+                </span>
+            ) : null}
+
             <div className="comment-user-info">
                 <div className="user-profile">
                     <img

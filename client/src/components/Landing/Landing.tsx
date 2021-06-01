@@ -8,6 +8,8 @@ import formSwiggle from '../../assets/form-red-swiggle.svg';
 import LoginForm from './LoginForm/LoginForm';
 import { useSelector } from 'react-redux';
 import { RootStore } from 'src/redux/store';
+import { motion } from 'framer-motion';
+import { duration } from 'moment';
 
 const Landing = () => {
     const userState = useSelector((state: RootStore) => state.client);
@@ -43,7 +45,7 @@ const Landing = () => {
                 />
             </div>
 
-            <img className="typewriter" src={typewriter} alt="" />
+            <img className="typewriter" src={typewriter} />
         </div>
     );
 };

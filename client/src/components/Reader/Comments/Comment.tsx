@@ -7,7 +7,9 @@ import {
     downArrowIcon,
     heartFilledIcon,
     heartStrokeIcon,
+    trashIcon,
 } from 'src/assets/SVGs';
+import { showSuccessToast } from 'src/components/Utils/ToastNotification';
 import { RootStore } from 'src/redux/store';
 import ChildrenComment from './ChildrenComment';
 import { commentInterface } from './Comments';
@@ -16,10 +18,12 @@ const Comment = ({
     comment,
     blogAuthorId,
     blogId,
+    deleteComment,
 }: {
     comment: commentInterface;
     blogAuthorId: number;
     blogId: number;
+    deleteComment: (commentId: number) => void;
 }) => {
     const userState = useSelector((state: RootStore) => state.client);
     const accessToken = userState.client?.accessToken;
@@ -110,8 +114,40 @@ const Comment = ({
         }
     };
 
+    const deleteChildComment = async (commentId: number) => {
+        const res = await fetch(`/blog/deleteComment/${commentId}`, {
+            headers: {
+                authorization: `bearer ${accessToken}`,
+            },
+        });
+
+        const data = await res.json();
+        if (data.ok) {
+            setChildrenComments(childrenComments =>
+                childrenComments.filter(
+                    comment => comment.commentId !== commentId
+                )
+            );
+
+            showSuccessToast('Comment Removed!');
+        }
+    };
+
     return (
         <div className="comment">
+            {/* display delete button if comment belongs to current user */}
+            {currentComment.userId ===
+            (userState && userState.client?.profile.userId) ? (
+                <span
+                    onClick={() => {
+                        deleteComment(comment.commentId);
+                    }}
+                    className="delete-comment"
+                >
+                    {trashIcon}
+                </span>
+            ) : null}
+
             <div className="comment-user-info">
                 <div className="user-profile">
                     <img
@@ -224,6 +260,7 @@ const Comment = ({
                               key={children.commentId}
                               comment={children}
                               blogAuthorId={blogAuthorId}
+                              deleteChildComment={deleteChildComment}
                           />
                       ))
                     : null}
