@@ -6,10 +6,16 @@ import {
     heartFilledIcon,
     heartStrokeIcon,
     loadingAnimation,
+    defaultProfileImage,
 } from 'src/assets/SVGs';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { RootStore } from 'src/redux/store';
-import { toggleBookmark } from 'src/redux/Actions/userActions';
+import {
+    toggleBookmark,
+    unfollowUser,
+    followUser,
+} from 'src/redux/Actions/userActions';
 
 const ReaderWysiwyg = lazy(() => import('./ReaderWysiwyg'));
 
@@ -20,6 +26,11 @@ interface readerBlogInterface {
     headerImage: string;
     createdAt: string;
     likes: number[] | null;
+    userId: number;
+    firstName: string;
+    lastName: string;
+    interest: string | null;
+    profileImage: string | null;
 }
 
 const ReaderBlog = ({
@@ -29,6 +40,11 @@ const ReaderBlog = ({
     headerImage,
     createdAt,
     likes,
+    userId,
+    firstName,
+    lastName,
+    interest,
+    profileImage,
 }: readerBlogInterface) => {
     const [blogLikes, setBlogLikes] = useState<any>(likes);
     const userState = useSelector((state: RootStore) => state.client);
@@ -62,6 +78,58 @@ const ReaderBlog = ({
     return (
         <div className="reader-blog-container">
             <h1 className="blog-title">{title}</h1>
+            <div className="user-info">
+                <div className="user-profile-picture">
+                    <img src={profileImage || defaultProfileImage} alt="" />
+                </div>
+
+                <Link
+                    style={{
+                        color: 'black',
+                        textDecoration: 'none',
+                    }}
+                    to={`/user/${userId}`}
+                >
+                    <p className="user-name">
+                        {firstName} {lastName}
+                    </p>
+                </Link>
+
+                {userState &&
+                    (userState.client?.profile.userId ===
+                    userId ? null : userState.client?.profile.usersFollowed.includes(
+                          userId
+                      ) ? (
+                        <button
+                            className="follow-btn"
+                            onClick={() => {
+                                dispatch(
+                                    unfollowUser(
+                                        userId,
+                                        userState.client?.accessToken
+                                    )
+                                );
+                            }}
+                        >
+                            Following
+                        </button>
+                    ) : (
+                        <button
+                            onClick={() => {
+                                dispatch(
+                                    followUser(
+                                        userId,
+                                        userState.client?.accessToken
+                                    )
+                                );
+                            }}
+                            className="follow-btn"
+                        >
+                            Follow
+                        </button>
+                    ))}
+            </div>
+
             <div className="blog-info">
                 <span className="blog-date">
                     {moment(createdAt).format('DD')}{' '}

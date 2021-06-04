@@ -34,39 +34,13 @@ body .App-dark {
   margin-top: 80px;
 }
 
-.reader-container .blog-container .reader-user-container {
-  position: absolute;
-  left: 0px;
-  width: 20%;
-  min-height: 20px;
-}
-
-.reader-container .blog-container .reader-user-container .user-name {
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-
-.reader-container .blog-container .reader-user-container .user-interest {
-  display: inline-block;
-  margin-bottom: 10px;
-}
-
-.reader-container .blog-container .reader-user-container button {
-  background-color: transparent;
-  border: 1px solid black;
-  border-radius: 7px;
-  padding: 0.5rem;
-  font-weight: bold;
-  cursor: pointer;
-  outline: none;
-}
-
 .reader-container .blog-container .reader-blog-container {
   width: 60%;
   margin: auto;
   min-height: 20px;
   padding-bottom: 20px;
   border-bottom: 1px solid lightgray;
+  position: relative;
 }
 
 .reader-container .blog-container .reader-blog-container .blog-title {
@@ -75,6 +49,43 @@ body .App-dark {
   font-weight: 700;
   line-height: 1em;
   margin-bottom: 15px;
+}
+
+.reader-container .blog-container .reader-blog-container .user-info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.reader-container .blog-container .reader-blog-container .user-info .user-profile-picture {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+}
+
+.reader-container .blog-container .reader-blog-container .user-info .user-profile-picture img {
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.reader-container .blog-container .reader-blog-container .user-info .user-name {
+  font-weight: bold;
+}
+
+.reader-container .blog-container .reader-blog-container .user-info .follow-btn {
+  padding: 0;
+  background-color: transparent;
+  border: none;
+  margin-left: 30px;
+  font-weight: bold;
+  color: #299154;
+  cursor: pointer;
 }
 
 .reader-container .blog-container .reader-blog-container .blog-info {

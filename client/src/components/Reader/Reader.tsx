@@ -6,9 +6,7 @@ import { RootStore } from 'src/redux/store';
 import './reader.css';
 import ReaderBlog from './ReaderBlog';
 // import ReaderUserInfo from './ReaderUserInfo';
-
 const Comments = lazy(() => import('./Comments/Comments'));
-const ReaderUserInfo = lazy(() => import('./ReaderUserInfo'));
 
 interface blogInterface {
     title: string;
@@ -79,19 +77,6 @@ const Reader = (props: any) => {
             }
         >
             <div className="blog-container">
-                {userState &&
-                userState.client?.profile.userId !== blog?.userId ? (
-                    <Suspense fallback={null}>
-                        <ReaderUserInfo
-                            userId={blog!.userId}
-                            firstName={blog!.firstName}
-                            lastName={blog!.lastName}
-                            interest={blog!.interest}
-                            profileImage={blog!.profileImage}
-                        />
-                    </Suspense>
-                ) : null}
-
                 <ReaderBlog
                     blogId={blogId}
                     title={blog!.title}
@@ -99,6 +84,11 @@ const Reader = (props: any) => {
                     headerImage={blog!.headerImage}
                     createdAt={blog!.createdAt}
                     likes={blog!.likes}
+                    userId={blog!.userId}
+                    firstName={blog!.firstName}
+                    lastName={blog!.lastName}
+                    interest={blog!.interest}
+                    profileImage={blog!.profileImage}
                 />
 
                 <Suspense fallback={loadingAnimation}>
