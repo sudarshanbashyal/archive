@@ -91,6 +91,12 @@ body .App-dark {
   margin-bottom: 0px;
 }
 
+@media screen and (max-width: 1500px) {
+  .recommendations {
+    display: none;
+  }
+}
+
 .recommendations-dark {
   color: #becfe2;
   border-left-color: #becfe2;

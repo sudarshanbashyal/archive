@@ -64,6 +64,10 @@
             }
         }
     }
+
+    @media screen and (max-width: $large) {
+        display: none;
+    }
 }
 
 .recommendations-dark {

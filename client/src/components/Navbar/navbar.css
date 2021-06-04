@@ -27,7 +27,7 @@ body .App-dark {
 }
 
 .navbar .nav-container {
-  width: 1200px;
+  width: 65%;
   margin: auto;
   height: 60px;
   display: -webkit-box;
@@ -40,6 +40,12 @@ body .App-dark {
       -ms-flex-pack: justify;
           justify-content: space-between;
   position: relative;
+}
+
+@media screen and (max-width: 1300px) {
+  .navbar .nav-container {
+    width: 80%;
+  }
 }
 
 .navbar .nav-container .logo {

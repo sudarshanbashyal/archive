@@ -29,7 +29,9 @@ body .App-dark {
 }
 
 .landing .image-section {
-  width: 50%;
+  -webkit-box-flex: 50%;
+      -ms-flex: 50% 3 3;
+          flex: 50% 3 3;
   height: 100%;
   background-color: #4a6163;
   position: relative;
@@ -45,6 +47,17 @@ body .App-dark {
   display: inline-block;
   background-clip: text;
   color: transparent;
+}
+
+.landing .image-section .typewriter {
+  position: absolute;
+  -webkit-transform: rotate(31deg);
+          transform: rotate(31deg);
+  margin: auto;
+  left: 0;
+  right: 0px;
+  bottom: -100px;
+  text-align: center;
 }
 
 .landing .image-section .swiggle {
@@ -71,7 +84,9 @@ body .App-dark {
 }
 
 .landing .login-section {
-  width: 50%;
+  -webkit-box-flex: 50%;
+      -ms-flex: 50% 1 1;
+          flex: 50% 1 1;
   height: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -150,16 +165,5 @@ body .App-dark {
 .landing .login-section .form-container form .error-message {
   font-weight: 700;
   color: #dd3b40;
-}
-
-.landing .typewriter {
-  position: absolute;
-  -webkit-transform: rotate(31deg);
-          transform: rotate(31deg);
-  margin: auto;
-  left: 0;
-  right: 450px;
-  bottom: -100px;
-  text-align: center;
 }
 /*# sourceMappingURL=landing.css.map */

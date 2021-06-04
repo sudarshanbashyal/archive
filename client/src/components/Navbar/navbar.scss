@@ -7,13 +7,17 @@
     background-color: white;
 
     .nav-container {
-        width: 1200px;
+        width: 65%;
         margin: auto;
         height: 60px;
         display: flex;
         align-items: center;
         justify-content: space-between;
         position: relative;
+
+        @media screen and (max-width: $med-large) {
+            width: 80%;
+        }
 
         .logo {
             height: 100%;

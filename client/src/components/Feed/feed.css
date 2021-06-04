@@ -22,12 +22,14 @@ body .App-dark {
 }
 
 .outer-container .feed {
-  width: 1200px;
+  width: 65%;
   margin: auto;
 }
 
 .outer-container .feed .header {
   margin-top: 90px;
+  position: relative;
+  z-index: 99;
 }
 
 .outer-container .feed .header h1 {
@@ -86,24 +88,60 @@ body .App-dark {
   width: 65%;
 }
 
+@media screen and (max-width: 1500px) {
+  .outer-container .feed .content-section .blog-section {
+    width: 100%;
+  }
+}
+
 .outer-container .feed .content-section .recommendation-section {
   width: 32%;
 }
 
+@media screen and (max-width: 1500px) {
+  .outer-container .feed .content-section .recommendation-section {
+    width: 0%;
+  }
+}
+
+@media screen and (max-width: 1300px) {
+  .outer-container .feed {
+    width: 80%;
+  }
+}
+
 .outer-container .pattern-right, .outer-container .pattern-left {
-  width: 1090px;
-  height: 320px;
+  width: 60%;
+  min-height: 320px;
   position: absolute;
   top: -90px;
   right: 0;
   background-image: url("../../assets//images/pattern.jpg");
   background-position: center;
-  background-size: 100%;
   background-repeat: no-repeat;
+  background-size: cover;
+}
+
+@media screen and (max-width: 1600px) {
+  .outer-container .pattern-right, .outer-container .pattern-left {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 1300px) {
+  .outer-container .pattern-right, .outer-container .pattern-left {
+    width: 40%;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .outer-container .pattern-right, .outer-container .pattern-left {
+    width: 0%;
+  }
 }
 
 .outer-container .pattern-left {
-  width: 140px;
+  width: 5%;
   left: 0px;
   background-position-x: -500px;
   background-size: 850%;

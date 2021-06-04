@@ -1,7 +1,7 @@
 @import '../../index.scss';
 
 .explore {
-    width: 1200px;
+    width: 65%;
     margin: auto;
     margin-top: 70px;
 
@@ -102,6 +102,10 @@
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         grid-column-gap: 50px;
+    }
+
+    @media screen and (max-width: $med-large) {
+        width: 80%;
     }
 }
 

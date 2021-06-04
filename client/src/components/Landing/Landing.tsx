@@ -33,6 +33,8 @@ const Landing = () => {
                     src={redSwiggle}
                     alt="decoration"
                 />
+
+                <img className="typewriter" src={typewriter} />
             </div>
 
             <div className="login-section">
@@ -44,8 +46,6 @@ const Landing = () => {
                     alt="decoration"
                 />
             </div>
-
-            <img className="typewriter" src={typewriter} />
         </div>
     );
 };

@@ -5,11 +5,13 @@
     width: 100%;
 
     .feed {
-        width: 1200px;
+        width: 65%;
         margin: auto;
 
         .header {
             margin-top: 90px;
+            position: relative;
+            z-index: 99;
 
             h1 {
                 font-family: 'Playfair Display', serif;
@@ -57,29 +59,53 @@
 
             .blog-section {
                 width: 65%;
+
+                @media screen and (max-width: $large) {
+                    width: 100%;
+                }
             }
 
             .recommendation-section {
                 width: 32%;
+
+                @media screen and (max-width: $large) {
+                    width: 0%;
+                }
             }
+        }
+
+        @media screen and (max-width: $med-large) {
+            width: 80%;
         }
     }
 
     .pattern-right {
-        width: 1090px;
-        height: 320px;
+        width: 60%;
+        min-height: 320px;
         position: absolute;
         top: -90px;
         right: 0;
         background-image: url('../../assets//images/pattern.jpg');
         background-position: center;
-        background-size: 100%;
         background-repeat: no-repeat;
+        background-size: cover;
+
+        @media screen and (max-width: 1600px) {
+            width: 50%;
+        }
+
+        @media screen and (max-width: $med-large) {
+            width: 40%;
+        }
+
+        @media screen and (max-width: $small) {
+            width: 0%;
+        }
     }
 
     .pattern-left {
         @extend .pattern-right;
-        width: 140px;
+        width: 5%;
         left: 0px;
         background-position-x: -500px;
         background-size: 850%;

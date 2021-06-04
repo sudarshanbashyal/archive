@@ -17,7 +17,7 @@ body .App-dark {
 }
 
 .explore {
-  width: 1200px;
+  width: 65%;
   margin: auto;
   margin-top: 70px;
 }
@@ -135,6 +135,12 @@ body .App-dark {
   -ms-grid-columns: (minmax(300px, 1fr))[auto-fit];
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   grid-column-gap: 50px;
+}
+
+@media screen and (max-width: 1300px) {
+  .explore {
+    width: 80%;
+  }
 }
 
 .explore-dark {
