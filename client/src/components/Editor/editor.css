@@ -133,6 +133,12 @@ body .App-dark {
   background: linear-gradient(90deg, #ffc94b 0%, #f17a7e 100%);
 }
 
+@media screen and (max-width: 1300px) {
+  .editor-page {
+    width: 90%;
+  }
+}
+
 .editor-page-dark .story-title {
   background-color: #151f2e;
   color: white;

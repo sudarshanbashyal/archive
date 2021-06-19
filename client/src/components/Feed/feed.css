@@ -22,7 +22,7 @@ body .App-dark {
 }
 
 .outer-container .feed {
-  width: 65%;
+  width: 1200px;
   margin: auto;
 }
 
@@ -106,7 +106,7 @@ body .App-dark {
 
 @media screen and (max-width: 1300px) {
   .outer-container .feed {
-    width: 80%;
+    width: 90%;
   }
 }
 

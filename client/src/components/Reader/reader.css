@@ -144,6 +144,18 @@ body .App-dark {
   font-size: 1.1rem;
 }
 
+@media screen and (max-width: 1100px) {
+  .reader-container .blog-container .reader-blog-container {
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 1300px) {
+  .reader-container {
+    width: 90%;
+  }
+}
+
 .reader-container-dark svg {
   fill: #becfe2;
 }

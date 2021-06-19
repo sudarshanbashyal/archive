@@ -114,7 +114,15 @@
             .ql-container {
                 font-size: 1.1rem;
             }
+
+            @media screen and (max-width: $medium) {
+                width: 90%;
+            }
         }
+    }
+
+    @media screen and (max-width: $med-large) {
+        width: 90%;
     }
 }
 

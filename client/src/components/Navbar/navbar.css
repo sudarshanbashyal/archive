@@ -27,7 +27,7 @@ body .App-dark {
 }
 
 .navbar .nav-container {
-  width: 65%;
+  width: 1200px;
   margin: auto;
   height: 60px;
   display: -webkit-box;
@@ -44,7 +44,7 @@ body .App-dark {
 
 @media screen and (max-width: 1300px) {
   .navbar .nav-container {
-    width: 80%;
+    width: 90%;
   }
 }
 

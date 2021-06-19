@@ -23,6 +23,7 @@
         margin: auto;
         display: flex;
         justify-content: space-between;
+        position: relative;
 
         .profile {
             width: 15%;
@@ -49,6 +50,12 @@
                 cursor: pointer;
                 margin-top: 10px;
             }
+
+            @media screen and (max-width: $medium) {
+                position: absolute;
+                left: 0;
+                top: 0;
+            }
         }
 
         .content {
@@ -74,11 +81,23 @@
 
                     margin-bottom: 50px;
                 }
+
+                @media screen and (max-width: $medium) {
+                    padding-left: 200px;
+                }
             }
 
             hr {
                 margin-bottom: 50px;
             }
+
+            @media screen and (max-width: $medium) {
+                width: 100%;
+            }
+        }
+
+        @media screen and (max-width: $med-large) {
+            width: 90%;
         }
     }
 }

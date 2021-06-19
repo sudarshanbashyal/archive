@@ -7,7 +7,7 @@
     background-color: white;
 
     .nav-container {
-        width: 65%;
+        width: 1200px;
         margin: auto;
         height: 60px;
         display: flex;
@@ -16,7 +16,7 @@
         position: relative;
 
         @media screen and (max-width: $med-large) {
-            width: 80%;
+            width: 90%;
         }
 
         .logo {

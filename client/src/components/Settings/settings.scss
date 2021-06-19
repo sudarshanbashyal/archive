@@ -51,6 +51,28 @@
                 margin: 0;
             }
         }
+
+        @media screen and(max-width: $medium) {
+            flex-direction: column;
+
+            .setting-content {
+                width: 90%;
+            }
+
+            .setting-links {
+                position: relative;
+                width: 90%;
+
+                ul {
+                    display: flex;
+                    align-items: center;
+                }
+            }
+        }
+    }
+
+    @media screen and (max-width: $medium) {
+        width: 90%;
     }
 }
 

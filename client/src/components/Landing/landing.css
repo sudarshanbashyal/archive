@@ -54,33 +54,36 @@ body .App-dark {
   -webkit-transform: rotate(31deg);
           transform: rotate(31deg);
   margin: auto;
-  left: 0;
-  right: 0px;
+  left: -100px;
   bottom: -100px;
   text-align: center;
 }
 
 .landing .image-section .swiggle {
   position: absolute;
-  width: 50%;
 }
 
 .landing .image-section .yellow-swiggle {
-  top: -170px;
-  right: -5px;
-  width: 40%;
+  top: -350px;
+  right: -450px;
+  height: 50%;
 }
 
 .landing .image-section .red-swiggle {
-  width: 75%;
-  top: 25%;
-  left: 0px;
+  top: 40vh;
+  width: 100%;
+  right: 0;
 }
 
 .landing .image-section .white-swiggle {
-  bottom: -200px;
-  left: 0px;
-  width: 35%;
+  bottom: -300px;
+  right: -50px;
+}
+
+@media screen and (max-width: 700px) {
+  .landing .image-section {
+    display: none;
+  }
 }
 
 .landing .login-section {
@@ -98,13 +101,14 @@ body .App-dark {
       -ms-flex-pack: center;
           justify-content: center;
   position: relative;
+  padding: 0rem 4rem;
 }
 
 .landing .login-section .form-swiggle {
   position: absolute;
-  width: 50%;
-  top: -50px;
-  right: 0px;
+  top: -250px;
+  right: -50px;
+  width: 40%;
 }
 
 .landing .login-section .form-container {
@@ -165,5 +169,18 @@ body .App-dark {
 .landing .login-section .form-container form .error-message {
   font-weight: 700;
   color: #dd3b40;
+}
+
+@media screen and (max-width: 700px) {
+  .landing .login-section .form-container {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .landing .login-section {
+    -ms-flex-preferred-size: 100%;
+        flex-basis: 100%;
+  }
 }
 /*# sourceMappingURL=landing.css.map */

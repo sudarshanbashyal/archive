@@ -43,6 +43,7 @@ body .App-dark {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+  position: relative;
 }
 
 .profile .content-container .profile {
@@ -73,6 +74,14 @@ body .App-dark {
   margin-top: 10px;
 }
 
+@media screen and (max-width: 1100px) {
+  .profile .content-container .profile {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+}
+
 .profile .content-container .content {
   width: 80%;
 }
@@ -93,8 +102,26 @@ body .App-dark {
   cursor: pointer;
 }
 
+@media screen and (max-width: 1100px) {
+  .profile .content-container .content .profile-info {
+    padding-left: 200px;
+  }
+}
+
 .profile .content-container .content hr {
   margin-bottom: 50px;
+}
+
+@media screen and (max-width: 1100px) {
+  .profile .content-container .content {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 1300px) {
+  .profile .content-container {
+    width: 90%;
+  }
 }
 
 .profile-dark .follow-btn {

@@ -102,6 +102,10 @@
             }
         }
     }
+
+    @media screen and(max-width: $med-large) {
+        width: 90%;
+    }
 }
 
 .editor-page-dark {

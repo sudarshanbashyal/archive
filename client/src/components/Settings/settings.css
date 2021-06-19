@@ -78,6 +78,36 @@ body .App-dark {
   margin: 0;
 }
 
+@media screen and (max-width: 1100px) {
+  .settings .settings-container {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .settings .settings-container .setting-content {
+    width: 90%;
+  }
+  .settings .settings-container .setting-links {
+    position: relative;
+    width: 90%;
+  }
+  .settings .settings-container .setting-links ul {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+}
+
+@media screen and (max-width: 1100px) {
+  .settings {
+    width: 90%;
+  }
+}
+
 .settings-dark .inactive-link {
   color: #becfe2 !important;
 }
