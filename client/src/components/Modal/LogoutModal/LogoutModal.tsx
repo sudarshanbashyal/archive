@@ -5,7 +5,9 @@ import { logoutIcon } from 'src/assets/SVGs';
 import { closeModal } from 'src/redux/Actions/applicationActions';
 import { logOutUser } from 'src/redux/Actions/userActions';
 import { RootStore } from 'src/redux/store';
+import { motion, AnimatePresence } from 'framer-motion';
 import './logoutModal.css';
+import { animationPrefixes } from '../ModalContainer';
 
 const LogoutModal = () => {
     const dispatch = useDispatch();
@@ -16,7 +18,7 @@ const LogoutModal = () => {
     const history = useHistory();
 
     return (
-        <div
+        <motion.div
             className={
                 'logout-modal ' +
                 (applicationState &&
@@ -24,6 +26,10 @@ const LogoutModal = () => {
                     ? 'logout-modal-dark'
                     : '')
             }
+            initial={animationPrefixes.initial}
+            animate={animationPrefixes.animate}
+            transition={animationPrefixes.transition}
+            exit={animationPrefixes.exit}
         >
             <div className="icon-section">{logoutIcon}</div>
 
@@ -52,7 +58,7 @@ const LogoutModal = () => {
                     Cancel
                 </button>
             </div>
-        </div>
+        </motion.div>
     );
 };
 

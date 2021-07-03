@@ -160,6 +160,10 @@ body .App-dark {
   fill: #becfe2;
 }
 
+.reader-container-dark .user-info .user-name {
+  color: #becfe2;
+}
+
 .reader-container-dark .reader-user-container .follow-btn {
   color: #becfe2;
   border-color: #becfe2 !important;

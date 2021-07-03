@@ -5,7 +5,9 @@ import { closeModal } from 'src/redux/Actions/applicationActions';
 import { RootStore } from 'src/redux/store';
 import './infoModal.css';
 import TopicsInfoContainer from './TopicsInfoContainer';
+import { motion, AnimatePresence } from 'framer-motion';
 import UsersInfoContainer from './UsersInfoContainer';
+import { animationPrefixes } from '../ModalContainer';
 
 export interface infoUserInterface {
     userId: number;
@@ -28,6 +30,7 @@ const InfoModal = ({ infoType }: { infoType: String }) => {
     );
 
     const profileId = +currentURL.charAt(currentURL.length - 1);
+
     const infoEndPoint =
         infoType === 'Following'
             ? `/user/getFollowing/${profileId}`
@@ -96,72 +99,78 @@ const InfoModal = ({ infoType }: { infoType: String }) => {
     }, [currentInfo]);
 
     return (
-        <div
-            className={
-                'info-modal ' +
-                (applicationState &&
-                applicationState.applicationTheme === 'dark'
-                    ? 'info-modal-dark'
-                    : '')
-            }
-        >
-            <span
-                className="close-modal"
-                onClick={() => {
-                    dispatch(closeModal);
-                }}
+        <AnimatePresence>
+            <motion.div
+                className={
+                    'info-modal ' +
+                    (applicationState &&
+                    applicationState.applicationTheme === 'dark'
+                        ? 'info-modal-dark'
+                        : '')
+                }
+                initial={animationPrefixes.initial}
+                animate={animationPrefixes.animate}
+                transition={animationPrefixes.transition}
+                exit={animationPrefixes.exit}
             >
-                {closeIcon}
-            </span>
-            <h3 className="info-title">{infoType}</h3>
+                <span
+                    className="close-modal"
+                    onClick={() => {
+                        dispatch(closeModal);
+                    }}
+                >
+                    {closeIcon}
+                </span>
+                <h3 className="info-title">{infoType}</h3>
 
-            {/* Only display info navigaton when on following modal, not on follower modal */}
-            {infoType === 'Following' ? (
-                <div className="info-navigation">
-                    <div
-                        className={
-                            'info-topic ' +
-                            (currentInfo === 'People' ? 'active-topic' : '')
-                        }
-                    >
-                        <span
-                            className="topic-title"
-                            onClick={() => {
-                                setCurrentInfo('People');
-                            }}
+                {/* Only display info navigaton when on following modal, not on follower modal */}
+                {infoType === 'Following' ? (
+                    <div className="info-navigation">
+                        <div
+                            className={
+                                'info-topic ' +
+                                (currentInfo === 'People' ? 'active-topic' : '')
+                            }
                         >
-                            People
-                        </span>
-                    </div>
-                    <div
-                        className={
-                            'info-topic ' +
-                            (currentInfo === 'Topic' ? 'active-topic' : '')
-                        }
-                    >
-                        <span
-                            className="topic-title"
-                            onClick={() => {
-                                setCurrentInfo('Topic');
-                            }}
+                            <span
+                                className="topic-title"
+                                onClick={() => {
+                                    setCurrentInfo('People');
+                                }}
+                            >
+                                People
+                            </span>
+                        </div>
+                        <div
+                            className={
+                                'info-topic ' +
+                                (currentInfo === 'Topic' ? 'active-topic' : '')
+                            }
                         >
-                            Topics
-                        </span>
+                            <span
+                                className="topic-title"
+                                onClick={() => {
+                                    setCurrentInfo('Topic');
+                                }}
+                            >
+                                Topics
+                            </span>
+                        </div>
                     </div>
-                </div>
-            ) : null}
+                ) : null}
 
-            {/* checking which navigation is open at the moment */}
-            {loading ? (
-                <div className="svg-container">
-                    <span className="loading-svg">{loadingAnimation}</span>
-                </div>
-            ) : currentInfo === 'People' ? (
-                <UsersInfoContainer users={users} />
-            ) : (
-                <TopicsInfoContainer topics={topics} />
-            )}
-        </div>
+                {/* checking which navigation is open at the moment */}
+                {loading ? (
+                    <div className="svg-container">
+                        <span className="loading-svg">{loadingAnimation}</span>
+                    </div>
+                ) : currentInfo === 'People' ? (
+                    <UsersInfoContainer users={users} />
+                ) : (
+                    <TopicsInfoContainer topics={topics} />
+                )}
+            </motion.div>
+        </AnimatePresence>
     );
 };
 

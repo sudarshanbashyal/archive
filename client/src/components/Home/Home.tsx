@@ -19,7 +19,11 @@ const Home = () => {
                     <Route exact path="/" component={Feed} />
 
                     <React.Suspense fallback={loadingAnimation}>
-                        <Route exact path="/user/:id" component={Profile} />
+                        <Route
+                            exact
+                            path="/user/:section?/:id/"
+                            component={Profile}
+                        />
                         <Route path="/settings" component={Settings} />
                         <Route exact path="/explore" component={Explore} />
                         <Route

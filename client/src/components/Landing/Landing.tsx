@@ -1,15 +1,10 @@
 import React from 'react';
 import './landing.css';
 import typewriter from '../../assets/images/typewriter.png';
-import yellowSwiggle from '../../assets/yellow-swiggle.svg';
-import redSwiggle from '../../assets/red-swiggle.svg';
-import whiteSwiggle from '../../assets/white-swiggle.svg';
-import formSwiggle from '../../assets/form-red-swiggle.svg';
 import LoginForm from './LoginForm/LoginForm';
 import { useSelector } from 'react-redux';
 import { RootStore } from 'src/redux/store';
 import { motion } from 'framer-motion';
-import { duration } from 'moment';
 
 const Landing = () => {
     const userState = useSelector((state: RootStore) => state.client);

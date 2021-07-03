@@ -38,13 +38,15 @@ export interface ProfileBlogType {
 export const blogsType = 'blogs';
 export const bookmarksType = 'bookmarks';
 export const draftsType = 'drafts';
+
 export type ProfileNavigationType =
     | typeof blogsType
     | typeof bookmarksType
     | typeof draftsType;
 
 const Profile = (props: any) => {
-    const { id: profileId } = props.match.params;
+    const { id: profileId, section: sectionName } = props.match.params;
+
     const userState = useSelector((state: RootStore) => state.client);
     const applicationState = useSelector(
         (state: RootStore) => state.application
@@ -68,6 +70,18 @@ const Profile = (props: any) => {
 
     const [currentProfileNavigation, setCurrentProfileNavigation] =
         useState<ProfileNavigationType>('blogs');
+
+    // check if any section name was passed, the user is only able to navigate his own profile's sections
+    useEffect(() => {
+        if (
+            sectionName &&
+            +profileId === +(userState && userState.client!.profile.userId)
+        ) {
+            setCurrentProfileNavigation(sectionName);
+        } else {
+            setCurrentProfileNavigation('blogs');
+        }
+    }, [window.location.href]);
 
     useEffect(() => {
         (async function () {

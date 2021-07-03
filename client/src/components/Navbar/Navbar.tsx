@@ -32,7 +32,9 @@ const Navbar = () => {
             icon: exploreIcon,
         },
         {
-            link: '/',
+            link: `/user/bookmarks/${
+                userState && userState.client?.profile.userId
+            }`,
             icon: bookmarkStrokeIcon,
         },
     ];

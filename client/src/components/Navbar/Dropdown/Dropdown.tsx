@@ -28,6 +28,10 @@ const Dropdown = ({
             title: 'My Blogs',
             to: `/user/${userState && userState.client?.profile.userId}`,
         },
+        {
+            title: 'My Drafts',
+            to: `/user/drafts/${userState && userState.client?.profile.userId}`,
+        },
         { title: 'Settings', to: '/settings' },
     ];
 

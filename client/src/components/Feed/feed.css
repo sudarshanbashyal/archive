@@ -37,6 +37,7 @@ body .App-dark {
   font-weight: 700;
   font-size: 3rem;
   line-height: 1em;
+  width: 50%;
 }
 
 .outer-container .feed .header p {

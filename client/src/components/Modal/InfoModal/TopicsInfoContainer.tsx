@@ -13,7 +13,9 @@ const TopicsInfoContainer = ({ topics }: { topics: infoTopicInterface[] }) => {
         <div className="topics-container">
             {topics.map((topic: infoTopicInterface) => (
                 <div className="topic" key={topic.topicId}>
-                    <div className="topic-profile"></div>
+                    <div className="topic-profile">
+                        <img src={`${topic.topicImage}.jpg`} alt="" />
+                    </div>
                     <div className="topic-detail">{topic.topicTitle}</div>
 
                     {/* check if the current topic is followed by our user and display buttons accordingly */}
