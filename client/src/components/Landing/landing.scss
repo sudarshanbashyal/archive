@@ -20,10 +20,8 @@
             font-family: 'Playfair Display';
             margin-left: 160px;
             font-size: 1.3rem;
-            background: linear-gradient(90deg, #ffc94b 0%, #f17a7e 100%);
             display: inline-block;
-            background-clip: text;
-            color: transparent;
+            color: $yellow-primary;
         }
 
         .typewriter {

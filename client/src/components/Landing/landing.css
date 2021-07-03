@@ -42,11 +42,8 @@ body .App-dark {
   font-family: 'Playfair Display';
   margin-left: 160px;
   font-size: 1.3rem;
-  background: -webkit-gradient(linear, left top, right top, from(#ffc94b), to(#f17a7e));
-  background: linear-gradient(90deg, #ffc94b 0%, #f17a7e 100%);
   display: inline-block;
-  background-clip: text;
-  color: transparent;
+  color: #ffc94b;
 }
 
 .landing .image-section .typewriter {
