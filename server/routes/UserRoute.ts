@@ -690,6 +690,12 @@ router.post('/recommendUsers', async (_req, _res) => {
     try {
         const { usersFollowed, userId } = _req.body;
 
+        // if the user hasn't followed any other users, the query will look something like OR b.creator_id IN () which will result in an error
+        let usersFollowedQuery = '';
+        if (usersFollowed.length > 0) {
+            usersFollowedQuery = `b.creator_id NOT IN (${usersFollowed}) AND`;
+        }
+
         const recommendationQuery = await db.query(
             `
             SELECT DISTINCT
@@ -701,7 +707,7 @@ router.post('/recommendUsers', async (_req, _res) => {
                 u.profileimage as "profileImage"
             FROM blogs b
             INNER JOIN users u ON u.user_id = b.creator_id
-            WHERE b.creator_id NOT IN (${usersFollowed}) AND b.creator_id!=$1 LIMIT 3;
+            WHERE ${usersFollowedQuery} b.creator_id!=$1 LIMIT 3;
         `,
             [userId]
         );

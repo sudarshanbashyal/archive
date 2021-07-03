@@ -568,6 +568,12 @@ router.get('/generateFeed', isAuth, async (_req: PayloadType, _res) => {
         const topicsFollowedArray =
             userPreferencesQuery.rows[0].topics_followed.toString();
 
+        // if the user hasn't followed any other users, the query will look something like OR b.creator_id IN () which will result in an error
+        let usersFollowedQuery = `WHERE (t.topic_id IN (${topicsFollowedArray}) OR b.creator_id IN (${usersFollowedArray}))`;
+        if (usersFollowedArray.length === 0) {
+            usersFollowedQuery = `WHERE t.topic_id IN (${topicsFollowedArray})`;
+        }
+
         // generate feed according to those follows
         const feedGenerationQuery = await db.query(`     
             SELECT 
@@ -580,7 +586,7 @@ router.get('/generateFeed', isAuth, async (_req: PayloadType, _res) => {
             FROM blogs b
             INNER JOIN users u ON u.user_id = b.creator_id
             INNER JOIN topics t on t.topic_id = b.topic_id
-            WHERE (t.topic_id IN (${topicsFollowedArray}) OR b.creator_id IN (${usersFollowedArray}))
+            ${usersFollowedQuery}
             ORDER BY b.created_at DESC;
         `);
 
