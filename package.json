@@ -4,6 +4,7 @@
     "description": "Full stack blogging webapp with react, typescript, node and postgres",
     "main": "index.ts",
     "scripts": {
+        "start": "node index.ts",
         "test": "echo \"Error: no test specified\" && exit 1",
         "dev": "nodemon index.ts",
         "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
