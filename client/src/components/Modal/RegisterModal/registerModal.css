@@ -243,4 +243,10 @@ body .App-dark {
   -webkit-transition: 0.3s ease-in-out;
   transition: 0.3s ease-in-out;
 }
+
+@media screen and (max-width: 700px) {
+  .register-modal {
+    width: 70%;
+  }
+}
 /*# sourceMappingURL=registerModal.css.map */
