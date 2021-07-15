@@ -1,4 +1,6 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { RootStore } from 'src/redux/store';
 import {
     githubIcon,
     nodeIcon,
@@ -10,8 +12,20 @@ import {
 import './about.css';
 
 const About = () => {
+    const applicationState = useSelector(
+        (state: RootStore) => state.application
+    );
+
     return (
-        <div className="about-settings">
+        <div
+            className={
+                'about-settings ' +
+                (applicationState &&
+                applicationState.applicationTheme === 'dark'
+                    ? 'about-settings-dark'
+                    : '')
+            }
+        >
             <div className="setting-section">
                 <h2 className="section-title">About</h2>
 

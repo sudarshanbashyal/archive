@@ -115,6 +115,14 @@
             .error-message {
                 @extend .error-message;
             }
+
+            @media screen and(max-width:$medium) {
+                flex-direction: column;
+
+                .change-profile {
+                    margin-bottom: 20px;
+                }
+            }
         }
 
         form {

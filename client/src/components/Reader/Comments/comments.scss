@@ -198,6 +198,11 @@
     .child-comment {
         @extend .comment;
     }
+
+    @media screen and (max-width: $medium) {
+        padding: 0;
+        width: 90%;
+    }
 }
 
 .comments-container-dark {
