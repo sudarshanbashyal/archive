@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import Home from './components/Home/Home';
 import Landing from './components/Landing/Landing';
 import ModalContainer from './components/Modal/ModalContainer';
-import Navbar from './components/Navbar/Navbar';
 import './index.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootStore } from './redux/store';
@@ -12,9 +11,9 @@ import { changeTheme } from './redux/Actions/applicationActions';
 
 const App = () => {
     const dispatch = useDispatch();
-    const [userLogged, setUserLogged] = useState(
-        localStorage.getItem('userLoggedIn')
-    );
+    // const [userLogged, setUserLogged] = useState(
+    //     localStorage.getItem('userLoggedIn')
+    // );
 
     const [applicationTheme, setApplicationTheme] = useState<string | null>(
         localStorage.getItem('applicationTheme')

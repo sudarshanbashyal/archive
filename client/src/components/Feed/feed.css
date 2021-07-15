@@ -29,7 +29,7 @@ body .App-dark {
 .outer-container .feed .header {
   margin-top: 90px;
   position: relative;
-  z-index: 99;
+  z-index: 1;
 }
 
 .outer-container .feed .header h1 {
