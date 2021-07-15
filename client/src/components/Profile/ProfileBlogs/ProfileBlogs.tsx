@@ -23,9 +23,7 @@ const ProfileBlogs = ({ profileBlogs }: BlogPropType) => {
                     />
                 ))
             ) : (
-                <h2 className="no-blogs-message">
-                    This User Does not have any Blogs.
-                </h2>
+                <h2>No Blogs found.</h2>
             )}
         </div>
     );

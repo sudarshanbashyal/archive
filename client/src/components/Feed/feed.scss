@@ -78,6 +78,14 @@
         @media screen and (max-width: $med-large) {
             width: 90%;
         }
+
+        @media screen and (max-width: $small) {
+            .header {
+                h1 {
+                    width: 100%;
+                }
+            }
+        }
     }
 
     .pattern-right {

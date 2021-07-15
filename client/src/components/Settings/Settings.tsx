@@ -5,6 +5,7 @@ import { Link, NavLink, Route } from 'react-router-dom';
 import AccountSettings from './Account/AccountSettings';
 import { useSelector } from 'react-redux';
 import { RootStore } from 'src/redux/store';
+import About from './About/About';
 
 const Settings = () => {
     const applicationState = useSelector(
@@ -73,6 +74,8 @@ const Settings = () => {
                         path="/settings/account"
                         component={AccountSettings}
                     />
+
+                    <Route exact path="/settings/about" component={About} />
                 </div>
             </div>
         </div>

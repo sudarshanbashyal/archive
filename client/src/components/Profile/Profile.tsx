@@ -89,6 +89,7 @@ const Profile = (props: any) => {
             setProfileBlogs([]);
             const res = await fetch(`/user/getUser/${profileId}`);
             const data = await res.json();
+            console.log(data);
 
             if (data.ok) {
                 // set up profile info
@@ -115,6 +116,7 @@ const Profile = (props: any) => {
                 });
 
                 if (!data.info[0].title) {
+                    setLoading(false);
                     return;
                 }
 

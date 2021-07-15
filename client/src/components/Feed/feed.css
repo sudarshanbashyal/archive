@@ -111,6 +111,12 @@ body .App-dark {
   }
 }
 
+@media screen and (max-width: 700px) {
+  .outer-container .feed .header h1 {
+    width: 100%;
+  }
+}
+
 .outer-container .pattern-right, .outer-container .pattern-left {
   width: 60%;
   min-height: 320px;

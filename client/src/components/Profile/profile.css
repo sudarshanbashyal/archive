@@ -48,6 +48,16 @@ body .App-dark {
 
 .profile .content-container .profile {
   width: 15%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 .profile .content-container .profile .profile-picture {
@@ -78,7 +88,14 @@ body .App-dark {
   .profile .content-container .profile {
     position: absolute;
     left: 0;
-    top: 0;
+    top: 2rem;
+  }
+  .profile .content-container .profile .profile-picture {
+    height: 80px;
+    width: 80px;
+  }
+  .profile .content-container .profile .follow-btn {
+    width: 90px;
   }
 }
 
@@ -104,7 +121,7 @@ body .App-dark {
 
 @media screen and (max-width: 1100px) {
   .profile .content-container .content .profile-info {
-    padding-left: 200px;
+    padding-left: 150px;
   }
 }
 

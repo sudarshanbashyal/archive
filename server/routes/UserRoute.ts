@@ -407,7 +407,6 @@ router.get('/getUser/:id', async (_req, _res) => {
                 },
             });
         }
-
         return _res.json({
             ok: true,
             info: user.rows,
