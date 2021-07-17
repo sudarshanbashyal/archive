@@ -148,6 +148,10 @@
                 margin-bottom: 20px;
             }
 
+            .bio-length-red {
+                color: $red-dark !important;
+            }
+
             .save-btn {
                 padding: 0.8rem 1.8rem;
                 font-weight: 700;
@@ -168,6 +172,12 @@
 .profile-settings-dark {
     .setting-section {
         border-bottom: 1px solid $blue-light !important;
+
+        form {
+            .bio-length {
+                color: $dark-font;
+            }
+        }
     }
 
     form {
@@ -190,9 +200,6 @@
 
         .dark-theme {
             border: 1px solid $dark-font !important;
-        }
-
-        .high-contract {
         }
     }
 }

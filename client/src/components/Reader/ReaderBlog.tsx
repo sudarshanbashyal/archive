@@ -7,6 +7,7 @@ import {
     heartStrokeIcon,
     loadingAnimation,
     defaultProfileImage,
+    trashIcon,
 } from 'src/assets/SVGs';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -16,6 +17,7 @@ import {
     unfollowUser,
     followUser,
 } from 'src/redux/Actions/userActions';
+import { openModal } from 'src/redux/Actions/applicationActions';
 
 const ReaderWysiwyg = lazy(() => import('./ReaderWysiwyg'));
 
@@ -180,6 +182,19 @@ const ReaderBlog = ({
                         >
                             {bookmarkStrokeIcon}
                         </span>
+                    )}
+
+                    {userState &&
+                    userState.client!.profile.userId === userId ? (
+                        <span
+                            onClick={() => {
+                                dispatch(openModal('blogDeleteModal'));
+                            }}
+                        >
+                            {trashIcon}
+                        </span>
+                    ) : (
+                        ''
                     )}
                 </div>
             </div>

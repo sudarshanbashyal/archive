@@ -37,7 +37,11 @@ const Feed = () => {
                         Good {greeting} <br />
                         {userState && userState.client?.profile.firstName}...
                     </h1>
-                    <p>Hope you have a good read!</p>
+                    {greeting === 'Night,' ? (
+                        <p>Hope you end your day with a good read!</p>
+                    ) : (
+                        <p>Hope you have a good read!</p>
+                    )}
 
                     <Link style={{ textDecoration: 'none' }} to="/editor">
                         <button className="cta-button">

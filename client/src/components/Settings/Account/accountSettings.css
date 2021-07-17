@@ -244,6 +244,10 @@ body .App-dark {
   border: 1px solid #becfe2 !important;
 }
 
+.profile-settings-dark .bio-length {
+  color: #becfe2;
+}
+
 .account-setting .setting-section form #email-input {
   margin-bottom: 0px;
 }

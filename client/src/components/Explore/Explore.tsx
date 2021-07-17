@@ -146,6 +146,11 @@ const Explore = () => {
                     ) ? (
                         <button
                             className="follow-topic-btn"
+                            disabled={
+                                userState &&
+                                userState.client!.profile.topicsFollowed
+                                    .length < 4
+                            }
                             onClick={() => {
                                 dispatch(
                                     unfollowTopic(
@@ -161,11 +166,6 @@ const Explore = () => {
                     ) : (
                         <button
                             className="follow-topic-btn"
-                            disabled={
-                                userState &&
-                                userState.client!.profile.topicsFollowed
-                                    .length < 4
-                            }
                             onClick={() => {
                                 dispatch(
                                     followTopic(

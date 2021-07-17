@@ -95,6 +95,16 @@
             margin-right: 0;
             margin-left: auto;
         }
+
+        @media screen and (max-width: $small) {
+            flex-direction: column;
+
+            button,
+            select {
+                margin-bottom: 20px;
+                width: 100%;
+            }
+        }
     }
 
     .blogs {

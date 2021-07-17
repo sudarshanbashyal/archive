@@ -51,10 +51,12 @@ const ProfileSettings = () => {
     >(profile.headerImage);
 
     // image preview error states
-    const [profileImageError, setProfileImageError] =
-        useState<string | null | undefined>(null);
-    const [bannerImageError, setBannerImageError] =
-        useState<string | null | undefined>(null);
+    const [profileImageError, setProfileImageError] = useState<
+        string | null | undefined
+    >(null);
+    const [bannerImageError, setBannerImageError] = useState<
+        string | null | undefined
+    >(null);
 
     // input file references
     const profileUpload = useRef<any>(null);
@@ -305,14 +307,14 @@ const ProfileSettings = () => {
                         name="bio"
                         onChange={handleChange}
                     ></textarea>
+
                     <p
-                        style={{
-                            color:
-                                profileData.bio.length >= 200
-                                    ? '#dd3b40'
-                                    : 'black',
-                        }}
-                        className="bio-length"
+                        className={
+                            `bio-length ` +
+                            (profileData.bio.length >= 200
+                                ? 'bio-length-red'
+                                : '')
+                        }
                     >
                         {profileData.bio.length}/200
                     </p>

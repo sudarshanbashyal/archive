@@ -6,6 +6,7 @@ import RegisterModal from './RegisterModal/RegisterModal';
 import './modalContainer.css';
 import ConfirmModal from './ConfirmModal/ConfirmModal';
 import InfoModal from './InfoModal/InfoModal';
+import BlogDeleteModal from './BlogDeleteModal/BlogDeleteModal';
 
 export const animationPrefixes = {
     initial: {
@@ -44,6 +45,8 @@ const ModalContainer = () => {
                 <InfoModal infoType="Following" />
             ) : applicationState.modal?.modalType === 'followers' ? (
                 <InfoModal infoType="Followers" />
+            ) : applicationState.modal?.modalType === 'blogDeleteModal' ? (
+                <BlogDeleteModal />
             ) : null}
         </div>
     );

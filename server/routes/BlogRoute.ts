@@ -816,11 +816,43 @@ router.get('/deleteComment/:id', isAuth, async (_req: PayloadType, _res) => {
         const deleteQuery = await db.query(
             `
             DELETE FROM comments WHERE comment_id=$1 AND user_id=$2;
-        `,
+            `,
             [commentId, userId]
         );
 
         if (deleteQuery) {
+            return _res.status(201).json({
+                ok: true,
+            });
+        }
+
+        return _res.status(500).json({
+            ok: false,
+            error: {
+                message: 'Something went wrong. Please try again.',
+            },
+        });
+
+        //
+    } catch (error) {
+        return _res.status(500).json({
+            ok: false,
+            error,
+        });
+    }
+});
+
+router.get('/deleteBlog/:id', isAuth, async (_req: PayloadType, _res) => {
+    try {
+        const blogId = _req.params.id;
+        const userId = _req.userId;
+
+        const deleteQuery = await db.query(`
+            DELETE FROM blogs WHERE blog_id=${blogId} AND creator_id=${userId} RETURNING *
+            `);
+
+        console.log(blogId, userId);
+        if (deleteQuery.rows[0].blog_id) {
             return _res.status(201).json({
                 ok: true,
             });

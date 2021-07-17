@@ -23,13 +23,13 @@ export interface infoTopicInterface {
 }
 
 const InfoModal = ({ infoType }: { infoType: String }) => {
-    const currentURL = window.location.href;
-
     const applicationState = useSelector(
         (state: RootStore) => state.application
     );
 
-    const profileId = +currentURL.charAt(currentURL.length - 1);
+    const currentURL = window.location.href;
+    const urlElements = currentURL.split('/');
+    const profileId = +urlElements[urlElements.length - 1];
 
     const infoEndPoint =
         infoType === 'Following'

@@ -175,6 +175,10 @@ body .App-dark {
   margin-bottom: 20px;
 }
 
+.profile-settings .setting-section form .bio-length-red {
+  color: #dd3b40 !important;
+}
+
 .profile-settings .setting-section form .save-btn {
   padding: 0.8rem 1.8rem;
   font-weight: 700;
@@ -188,6 +192,10 @@ body .App-dark {
 
 .profile-settings-dark .setting-section {
   border-bottom: 1px solid #222e40 !important;
+}
+
+.profile-settings-dark .setting-section form .bio-length {
+  color: #becfe2;
 }
 
 .profile-settings-dark form input,

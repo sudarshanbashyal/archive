@@ -1,0 +1,23 @@
+@import '../../../index.scss';
+@import '../LogoutModal/logoutModal.scss';
+
+.blog-delete-modal {
+    @extend .logout-modal;
+
+    .icon-section {
+        background-color: $red-dark;
+
+        svg {
+            fill: white;
+        }
+    }
+
+    .content-section {
+        .delete-btn {
+            @extend .logout-btn;
+            background: transparent;
+            border: 1px solid $red-dark;
+            color: $red-dark;
+        }
+    }
+}

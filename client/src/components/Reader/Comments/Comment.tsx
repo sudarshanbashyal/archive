@@ -247,7 +247,9 @@ const Comment = ({
                         }}
                         className="show-all-replies"
                     >
-                        {childrenNumber > 1
+                        {childrenToggled
+                            ? 'Hide Replies'
+                            : childrenNumber > 1
                             ? `Show ${childrenNumber} replies`
                             : `Show 1 reply`}
                         <span className="down-arrow">{downArrowIcon}</span>

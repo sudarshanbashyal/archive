@@ -1,0 +1,119 @@
+body {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: 'Source Sans Pro';
+}
+
+body .App {
+  position: relative;
+  min-height: 100vh;
+}
+
+body .App-dark {
+  background-color: #151f2e;
+  color: #becfe2;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: 'Source Sans Pro';
+}
+
+body .App {
+  position: relative;
+  min-height: 100vh;
+}
+
+body .App-dark {
+  background-color: #151f2e;
+  color: #becfe2;
+}
+
+.logout-modal, .blog-delete-modal {
+  background-color: white;
+  width: 500px;
+  border-radius: 7px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.logout-modal .icon-section, .blog-delete-modal .icon-section {
+  height: auto;
+  width: 20%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background: #ffc94b;
+  border-radius: 7px 0px 0px 7px;
+}
+
+.logout-modal .icon-section svg, .blog-delete-modal .icon-section svg {
+  -webkit-transform: scale(1.2);
+          transform: scale(1.2);
+}
+
+.logout-modal .content-section, .blog-delete-modal .content-section {
+  width: 80%;
+  padding: 2rem 1rem;
+}
+
+.logout-modal .content-section h2, .blog-delete-modal .content-section h2 {
+  margin: 0;
+}
+
+.logout-modal .content-section p, .blog-delete-modal .content-section p {
+  margin-top: 10px;
+  margin-bottom: 30px;
+}
+
+.logout-modal .content-section .cancel-btn, .blog-delete-modal .content-section .cancel-btn, .logout-modal .content-section .logout-btn, .blog-delete-modal .content-section .logout-btn, .blog-delete-modal .content-section .delete-btn {
+  font-weight: 700;
+  padding: 0.5rem 0rem;
+  cursor: pointer;
+  outline: none;
+  background-color: transparent;
+  border: none;
+}
+
+.logout-modal .content-section .logout-btn, .blog-delete-modal .content-section .logout-btn, .blog-delete-modal .content-section .delete-btn {
+  padding: 0.5rem 2rem;
+  margin-right: 20px;
+  background: -webkit-gradient(linear, left top, right top, from(#ffc94b), to(#f17a7e));
+  background: linear-gradient(90deg, #ffc94b 0%, #f17a7e 100%);
+  border-radius: 7px;
+}
+
+.logout-modal-dark {
+  background-color: #151f2e;
+}
+
+.logout-modal-dark .cancel-btn, .logout-modal-dark .logout-modal .content-section .logout-btn, .logout-modal .content-section .logout-modal-dark .logout-btn, .logout-modal-dark .blog-delete-modal .content-section .logout-btn, .blog-delete-modal .content-section .logout-modal-dark .logout-btn, .logout-modal-dark .blog-delete-modal .content-section .delete-btn, .blog-delete-modal .content-section .logout-modal-dark .delete-btn {
+  color: #becfe2;
+}
+
+.blog-delete-modal .icon-section {
+  background-color: #dd3b40;
+}
+
+.blog-delete-modal .icon-section svg {
+  fill: white;
+}
+
+.blog-delete-modal .content-section .delete-btn {
+  background: transparent;
+  border: 1px solid #dd3b40;
+  color: #dd3b40;
+}
+/*# sourceMappingURL=blogDeleteModal.css.map */

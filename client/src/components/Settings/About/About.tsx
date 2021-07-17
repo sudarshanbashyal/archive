@@ -47,11 +47,11 @@ const About = () => {
                 <p>The technologies used for this project are listed below:</p>
 
                 <div className="tech-icons">
-                    <span>{reactIcon}</span>
-                    <span>{typescriptIcon}</span>
-                    <span>{sassIcon}</span>
-                    <span>{nodeIcon}</span>
-                    <span>{postgresIcon}</span>
+                    <span title="ReactJS">{reactIcon}</span>
+                    <span title="Bow before Typescript">{typescriptIcon}</span>
+                    <span title="SASS">{sassIcon}</span>
+                    <span title="NodeJS">{nodeIcon}</span>
+                    <span title="PostgreSQL">{postgresIcon}</span>
                 </div>
             </div>
         </div>
