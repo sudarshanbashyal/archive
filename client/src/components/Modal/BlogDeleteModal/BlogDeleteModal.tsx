@@ -45,7 +45,13 @@ const BlogDeleteModal = () => {
 
     return (
         <motion.div
-            className="blog-delete-modal"
+            className={
+                'blog-delete-modal ' +
+                (applicationState &&
+                applicationState.applicationTheme === 'dark'
+                    ? 'logout-modal-dark'
+                    : '')
+            }
             initial={animationPrefixes.initial}
             animate={animationPrefixes.animate}
             transition={animationPrefixes.transition}
