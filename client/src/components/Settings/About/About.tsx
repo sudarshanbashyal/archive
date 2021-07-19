@@ -6,15 +6,48 @@ import {
     nodeIcon,
     postgresIcon,
     reactIcon,
+    reduxIcon,
     sassIcon,
     typescriptIcon,
 } from 'src/assets/SVGs';
 import './about.css';
 
+interface techIconsInterface {
+    title: string;
+    svgIcon: Element | JSX.Element;
+}
+
 const About = () => {
     const applicationState = useSelector(
         (state: RootStore) => state.application
     );
+
+    const techIcons: techIconsInterface[] = [
+        {
+            title: 'ReactJS',
+            svgIcon: reactIcon,
+        },
+        {
+            title: 'Redux',
+            svgIcon: reduxIcon,
+        },
+        {
+            title: 'Bow before TypeScript',
+            svgIcon: typescriptIcon,
+        },
+        {
+            title: 'SASS',
+            svgIcon: sassIcon,
+        },
+        {
+            title: 'Node JS',
+            svgIcon: nodeIcon,
+        },
+        {
+            title: 'PostgreSQL',
+            svgIcon: postgresIcon,
+        },
+    ];
 
     return (
         <div
@@ -47,11 +80,11 @@ const About = () => {
                 <p>The technologies used for this project are listed below:</p>
 
                 <div className="tech-icons">
-                    <span title="ReactJS">{reactIcon}</span>
-                    <span title="Bow before Typescript">{typescriptIcon}</span>
-                    <span title="SASS">{sassIcon}</span>
-                    <span title="NodeJS">{nodeIcon}</span>
-                    <span title="PostgreSQL">{postgresIcon}</span>
+                    {techIcons.map(icon => (
+                        <span key={icon.title} title={icon.title}>
+                            {icon.svgIcon}
+                        </span>
+                    ))}
                 </div>
             </div>
         </div>
