@@ -142,6 +142,8 @@ body .App-dark {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+  overflow-y: auto;
+  height: 300px;
 }
 
 .register-modal .form-content .topics-panel .topic {
@@ -171,7 +173,35 @@ body .App-dark {
 }
 
 .register-modal .form-content .topics-panel .selected-topic .topic-image {
-  border: 2px solid black;
+  position: relative;
+}
+
+.register-modal .form-content .topics-panel .selected-topic .topic-image .checkmark-container {
+  position: absolute;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  top: 0;
+  left: 0;
+  width: 110px;
+  height: 50px;
+  border-radius: 7px;
+  background-image: -webkit-gradient(linear, left top, right top, from(#ffc94b), to(#f17a7e));
+  background-image: linear-gradient(90deg, #ffc94b 0%, #f17a7e 100%);
+  -webkit-filter: opacity(0.4);
+          filter: opacity(0.4);
+}
+
+.register-modal .form-content .topics-panel .selected-topic .topic-image .checkmark-icon {
+  position: absolute;
+  top: 15px;
+  right: 40px;
 }
 
 .register-modal .form-error {

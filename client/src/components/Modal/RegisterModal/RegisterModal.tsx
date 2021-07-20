@@ -5,6 +5,7 @@ import { closeModal } from 'src/redux/Actions/applicationActions';
 import { AnimatePresence, motion } from 'framer-motion';
 import './registerModal.css';
 import { animationPrefixes } from '../ModalContainer';
+import { checkmarkIcon } from 'src/assets/SVGs';
 
 interface registerData {
     firstName: string;
@@ -297,7 +298,19 @@ const RegisterModal = () => {
                                             src={`${topic.topic_image}.jpg`}
                                             alt={topic.topic_title}
                                         />
+
+                                        {registerData.topics.includes(
+                                            topic.topic_id
+                                        ) ? (
+                                            <>
+                                                <div className="checkmark-container"></div>
+                                                <span className="checkmark-icon">
+                                                    {checkmarkIcon}
+                                                </span>
+                                            </>
+                                        ) : null}
                                     </div>
+
                                     <span className="topic-title">
                                         {topic.topic_title}
                                     </span>
