@@ -8,6 +8,10 @@ const UsersInfoContainer = ({ users }: { users: infoUserInterface[] }) => {
     const userState = useSelector((state: RootStore) => state.client);
     const dispatch = useDispatch();
 
+    const getUserProfile = (userId: number | string) => {
+        window.location.replace(`/user/${userId}`);
+    };
+
     return (
         <div className="users-container">
             {users.length === 0 ? (
@@ -15,7 +19,12 @@ const UsersInfoContainer = ({ users }: { users: infoUserInterface[] }) => {
             ) : (
                 users.map((user: infoUserInterface) => (
                     <div key={user.userId} className="user">
-                        <div className="user-profile">
+                        <div
+                            className="user-profile"
+                            onClick={() => {
+                                getUserProfile(user.userId);
+                            }}
+                        >
                             <img
                                 src={
                                     user.profileImage
@@ -25,7 +34,12 @@ const UsersInfoContainer = ({ users }: { users: infoUserInterface[] }) => {
                                 alt=""
                             />
                         </div>
-                        <div className="user-detail">
+                        <div
+                            className="user-detail"
+                            onClick={() => {
+                                getUserProfile(user.userId);
+                            }}
+                        >
                             {user.firstName} {user.lastName}
                         </div>
 

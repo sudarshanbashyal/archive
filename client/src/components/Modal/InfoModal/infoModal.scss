@@ -71,12 +71,17 @@
                 border-radius: 50%;
                 background-color: teal;
                 margin-right: 10px;
+                cursor: pointer;
 
                 img {
                     width: 100%;
                     height: 100%;
                     border-radius: 50%;
                 }
+            }
+
+            .user-detail {
+                cursor: pointer;
             }
 
             .follow-btn {
