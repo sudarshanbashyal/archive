@@ -1,6 +1,7 @@
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import {
     crownIcon,
     defaultProfileImage,
@@ -150,20 +151,28 @@ const Comment = ({
 
             <div className="comment-user-info">
                 <div className="user-profile">
-                    <img
-                        src={comment.profileImage || defaultProfileImage}
-                        alt="user-profile-image"
-                    />
+                    <Link to={`/user/${currentComment.userId}`}>
+                        <img
+                            src={comment.profileImage || defaultProfileImage}
+                            alt="user-profile-image"
+                        />
+                    </Link>
                 </div>
             </div>
 
             <div className="comment-body">
-                <span className="user-name">
-                    {comment.firstName} {comment.lastName}
-                    {comment.userId === blogAuthorId ? (
-                        <span className="author-icon">{crownIcon}</span>
-                    ) : null}
-                </span>
+                <Link
+                    style={{ textDecoration: 'none', color: 'black' }}
+                    to={`/user/${currentComment.userId}`}
+                >
+                    <span className="user-name">
+                        {comment.firstName} {comment.lastName}
+                        {comment.userId === blogAuthorId ? (
+                            <span className="author-icon">{crownIcon}</span>
+                        ) : null}
+                    </span>
+                </Link>
+
                 <span className="comment-date">
                     {moment(comment.createdAt).format('MMM Do')}
                 </span>
